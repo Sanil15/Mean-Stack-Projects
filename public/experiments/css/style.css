@@ -364,7 +364,7 @@ p {
   text-align: center;
 }
 #head {
-  background: #f4f4f4 url(../assignment/Stylesheet/aa.jpg) top center;
+  background: #f4f4f4 url(aa.jpg) top center;
   background-size: cover;
   color: #7C7C7C;
   padding: 240px 0 200px;
