@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MovieAdminApp">
+<head>
+
+    <title>Movie Admin</title>
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css " rel="stylesheet">
+
+
+
+</head>
+<body>
+<div class="container">
+    <h1>Movie Admin</h1>
+
+    <div ng-controller="MovieController"
+            class="table-responsive">
+
+        <!-- Example how model-view tight coupling works
+        {{hello}}
+        <input ng-model="hello" class="form-control"/>
+        -->
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Director</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tr>
+                <td><input ng-model="movie.id" class="form-control"></td>
+                <td><input ng-model="movie.title" class="form-control"></td>
+                <td><input ng-model="movie.director" class="form-control"></td>
+                <td><button ng-click="addMovie(movie)" class="btn btn-success">Add</button>
+                    <button ng-click="updateMovie(movie)" class="btn btn-success">Update</button></td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="movie in movies">
+                <td>{{movie.id}}</td>
+                <td>{{movie.title}}</td>
+                <td>{{movie.director}}</td>
+                <td><button ng-click="deleteMovie(movie)" class="btn btn-danger">Delete</button>
+                    <button ng-click="selectMovie(movie)" class="btn btn-info">Select</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+
+<!-- Angular JS-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
