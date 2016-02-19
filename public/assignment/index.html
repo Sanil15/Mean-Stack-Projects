@@ -14,13 +14,32 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css " rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../assignment/css/dashboard.css" rel="stylesheet">
+    <link href="/assignment/css/dashboard.css" rel="stylesheet">
+    <link href="/assignment/css/style.css" rel="stylesheet">
+
 
     <!-- Angular JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
 
     <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+    <script src="views/main/main.controller.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="views/users/register.controller.js"></script>
+   <!-- <script src="views/admin/admin.controller.js"></script>
+    <script src="views/fields/fields.controller.js"></script>
+    <script src="views/admin/admin.controller.js"></script>
+    <script src="views/forms/forms.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/users/register.controller.js"></script>-->
 
 
 </head>
@@ -38,8 +57,7 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-            <h1>Hello</h1>
+            <div ng-view></div>
         </div>
     </div>
 </div>
