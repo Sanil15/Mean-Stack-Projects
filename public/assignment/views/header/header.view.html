@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -11,8 +11,12 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/login">Login</a></li>
-                <li><a href="#/register">Register</a></li>
+                <li ng-show="checkRootScope()"><a href="#/login">Login</a></li>
+                <li ng-show="checkRootScope()"><a href="#/register">Register</a></li>
+                <li ng-show="!checkAdmin()"><a href="#/admin">Admin</a></li>
+                <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
+                <li ng-show="!checkRootScope()"><a ng-click="logout()" href="#/home">Logout</a></li>
+
 
             </ul>
 

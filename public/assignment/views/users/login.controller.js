@@ -15,8 +15,7 @@
         }
 
         function render (user) {
-            if(user != null)
-            {
+            if(user != null){
                 $rootScope=user;
                 //console.log(user);
                 $location.path("/profile");
