@@ -10,7 +10,7 @@
         $scope.login=loginFunction;
 
         function loginFunction(username,password){
-            console.log(username,password);
+            //console.log(username,password);
             UserService.findUserByUsernameAndPassword(username,password,render);
         }
 
@@ -18,10 +18,9 @@
             if(user != null)
             {
                 $rootScope=user;
-                console.log(user);
+                //console.log(user);
                 $location.path("/profile");
             }
-
         }
     }
 

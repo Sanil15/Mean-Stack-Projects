@@ -31,17 +31,15 @@
         return api;
 
         function findUserByUsernameAndPassword(username, password, callback){
-            for(var i=0; i<currentUsers.length;i++)
-            {
-                if(username == currentUsers[i].username && password== currentUsers[i].password){
+            for(var i=0; i<currentUsers.length;i++) {
+                if (username == currentUsers[i].username && password == currentUsers[i].password) {
                     callback(currentUsers[i]);
-                    console.log(currentUsers[i]);
+                    }
                 }
 
-                else{
                     callback(null);
-                }
-            }
+
+
         }
 
         function findAllUsers(callback){
@@ -49,7 +47,9 @@
         }
 
         function createUser(user, callback){
-
+            currentUsers.push(user);
+            console.log(currentUsers);
+            callback(user);
         }
 
         function deleteUserById(userId, callback){
@@ -58,12 +58,17 @@
 
         function updateUser(userId, user, callback){
 
+            for(var i=0;i<currentUsers.length;i++)
+            {
+                if(currentUsers[i]._id==userId)
+                break;
+            }
+
+            currentUsers[i].firstName = user.firstName;
+            currentUsers[i].lastName = user.lastName;
+            currentUsers[i].password = user.password;
+            currentUsers[i].username = user.username;
         }
-
-
-
-
-
 
     }
 })();

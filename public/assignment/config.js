@@ -18,18 +18,18 @@
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                //controller: "views/users/register.controller.js"
+                controller: "RegisterController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                //controller: "views/users/login.controller.js"
+                controller: "LoginController"
             })
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
-                //controller: "views/users/profile.controller.js"
+                controller: "ProfileController"
             })
             .when("/fields", {
-                templateUrl: "views/fields/fields.view.html",
+                templateUrl: "views/forms/fields.view.html",
                 //controller: "views/fields/field.controller.js"
             })
             .when("/forms", {

@@ -2,52 +2,53 @@
     <div class="row">
             <h1 class="page-header">Profile</h1>
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" ng-class="ProfileController">
 
                 <div class="form-group">
-                    <label for="inputUsername" class="col-sm-2 control-label">Username</label>
+                    <label class="col-sm-2 control-label">Username</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputUsername" placeholder="Username"/>
+                        <input ng-model="user.username" type="text" class="form-control"  placeholder="Username"/>
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="inputPassword2" class="col-sm-2 control-label">Password</label>
+                    <label class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                        <input ng-model="user.password"  type="password" class="form-control" placeholder="Password">
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="inputFirstname" class="col-sm-2 control-label">First Name</label>
+                    <label class="col-sm-2 control-label">First Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputFirstname" placeholder="First Name"/>
+                        <input ng-model="user.firstName"  type="text" class="form-control" placeholder="First Name"/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputLastname" class="col-sm-2 control-label">Last Name</label>
+                    <label class="col-sm-2 control-label">Last Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputLastnam" placeholder="Last Name"/>
+                        <input ng-model="user.lastName"  type="text" class="form-control"  placeholder="Last Name"/>
                     </div>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <label class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                        <input ng-model="email" type="email" class="form-control" placeholder="Email">
                     </div>
                 </div>
 
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a href="/assignment/profile.html"  class="btn btn-primary btn-block">Update</a>
+                        <a ng-click="update(user)"  class="btn btn-primary btn-block">Update</a>
                     </div>
                 </div>
+
             </form>
 
     </div>
