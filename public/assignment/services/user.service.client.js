@@ -39,7 +39,6 @@
 
                     callback(null);
 
-
         }
 
         function findAllUsers(callback){
@@ -48,17 +47,28 @@
 
         function createUser(user, callback){
             currentUsers.push(user);
-            console.log(currentUsers);
+               console.log(currentUsers);
             callback(user);
         }
 
         function deleteUserById(userId, callback){
 
+            var i;
+
+            for(i=0;i<currentUsers.length;i++)
+            {
+                if(currentUsers[i]._id==userId)
+                    break;
+            }
+
+            currentUsers.splice(i,1);
+
         }
 
         function updateUser(userId, user, callback){
 
-            for(var i=0;i<currentUsers.length;i++)
+            var i;
+            for( i=0;i<currentUsers.length;i++)
             {
                 if(currentUsers[i]._id==userId)
                 break;
@@ -68,6 +78,8 @@
             currentUsers[i].lastName = user.lastName;
             currentUsers[i].password = user.password;
             currentUsers[i].username = user.username;
+
+            callback(currentUsers[i]);
         }
 
     }
