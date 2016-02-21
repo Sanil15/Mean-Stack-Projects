@@ -5,6 +5,7 @@ div.border
     width: auto;
     border: 2px solid #eee;
     border-radius:3px;
+    padding: 20px;
 
 }
 
