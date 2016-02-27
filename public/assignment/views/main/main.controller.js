@@ -8,5 +8,6 @@
 
     function MainController($scope, $location){
         $scope.$location= $location;
+
     }
 })();

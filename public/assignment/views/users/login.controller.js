@@ -1,26 +1,30 @@
 /**
  * Created by Sanil on 2/18/2016.
  */
-(function () {
+(function (){
+
+    'use strict';
+
     angular.module("FormBuilderApp")
            .controller("LoginController",LoginController);
 
     function LoginController($scope, UserService, $location){
 
-        $scope.login=loginFunction;
+        $scope.login=login;
 
-        function loginFunction(username,password){
+        // function for checking login of a controller
+        function login(username,password){
             //console.log(username,password);
             UserService.findUserByUsernameAndPassword(username,password,render);
         }
 
-        function render (user) {
+        // callback of a function for login
+        function render(user) {
             if(user != null){
-                $rootScope=user;
+                UserService.setCurrentUser(user);
                 //console.log(user);
                 $location.path("/profile");
             }
         }
     }
-
 })();

@@ -2,32 +2,40 @@
  * Created by Sanil on 2/18/2016.
  */
 (function(){
+
+    'use strict';
+
     angular
         .module("FormBuilderApp")
         .controller("RegisterController",RegisterController)
 
         function RegisterController($scope, UserService, $location){
 
-            $scope.register=registerFunction;
+            $scope.register=register;
 
-            function registerFunction(username,password,confirmPassword,email){
-            var user;
+            // function to register a current user
+            function register(username,password,confirmPassword,email){
 
-                if(password==confirmPassword)
-                {
-                user={"_id": (new Date).getTime() , "firstName":null,"lastName":null,
-                             "username":username,  "password":password,   "roles": null};
+                var user;
+
+                if(password==confirmPassword){
+                    user={
+                        "_id": (new Date).getTime(),
+                        "firstName":null,
+                        "lastName":null,
+                        "username":username,
+                        "password":password,
+                        "roles": []};
 
                 UserService.createUser(user, render);
                 }
+            }
 
-
-
-                function render (user) {
-                    $rootScope = user;
-                    console.log(user);
-                    $location.path("/profile");
-                }
+            // function for callBack for registered user
+            function render (user) {
+                UserService.setCurrentUser(user);
+                //console.log(user);
+                $location.path("/profile");
             }
 
         }
