@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CarPoolApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Form Maker</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css " rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+
+
+    <!-- Angular JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--<script src="views/main/main.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+    <script src="views/main/main.controller.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="views/users/register.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/forms/forms.controller.js"></script>
+    <script src="services/forms.service.client.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+
+    <script src="views/admin/admin.controller.js"></script>
+     <script src="views/admin/admin.controller.js"></script>
+
+     <script src="views/home/home.controller.js"></script>
+
+    <script src="views/fields/fields.controller.js"></script>-->
+
+
+</head>
+
+<body ng-controller="MainController">
+
+<!-- Header for all The pages -->
+<div ng-include="'../project/views/header/header.view.html'"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+</html>

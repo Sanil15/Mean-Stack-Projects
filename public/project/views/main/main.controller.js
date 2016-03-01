@@ -3,7 +3,7 @@
  */
 (function (){
     angular
-        .module("FormBuilderApp")
+        .module("CarPoolApp")
         .controller("MainController",MainController);
 
     function MainController($scope, $location){
