@@ -1,22 +1,35 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="HeaderController">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/home">Form Maker</a>
+            <a class="navbar-brand page-scroll" href="#page-top">CarPool</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-show="checkRootScope()"><a href="#/login">Login</a></li>
-                <li ng-show="checkRootScope()"><a href="#/register">Register</a></li>
-                <li ng-show="checkAdmin()"><a href="#/admin">Admin</a></li>
-                <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
-                <li ng-show="!checkRootScope()"><a ng-click="logout()" href="#/home">Logout</a></li>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                <li class="hidden">
+                    <a class="page-scroll" href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#services">Services</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
             </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container -->
 </nav>

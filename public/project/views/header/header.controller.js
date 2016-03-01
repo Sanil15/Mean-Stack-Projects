@@ -6,12 +6,12 @@
     'use strict';
 
     angular
-        .module("FormBuilderApp")
+        .module("CarPoolApp")
         .controller("HeaderController",HeaderController)
 
-    function HeaderController($scope, UserService, $rootScope){
+    function HeaderController($scope, $rootScope){
 
-        UserService.setCurrentUser(null);
+        /*    UserService.setCurrentUser(null);
         $scope.checkRootScope=checkRootScope;
         $scope.logout=logout;
         $scope.checkAdmin=checkAdmin;
@@ -42,7 +42,7 @@
         // function to logout current user
         function logout(){
             UserService.setCurrentUser(null);
-        }
+        }*/
 
     }
 

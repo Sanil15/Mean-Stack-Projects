@@ -1,0 +1,73 @@
+
+<div class="container-fluid page">
+    <div class="row">
+
+        <div class="page-header">
+        <ul class="nav nav-pills nav-justified">
+            <li role="presentation"><a href="">Profile</a></li>
+            <li role="presentation" class="active"><a href="">Create a Carpool</a></li>
+            <li role="presentation"><a href="">Edit Profile</a></li>
+            <li role="presentation"><a href="">Message Box</a></li>
+            <li role="presentation"><a href="">My CarPools</a></li>
+        </ul>
+       </div>
+
+        <form class="form-horizontal" ng-controller="CarPoolController">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Source</label>
+                <div class="col-sm-10">
+                    <input ng-model="source" type="text" class="form-control" placeholder="Source"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Destination</label>
+                <div class="col-sm-10">
+                    <input ng-model="destination" type="text" class="form-control" placeholder="Destination"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Date</label>
+                <div class="col-sm-10">
+                    <input ng-model="date" class="form-control" type="date">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Time</label>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Car Information</label>
+                <div class="col-sm-10">
+                    <input ng-model="state" class="form-control" placeholder="carInfo">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Base Price</label>
+                <div class="col-sm-10">
+                    <input ng-model="city" class="form-control" placeholder="$">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Number Of Seats</label>
+                <div class="col-sm-10">
+                    <input ng-model="seats" class="form-control" placeholder="No of Seats Available">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a ng-click="addCarpool()" class="btn btn-success btn-block">Create Carpool</a>
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+</div>

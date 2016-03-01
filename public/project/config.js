@@ -22,15 +22,22 @@
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller: "RegisterController"
+                //controller: "RegisterController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                controller: "LoginController"
+                //controller: "LoginController"
             })
-            .when("/profile", {
+            .when("/editprofile", {
+                templateUrl: "views/users/editprofile.view.html",
+                //controller: "ProfileController"
+            })
+            .when("/showprofile", {
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController"
+            })
+            .when("/carpool", {
+                templateUrl: "views/carpool/carpool.view.html",
+                //controller: "CarPoolController"
             })
 
             .otherwise({
