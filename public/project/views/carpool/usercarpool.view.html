@@ -23,8 +23,11 @@
                 </thead>
 
                 <tbody>
-                <tr ng-repeat=" ">
-                    <td><a href="#"></a></td>
+                <tr ng-repeat="pool in carPools">
+                    <td>{{pool.source}}</td>
+                    <td>{{pool.destination}}</td>
+                    <td>{{pool.time}}</td>
+                    <td>{{pool.date}}</td>
                     <td>
                         <a ng-click="deleteForm($index)" class="btn btn-default" aria-label="Left Align">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

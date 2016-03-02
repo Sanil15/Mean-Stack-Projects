@@ -14,28 +14,21 @@
             $scope.register=register;
 
             // function to register a current user
-            function register(username,password,confirmPassword,email){
-
-                var user;
+            function register(password,confirmPassword){
 
                 if(password==confirmPassword){
-                    user={
-                        "_id": (new Date).getTime(),
-                        "firstName":null,
-                        "lastName":null,
-                        "username":username,
-                        "password":password,
-                        "roles": []};
 
-                UserService.createUser(user, render);
+                    $scope.user._id=(new Date).getTime();
+                    $scope.user.roles=["general"];
+                    UserService.createUser($scope.user, render);
                 }
             }
 
             // function for callBack for registered user
-            function render (user) {
+            function render(user) {
                 UserService.setCurrentUser(user);
-                //console.log(user);
-                $location.path("/profile");
+                console.log(user);
+                $location.path("/showprofile");
             }
 
         }

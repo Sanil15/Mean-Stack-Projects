@@ -64,6 +64,7 @@
 
         // function creates a set of users
         function createUser(user, callback){
+            alert();
             currentUsers.push(user);
                console.log(currentUsers);
             callback(user);

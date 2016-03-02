@@ -22,7 +22,7 @@
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                //controller: "RegisterController"
+                controller: "RegisterController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
@@ -38,11 +38,11 @@
             })
             .when("/carpool", {
                 templateUrl: "views/carpool/carpool.view.html",
-                //controller: "CarPoolController"
+                controller: "CarPoolController"
             })
             .when("/usercarpool", {
                 templateUrl: "views/carpool/usercarpool.view.html",
-                //controller: "CarPoolController"
+                controller: "UserCarPoolController"
             })
             .when("/rating", {
                 templateUrl: "views/rating/rating.view.html",
