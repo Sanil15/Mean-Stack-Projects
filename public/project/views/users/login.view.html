@@ -1,0 +1,28 @@
+<div class="row box">
+    <div class="col-sm-6 col-sm-offset-3 form-box" ng-controller="LoginController">
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3>Login to our site</h3>
+                <p>Enter your email and password to log on:</p>
+            </div>
+            <div class="form-top-right">
+                <i class="fa fa-key"></i>
+            </div>
+        </div>
+        <div class="form-bottom">
+
+            <div class="form-group">
+                    <label class="sr-only">Email</label>
+                    <input type="text" ng-model="email" placeholder="Email" class="form-username form-control">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">Password</label>
+                    <input type="password" ng-model="pass" placeholder="Password..." class="form-password form-control" >
+                </div>
+
+            <div class="">
+                <a ng-click="login(email,pass)" class="btn btn-success btn-block">Login</a>
+            </div>
+        </div>
+    </div>
+</div>

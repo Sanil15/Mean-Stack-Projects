@@ -26,17 +26,26 @@
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                //controller: "LoginController"
+                controller: "LoginController"
             })
             .when("/editprofile", {
                 templateUrl: "views/users/editprofile.view.html",
-                //controller: "ProfileController"
+                controller: "EditProfileController"
             })
             .when("/showprofile", {
                 templateUrl: "views/users/profile.view.html",
+                controller: "ProfileController"
             })
             .when("/carpool", {
                 templateUrl: "views/carpool/carpool.view.html",
+                //controller: "CarPoolController"
+            })
+            .when("/usercarpool", {
+                templateUrl: "views/carpool/usercarpool.view.html",
+                //controller: "CarPoolController"
+            })
+            .when("/rating", {
+                templateUrl: "views/rating/rating.view.html",
                 //controller: "CarPoolController"
             })
 

@@ -2,6 +2,17 @@
 <div class="container-fluid page">
     <div class="row">
         <h1 class="page-header">Register</h1>
+
+        <div class="col-md-2">
+                <div class="thumbnail">
+                    <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" >
+                </div>
+                <div class="centered">
+                    <p><a href="" class="btn btn-success btn-block" role="button">Browse</a> </p>
+                </div>
+        </div>
+
+        <div class="col-md-10">
         <form class="form-horizontal" ng-controller="RegisterController">
             <div class="form-group">
                 <label class="col-sm-2 control-label">First Name</label>
@@ -96,10 +107,11 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="register()" class="btn btn-primary btn-block">Register</a>
+                    <a ng-click="register()" class="btn btn-success btn-block">Register</a>
                 </div>
             </div>
         </form>
+        </div>
     </div>
 </div>
 
