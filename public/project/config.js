@@ -14,7 +14,7 @@
         $routeProvider
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                //controller: "views/home/home.controller.js"
+                controller: "HomeController"
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
