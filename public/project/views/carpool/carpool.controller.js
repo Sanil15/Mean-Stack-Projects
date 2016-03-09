@@ -37,7 +37,6 @@
 
             function initMap() {
 
-
                 var origin_place_id = null;
                 var destination_place_id = null;
                 var travel_mode = google.maps.TravelMode.DRIVING;
