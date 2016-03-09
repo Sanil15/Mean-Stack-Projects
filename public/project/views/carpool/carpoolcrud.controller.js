@@ -32,6 +32,7 @@
             $scope.destination=null;
         }
 
+
         function getMap(index){
 
             var directionsService = new google.maps.DirectionsService;
@@ -44,6 +45,8 @@
             });
 
             directionsDisplay.setMap(map);
+
+            directionsDisplay.setPanel(document.getElementById('right-panel'));
 
             directionsService.route({
                     origin: $scope.carPools[index].origin,
@@ -66,7 +69,10 @@
             //console.log(origin);
             //console.log(destination);
 
+
             getMap(index);
+
+            //initMap(index);
 
             var a=URL.replace("ORIGIN",$scope.carPools[index].origin);
             var b=a.replace("DESTINATION",$scope.carPools[index].destination);

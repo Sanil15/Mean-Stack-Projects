@@ -72,12 +72,13 @@
     color: #767676;
 }
 
-#map{
+/*#map{
     height:800px;
     width:100%;
     white-space: nowrap;
 
-}
+}*/
+
 #repeat{
     display: inline;
 }
@@ -116,4 +117,45 @@
     height: 100px;
     width : 100px;
     border: dashed;
+}
+
+/***************************************************/
+
+#map {
+    height: 400px;
+    border: dashed;
+}
+
+#right-panel {
+    font-family: 'Roboto','sans-serif';
+    line-height: 30px;
+
+}
+
+#right-panel select, #right-panel input {
+    font-size: 15px;
+}
+
+#right-panel select {
+    width: 100%;
+}
+
+#right-panel i {
+    font-size: 12px;
+}
+#right-panel {
+    height: 100%;
+    float: right;
+    overflow: auto;
+}
+
+@media print {
+    #map {
+        height: 500px;
+        margin: 0;
+    }
+    #right-panel {
+        float: none;
+        width: auto;
+    }
 }

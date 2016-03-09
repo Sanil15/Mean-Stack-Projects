@@ -59,6 +59,10 @@
                 templateUrl: "views/carpool/carpoolcrud.view.html",
                 controller: "CarPoolCRUDController"
             })
+            .when("/message", {
+                templateUrl: "views/message/message.view.html",
+                controller: "MessageController"
+            })
             .otherwise({
                 redirectTo: "/home"
             });
