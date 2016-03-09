@@ -109,5 +109,11 @@
 #map-info {
     height: 500px;
     width: auto;
+    border: transparent;
+}
+
+#map-container {
+    height: 100px;
+    width : 100px;
     border: dashed;
 }
