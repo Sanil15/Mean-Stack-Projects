@@ -12,14 +12,14 @@
     function UserService($rootScope){
         var currentUsers = [
             {	"_id":123, "firstName":"Alice",  "lastName":"Wonderland",
-                "email":"alice@abc.com",    "password":"alice",   "roles": ["general"],
+                "email":"alice@abc.com",    "password":"alice",   "roles": ["general"], "userName": "Alice123" ,
                 "dob":"", "country":"", "state": "", "city": "",
                 "address": "", "zipCode":"", "contact":""                                                  },
-            {	"_id":234, "firstName":"Bob",     "lastName":"Hope",
+            {	"_id":234, "firstName":"Bob",     "lastName":"Hope", "userName": "Bob_Hope",
                 "email":"bob@gmail.com",    "password":"bob",     "roles": ["admin"],
                 "dob":"", "country":"", "state": "", "city": "",
                 "address": "", "zipCode":"", "contact":""                                                  },
-            {	"_id":345, "firstName":"Charlie", "lastName":"Brown",
+            {	"_id":345, "firstName":"Charlie", "lastName":"Brown","userName": "CharlieCool",
                 "email":"charlie@yahoo.com","password":"charlie", "roles": ["general"],
                 "dob":"", "country":"", "state": "", "city": "",
                 "address": "", "zipCode":"", "contact":""                                                   },

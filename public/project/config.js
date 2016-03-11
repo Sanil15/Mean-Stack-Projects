@@ -55,6 +55,10 @@
                 templateUrl: "views/rating/rating.view.html",
                 //controller: "CarPoolController"
             })
+            .when("/ratingcrud", {
+                templateUrl: "views/rating/ratingcrud.view.html",
+                controller: "ReviewCRUDController"
+            })
             .when("/carpoolcrud", {
                 templateUrl: "views/carpool/carpoolcrud.view.html",
                 controller: "CarPoolCRUDController"

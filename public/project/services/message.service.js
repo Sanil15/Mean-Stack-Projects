@@ -12,9 +12,9 @@
     function MessageService(){
 
         var messageList = [
-            {"_id": "000", "message": "Hi Wassup!!!", "fromUser": 123, "toUser": 111},
-            {"_id": "010", "message": "Hey, How you doin?", "fromUser": 123, "toUser": 111},
-            {"_id": "020", "message": "Hey Hello", "fromUser": 234, "toUser": 111}
+            {"_id": "000", "message": "Hi Wassup!!!", "fromUser": "Alice123", "toUser": "Bob_Hope", },
+            {"_id": "010", "message": "Hey, How you doin?", "fromUser": "Bob_Hope", "toUser": "CharlieCool"},
+            {"_id": "020", "message": "Hey Hello", "fromUser": "CharlieCool", "toUser": "Alice123"}
         ];
 
         var api = {
@@ -36,10 +36,10 @@
             callback(messageList);
         }
 
-        function findAllMessagesForUser(userId, callback){
+        function findAllMessagesForUser(userName, callback){
             var userMessages=[];
             for(var i=0;i<messageList.length;i++){
-                if(messageList[i].toUser == userId){
+                if(messageList[i].toUser == userName){
                     userMessages.push(userMessages[i]);
                 }
             }
