@@ -22,7 +22,7 @@
         function render(user) {
             if(user != null){
                 UserService.setCurrentUser(user);
-                console.log(user);
+                //console.log(user);
                 $location.path("/showprofile");
             }
         }

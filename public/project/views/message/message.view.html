@@ -2,14 +2,17 @@
 <div class="container-fluid page" ng-controller="MessageController">
     <div class="row">
 
+        <!--<div class="page-header">
+           <ul class="nav nav-pills nav-justified">
+               <li role="presentation"><a href="">Profile</a></li>
+               <li role="presentation" class="active"><a href="">Create a Carpool</a></li>
+               <li role="presentation"><a href="">Edit Profile</a></li>
+               <li role="presentation"><a href="">Message Box</a></li>
+               <li role="presentation"><a href="">My CarPools</a></li>
+           </ul>
+       </div>-->
         <div class="page-header">
-            <ul class="nav nav-pills nav-justified">
-                <li role="presentation"><a href="">Profile</a></li>
-                <li role="presentation"><a href="">Create a Carpool</a></li>
-                <li role="presentation"><a href="">Edit Profile</a></li>
-                <li role="presentation" class="active"><a href="">Message Box</a></li>
-                <li role="presentation"><a href="">My CarPools</a></li>
-            </ul>
+            <h1>Message CRUD</h1>
         </div>
 
         <form class="form-horizontal">
@@ -53,14 +56,26 @@
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> From</th>
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> To</th>
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Message</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Update</th>
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="msg in messages">
-                <td>{{msg.fromUser}}</td>
-                <td>{{msg.toUser}}</td>
-                <td>{{msg.message}}</td>
+            <tr ng-show="selectedMessage!=null">
+                <td>{{selectedMessage.fromUser}}</td>
+                <td>{{selectedMessage.toUser}}</td>
+                <td><input ng-model="selectedMessage.message"  type="text" class="form-control"/></td>
+                <td><a ng-click="updateMessage()" class="btn btn-success btn-block" aria-label="Left Align">
+                    Update</a></td>
+            </tr>
+            <tr ng-repeat="mg in messages">
+                <td>{{mg.fromUser}}</td>
+                <td>{{mg.toUser}}</td>
+                <td>{{mg.message}}</td>
+                <td>
+                    <a ng-click="selectMessage($index)" class="btn btn-info btn-block" aria-label="Left Align">
+                       Select</a>
+                </td>
                 <td>
                     <a ng-click="deleteMessage($index)" class="btn btn-danger btn-block" aria-label="Left Align">
                         DELETE</a>

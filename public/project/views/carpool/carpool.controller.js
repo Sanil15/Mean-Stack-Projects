@@ -18,13 +18,16 @@
 
             function createCarPool(){
                 var userId=UserService.getCurrentUser();
-                CarPoolService.createCarPoolByUser(userId,$scope.pool,render);
+                var newPool=$scope.pool;
+                newPool.source=document.getElementById("origin-input").value;
+                newPool.destination=document.getElementById("destination-input").value;
+                CarPoolService.createCarPoolByUser(userId._id,newPool,render);
             }
 
             // function for callBack for registered user
             function render(pool) {
                 console.log(pool);
-                $location.path("/home");
+                $location.path("#/usercarpool");
             }
 
             //var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));

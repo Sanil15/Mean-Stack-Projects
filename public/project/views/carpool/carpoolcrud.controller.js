@@ -11,11 +11,11 @@
         $scope.createCarPool=createCarPool;
         $scope.details=details;
         $scope.carPools=[];
+        $scope.selectedIndex=-1;
 
         var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
         var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
         var URL="http://maps.googleapis.com/maps/api/directions/json?&origin=ORIGIN&destination=DESTINATION&key=AIzaSyD_70F4Mj8HaLj4AS8IYt4ZXyJGm2v-KD0";
-
 
 
         function createCarPool(){
@@ -30,6 +30,7 @@
             $scope.carPools.push(pool);
             $scope.source=null;
             $scope.destination=null;
+            $scope.selectedIndex=-1;
         }
 
 
@@ -46,6 +47,7 @@
 
             directionsDisplay.setMap(map);
 
+            document.getElementById('right-panel').innerHTML="";
             directionsDisplay.setPanel(document.getElementById('right-panel'));
 
             directionsService.route({
@@ -66,6 +68,7 @@
 
         function details(index){
 
+            $scope.selectedIndex=1;
             //console.log(origin);
             //console.log(destination);
 

@@ -2,7 +2,7 @@
 <div class="container-fluid page" ng-controller="CarPoolCRUDController">
     <div class="row">
 
-        <div class="page-header">
+        <!--<div class="page-header">
             <ul class="nav nav-pills nav-justified">
                 <li role="presentation"><a href="">Profile</a></li>
                 <li role="presentation" class="active"><a href="">Create a Carpool</a></li>
@@ -10,9 +10,13 @@
                 <li role="presentation"><a href="">Message Box</a></li>
                 <li role="presentation"><a href="">My CarPools</a></li>
             </ul>
+        </div>-->
+
+        <div class="page-header">
+            <h1>API-USAGE(GOOGLE-MAPS)/CARPOOL</h1>
         </div>
 
-            <form class="form-horizontal">
+        <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Source</label>
                     <div class="col-sm-10">
@@ -57,14 +61,16 @@
         </table>
     </div>
 
-    <div class="row">
+    <div class="row" ng-show="selectedIndex!=-1">
     <div class="map-container">
-
     </div>
 
-     <div class="table-responsive">
+     <div class="table-responsive" ng-show="selectedIndex!=-1">
             <br>
-            <table class="table table-stripped">
+            <table class="table table-stripped table-bordered">
+                <thead>
+                <th>Details:</th>
+                </thead>
                 <tbody>
                 <tr>
                     <td>Origin :</td>
@@ -86,7 +92,7 @@
             </table>
      </div>
     </div>
-<div class="row">
+<div class="row" ng-show="selectedIndex!=-1">
     <div id="map" class="col-md-8"></div>
     <div id="right-panel" class="col-md-4"></div>
 </div>

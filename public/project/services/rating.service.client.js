@@ -22,6 +22,7 @@
             findAllReviews: findAllReviews,
             findAllReviewsForUser: findAllReviewsForUser,
             deleteReviewById: deleteReviewById,
+            updateReviewById: updateReviewById
         };
 
         return api;
@@ -51,6 +52,17 @@
                 if(reviewList[i]._id == reviewId)
                 {
                     reviewList.splice(i,1);
+                }
+            }
+            callback(reviewList);
+        }
+
+        function updateReviewById(ratingId,rat,callback){
+            for(var i=0;i<reviewList.length;i++) {
+                if(reviewList[i]._id == ratingId) {
+                    reviewList[i].rating=rat.rating;
+                    reviewList[i].review=rat.review;
+                    break;
                 }
             }
             callback(reviewList);

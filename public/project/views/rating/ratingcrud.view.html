@@ -2,14 +2,18 @@
 <div class="container-fluid page" ng-controller="ReviewCRUDController">
     <div class="row">
 
+        <!--<div class="page-header">
+           <ul class="nav nav-pills nav-justified">
+               <li role="presentation"><a href="">Profile</a></li>
+               <li role="presentation" class="active"><a href="">Create a Carpool</a></li>
+               <li role="presentation"><a href="">Edit Profile</a></li>
+               <li role="presentation"><a href="">Message Box</a></li>
+               <li role="presentation"><a href="">My CarPools</a></li>
+           </ul>
+       </div>-->
+
         <div class="page-header">
-            <ul class="nav nav-pills nav-justified">
-                <li role="presentation"><a href="">Profile</a></li>
-                <li role="presentation"><a href="">Create a Carpool</a></li>
-                <li role="presentation"><a href="">Edit Profile</a></li>
-                <li role="presentation"><a href="">Message Box</a></li>
-                <li role="presentation"><a href="">My CarPools</a></li>
-            </ul>
+            <h1>Rating Crud</h1>
         </div>
 
         <form class="form-horizontal">
@@ -61,15 +65,28 @@
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> For</th>
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Review</th>
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Rating</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Update</th>
                 <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Delete</th>
             </tr>
             </thead>
             <tbody>
+            <tr ng-show="selectedReview!=null">
+                <td>{{selectedReview.fromUser}}</td>
+                <td>{{selectedReview.toUser}}</td>
+                <td><input ng-model="selectedReview.review"  type="text" class="form-control"/></td>
+                <td><input ng-model="selectedReview.rating"  type="text" class="form-control"/></td>
+                <td><a ng-click="updateReview()" class="btn btn-success btn-block" aria-label="Left Align">
+                    Update</a></td>
+            </tr>
             <tr ng-repeat="rve in reviews">
                 <td>{{rve.fromUser}}</td>
                 <td>{{rve.toUser}}</td>
                 <td>{{rve.review}}</td>
                 <td>{{rve.rating}}</td>
+                <td>
+                    <a ng-click="selectReview($index)" class="btn btn-info btn-block" aria-label="Left Align">
+                        Select</a>
+                </td>
                 <td>
                     <a ng-click="deleteReview($index)" class="btn btn-danger btn-block" aria-label="Left Align">
                         DELETE</a>

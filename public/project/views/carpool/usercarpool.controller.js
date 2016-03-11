@@ -18,10 +18,14 @@
         $scope.updateCarPool=updateCarPool;
         $scope.selectedIndex=-1;
 
-        CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser,renderUserCarPools)
+
+
+        if(UserService.getCurrentUser()!=null)
+        CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser()._id,renderUserCarPools)
 
         // call back function to render User CarPool
         function renderUserCarPools(pools) {
+            console.log(pools);
             $scope.carPools=pools;
         }
 

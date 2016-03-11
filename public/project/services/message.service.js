@@ -22,6 +22,7 @@
             findAllMessages: findAllMessages,
             findAllMessagesForUser: findAllMessagesForUser,
             deleteMessageById: deleteMessgaeById,
+            updateMessageById: updateMessageById
         };
 
         return api;
@@ -51,6 +52,17 @@
                 if(messageList[i]._id == messageId)
                 {
                     messageList.splice(i,1);
+                }
+            }
+            callback(messageList);
+        }
+
+        function updateMessageById(messageId,mes,callback){
+            for(var i=0;i<messageList.length;i++) {
+                if(messageList[i]._id == messageId) {
+                    messageList[i].message=mes.message;
+                    //currentForms[i].userId=newForm.userId;
+                    break;
                 }
             }
             callback(messageList);

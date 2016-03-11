@@ -10,6 +10,10 @@
 
         $scope.createMessage=createMessage;
         $scope.deleteMessage=deleteMessage;
+        $scope.updateMessage=updateMessage;
+        $scope.selectMessage=selectMessage;
+        $scope.selectedMessageId=-1;
+
 
         UserService.findAllUsers(renderUser);
         MessageService.findAllMessages(renderMessages);
@@ -22,6 +26,8 @@
         function renderMessages(list){
             $scope.messages=list;
             $scope.msg=null;
+            $scope.selectedMessage=null;
+            $scope.selectedMessageId=-1;
 
         }
 
@@ -31,16 +37,34 @@
         }
 
         function deleteMessage(index){
-
             var a;
-
             MessageService.findAllMessages(getList);
-
             function getList(list){
                 a=list;
             }
-
             MessageService.deleteMessageById(a[index]._id,renderMessages);
+        }
+
+        function selectMessage(index) {
+            var a;
+            MessageService.findAllMessages(getList);
+            function getList(list) {
+                a = list;
+            }
+
+            $scope.selectedMessageId = a[index]._id;
+
+            var msg = {
+                "message": a[index].message,
+                "fromUser": a[index].fromUser,
+                "toUser": a[index].toUser
+            }
+
+            $scope.selectedMessage = msg;
+        }
+
+        function updateMessage(){
+            MessageService.updateMessageById($scope.selectedMessageId,$scope.selectedMessage,renderMessages);
         }
 
     }
