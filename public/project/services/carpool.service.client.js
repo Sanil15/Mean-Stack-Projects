@@ -12,11 +12,11 @@
     function CarPoolService(){
 
         var currentCarPools = [
-            {"_id": "000", "userId":"123", "city":"Boston", "source": "Waltham", "destination": "Longwood", "date": "12/03/2016", "time": "03:00 pm",
+            {"_id": "000", "userId":"123", "city":"Boston", "source": "Waltham", "destination": "Longwood", "date": "2016-03-15T04:00:00.000Z", "time": "03:00 pm",
                 "carInfo": "XUV","basePrice":"$10", "noOfSeats": "4", "comments":"Please Notify in Advance like a day before"},
-            {"_id": "010","userId":"123", "city":"Boston", "source": "Bedford", "destination": "Salem", "date": "17/03/2016", "time": "04:00 pm",
+            {"_id": "010","userId":"123", "city":"Boston", "source": "Bedford", "destination": "Salem", "date": "2016-03-16T04:00:00.000Z", "time": "04:00 pm",
                 "carInfo": "Chevrolet Beat","basePrice":"$7", "noOfSeats": "2", "comments":"Ping me asap!!"},
-            {"_id": "020","userId":"234", "city":"Boston", "source": "Westford", "destination": "Umass", "date": "17/03/2016", "time": "07:00 pm",
+            {"_id": "020","userId":"234", "city":"Boston", "source": "Westford", "destination": "Umass", "date": "2016-03-15T04:00:00.000Z", "time": "07:00 pm",
                 "carInfo": "Toyota Prius", "basePrice":"$9", "noOfSeats": "3", "comments":"Time flexible can be adjusted"}
         ];
 
@@ -76,18 +76,24 @@
 
 
         // function to delete CarPool by id
-        function deleteCarPoolById(carPoolId,callback){
+        function deleteCarPoolById(carPoolId,userId,callback){
             for(var i=0;i<currentCarPools.length;i++) {
                 if(currentCarPools[i]._id == carPoolId)
                 {
                     currentCarPools.splice(i,1);
                 }
             }
+            findAllCarPoolByUser(userId, renderList);
+            var userCarPools;
+            function renderList(pools){
+                userCarPools=pools;
+            }
             callback(userCarPools);
         }
 
         // function updates the CarPool by its id
         function updateCarPoolById(carPoolId,pool,callBack){
+            var a;
             for(var i=0;i<currentCarPools.length;i++) {
                 if(currentCarPools[i]._id == carPoolId){
                     currentCarPools[i].basePrice=pool.basePrice;
@@ -98,10 +104,15 @@
                     currentCarPools[i].source=pool.source;
                     currentCarPools[i].time=pool.time;
                     currentCarPools[i].noOfSeats=pool.noOfSeats;
+                    findAllCarPoolByUser(currentCarPools[i].userId, renderList);
                     break;
                 }
             }
-            callBack(currentCarPools[i]);
+
+            function renderList(list){
+                a=list;
+            }
+            callBack(a);
         }
 
     }

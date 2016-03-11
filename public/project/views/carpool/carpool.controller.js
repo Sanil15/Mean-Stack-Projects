@@ -13,21 +13,29 @@
 
             $scope.createCarPool=createCarPool;
             $scope.initMap=initMap;
-
             window.onload=initMap();
 
+            console.log($scope.selectedPool);
+
+            if($scope.selectedPool!=null) {
+                $scope.pool=$scope.selectedPool;
+            }
+
+
             function createCarPool(){
-                var userId=UserService.getCurrentUser();
-                var newPool=$scope.pool;
-                newPool.source=document.getElementById("origin-input").value;
-                newPool.destination=document.getElementById("destination-input").value;
-                CarPoolService.createCarPoolByUser(userId._id,newPool,render);
+
+                    var userId = UserService.getCurrentUser();
+                    var newPool = $scope.pool;
+                    newPool.source = document.getElementById("origin-input").value;
+                    newPool.destination = document.getElementById("destination-input").value;
+                    CarPoolService.createCarPoolByUser(userId._id, newPool, render);
+
             }
 
             // function for callBack for registered user
             function render(pool) {
-                console.log(pool);
-                $location.path("#/usercarpool");
+                //console.log(pool);
+                $location.path("/usercarpool");
             }
 
             //var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
