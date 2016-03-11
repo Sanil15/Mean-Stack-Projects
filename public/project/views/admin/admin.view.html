@@ -1,0 +1,114 @@
+
+<div class="container-fluid page" ng-controller="AdminController">
+
+    <div class="page-header">
+        <h1>Admin</h1>
+    </div>
+    <div class="table-responsive" >
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> User Name</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> First Name</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Last Name</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Email</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Details</th>
+                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.userName}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <a ng-click="userDetails($index)" class="btn btn-info btn-block" aria-label="Left Align">
+                        DETAILS</a>
+                </td>
+                <td>
+                    <a ng-click="deleteUser($index)" class="btn btn-danger btn-block" aria-label="Left Align">
+                        DELETE</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <div class="col-md-6">
+        <table class="table table-resposive table-hover">
+
+                <thread>
+                    <th>User Profile Attributes</th>
+                    <th>Values</th>
+                </thread>
+
+                <tbody>
+                <tr>
+                    <td><label class="control-label">First Name:</label></td>
+                    <td>{{user.firstName}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Last Name:</label></td>
+                    <td>{{user.lastName}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Email:</label></td>
+                    <td>{{user.email}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">DOB</label></td>
+                    <td>{{user.dob}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Country</label></td>
+                    <td>{{user.country}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">State</label></td>
+                    <td> {{user.state}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">City</label></td>
+                    <td> {{user.city}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Address</label></td>
+                    <td>{{user.address}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Zip Code</label></td>
+                    <td>{{user.zipCode}}</td>
+                </tr>
+                <tr>
+                    <td><label class="control-label">Contact No.</label></td>
+                    <td>{{user.contact}}</td>
+                </tr>
+                </tbody>
+        </table>
+    </div>
+        <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> From</th>
+                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> For</th>
+                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Review</th>
+                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="rve in reviews">
+                    <td>{{rve.fromUser}}</td>
+                    <td>{{rve.toUser}}</td>
+                    <td>{{rve.review}}</td>
+                    <td>{{rve.rating}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>

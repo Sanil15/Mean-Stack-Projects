@@ -28,13 +28,11 @@
 
         function deleteReview(index){
             var a;
-
             ReviewService.findAllReviews(getList);
 
             function getList(list){
                 a=list;
             }
-
             ReviewService.deleteReviewById(a[index]._id,renderReviews);
         }
 
