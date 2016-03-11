@@ -1,6 +1,3 @@
-/**
- * Created by Sanil on 3/10/2016.
- */
 (function (){
     angular
         .module("CarPoolApp")
