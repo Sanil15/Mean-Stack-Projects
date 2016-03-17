@@ -11,6 +11,14 @@
 
     function HeaderController($scope, UserService, $rootScope){
 
+        var vm= this;
+
+        function init(){
+
+        }
+
+        init();
+
         UserService.setCurrentUser(null);
         $scope.checkRootScope=checkRootScope;
         $scope.logout=logout;

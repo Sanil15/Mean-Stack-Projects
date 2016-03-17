@@ -9,7 +9,16 @@
         .module("FormBuilderApp")
         .controller("SidebarController",SidebarController)
 
-    function SidebarController($scope, UserService){
+    function SidebarController($scope, UserService,$location){
+
+        var vm= this;
+
+        function init(){
+
+        vm.$location=$location;
+        }
+
+        init();
 
         $scope.checkLogin=checkLogin;
         $scope.checkAdmin=checkAdmin;

@@ -10,7 +10,15 @@
 
     function LoginController($scope, UserService, $location){
 
-        $scope.login=login;
+        var vm=this;
+
+        vm.login=login;
+
+        //$scope.login=login;
+
+        function init(){
+
+        }
 
         // function for checking login of a controller
         function login(username,password){
