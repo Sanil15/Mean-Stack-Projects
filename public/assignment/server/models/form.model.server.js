@@ -14,7 +14,11 @@ module.exports = function(){
         findAllFormsForUser: findAllFormsForUser,
         deleteFormById: deleteFormById,
         updateFormById: updateFormById,
-        findFormById: findFormById
+        findFormById: findFormById,
+
+        // fields
+        findAllFieldsForForm:findAllFieldsForForm,
+        findFieldByIdForForm:findFieldByIdForForm
     }
 
     return api;
@@ -111,4 +115,41 @@ module.exports = function(){
         deferred.resolve(mock);
         return deferred.promise;
     }
+
+    function findAllFieldsForForm(formId){
+        var deferred = q.defer();
+        var form=null;
+
+        for(var u in mock){
+            if(mock[u]._id==formId) {
+                form = mock[u];
+                break;
+            }
+        }
+        deferred.resolve(form.fields);
+        return deferred.promise;
+    }
+
+    function findFieldByIdForForm(formId,fieldId){
+        var deferred = q.defer();
+        var form=null;
+
+        for(var u in mock){
+            if(mock[u]._id==formId) {
+                form = mock[u];
+                break;
+            }
+        }
+
+        var fieldSelect=null;
+        for(var i in form.fields){
+            if(form.fields[i]._id==fieldId){
+                fieldSelect=form.fields[i];
+            }
+        }
+
+        deferred.resolve(fieldSelect);
+        return deferred.promise;
+    }
+
 }

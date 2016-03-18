@@ -38,7 +38,8 @@
             })
             .when("/fields", {
                 templateUrl: "views/forms/fields.view.html",
-                //controller: "views/fields/field.controller.js"
+                controller: "FieldsController",
+                controllerAs: "model"
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
