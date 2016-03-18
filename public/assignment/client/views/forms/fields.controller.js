@@ -13,6 +13,8 @@
 
         var vm = this;
         vm.addField=addField;
+        vm.removeField=removeField;
+        vm.clone=clone;
 
         function init() {
         FieldService.getFieldsForForm(FormService.getCurrentFormId())
@@ -65,6 +67,20 @@
             }
 
             FieldService.createFieldForForm(FormService.getCurrentFormId(),newField)
+                .then(function (response){
+                    init();
+                });
+        }
+
+        function removeField(fieldId){
+            FieldService.deleteFieldFromForm(FormService.getCurrentFormId(),fieldId)
+                .then(function (response){
+                    init();
+                });
+        }
+
+        function clone(field){
+            FieldService.createFieldForForm(FormService.getCurrentFormId(),field)
                 .then(function (response){
                     init();
                 });
