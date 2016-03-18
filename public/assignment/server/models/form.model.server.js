@@ -18,7 +18,9 @@ module.exports = function(){
 
         // fields
         findAllFieldsForForm:findAllFieldsForForm,
-        findFieldByIdForForm:findFieldByIdForForm
+        findFieldByIdForForm:findFieldByIdForForm,
+        deleteFieldByIdForForm: deleteFieldByIdForForm,
+        createFieldForForm: createFieldForForm
     }
 
     return api;
@@ -152,4 +154,68 @@ module.exports = function(){
         return deferred.promise;
     }
 
+    function deleteFieldByIdForForm(formId,fieldId){
+        var deferred = q.defer();
+        var form=null;
+
+        for(var u in mock){
+            if(mock[u]._id==formId) {
+                form = mock[u];
+                break;
+            }
+        }
+
+        for(var i in form.fields){
+            if(form.fields[i]._id==fieldId){
+                form.fields.splice(i,1);
+            }
+        }
+
+        deferred.resolve(form);
+        return deferred.promise;
+    }
+
+
+    function createFieldForForm(formId,field){
+        var deferred = q.defer();
+        var form=null;
+
+        for(var u in mock){
+            if(mock[u]._id==formId) {
+                form = mock[u];
+                break;
+            }
+        }
+
+        field._id=(new Date).getTime();
+
+        form.fields.push(field);
+
+        deferred.resolve(form);
+        return deferred.promise;
+    }
+
+    function updateFieldForForm(formId,fieldId,field){
+        var deferred = q.defer();
+        var form=null;
+
+
+        for(var u in mock){
+            if(mock[u]._id==formId) {
+                form = mock[u];
+                break;
+            }
+        }
+
+        for(var i in form.fields){
+            if(form.fields[i]._id==fieldId){
+                form.fields[i]= field;
+                break;
+            }
+        }
+
+        deferred.resolve(form);
+        return deferred.promise
+
+    }
 }
