@@ -9,20 +9,20 @@
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController)
 
-    function HeaderController($scope, UserService, $rootScope){
+    function HeaderController(UserService,$location){
 
         var vm= this;
 
-        function init(){
+        vm.checkRootScope=checkRootScope;
+        vm.checkAdmin=checkAdmin;
+        vm.logout=logout;
 
+        function init(){
+            vm.$location = $location;
         }
 
         init();
 
-        UserService.setCurrentUser(null);
-        $scope.checkRootScope=checkRootScope;
-        $scope.logout=logout;
-        $scope.checkAdmin=checkAdmin;
 
         // function to check the $rootScope current user
         function checkRootScope(){
@@ -30,7 +30,7 @@
                 return true;
 
             else{
-                $scope.username=UserService.getCurrentUser().username;
+                vm.user=UserService.getCurrentUser().username;
                 return false;
             }
         }
@@ -43,13 +43,13 @@
                         return true;
                 }
             }
-
             return false;
         }
 
         // function to logout current user
         function logout(){
             UserService.setCurrentUser(null);
+            $location.path("/home");
         }
 
     }

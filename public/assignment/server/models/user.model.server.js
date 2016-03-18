@@ -115,19 +115,17 @@ module.exports = function(){
 
         var i;
         for( i=0;i<mock.length;i++) {
-            if(mock[i]._id==userId)
-                break;
+            if(mock[i]._id==userId) {
+                console.log("YES");
+                mock[i].firstName = user.firstName;
+                mock[i].lastName = user.lastName;
+                mock[i].password = user.password;
+                mock[i].username = user.username;
+                deferred.resolve(mock[i]);
+
+            }
         }
-
-        mock[i].firstName = user.firstName;
-        mock[i].lastName = user.lastName;
-        mock[i].password = user.password;
-        mock[i].username = user.username;
-
-        var user=mock[i];
-        deferred.resolve(user);
         return deferred.promise;
-
     }
 
 }

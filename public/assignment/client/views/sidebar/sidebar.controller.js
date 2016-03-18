@@ -13,15 +13,15 @@
 
         var vm= this;
 
+        vm.checkLogin=checkLogin;
+        vm.checkAdmin=checkAdmin;
+
         function init(){
 
         vm.$location=$location;
         }
 
         init();
-
-        $scope.checkLogin=checkLogin;
-        $scope.checkAdmin=checkAdmin;
 
         // function to check login of a current User
         function checkLogin(){

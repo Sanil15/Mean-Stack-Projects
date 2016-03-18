@@ -9,23 +9,27 @@
         .module("FormBuilderApp")
         .controller("ProfileController",ProfileController)
 
-    function ProfileController($scope, UserService, $location){
-      $scope.user=UserService.getCurrentUser();
-      //console.log($rootScope);
+    function ProfileController(UserService, $location){
 
-      $scope.update=update;
+        var vm=this;
 
-      // function to update a user
-      function update(user) {
-            console.log(user);
-            UserService.updateUser(user._id,user,render);
-      }
+        vm.update=update;
 
-      // callback function to update a user
-      function render (user) {
-            UserService.setCurrentUser(user);
-            //console.log(user);
-            $location.path("/profile");
-      }
+        function init(){
+            console.log("HERE"+UserService.getCurrentUser());
+            vm.user=UserService.getCurrentUser();
+        }
+        init();
+
+        // function to update a user
+        function update(user) {
+            //console.log("INVOKED"+user._id);
+            UserService.updateUser(user._id,user)
+                .then(function(response){
+                //console.log("profile.controller.js"+response);
+                UserService.setCurrentUser(response.data);
+                $location.url("/profile");
+            });
+        }
     }
 })();

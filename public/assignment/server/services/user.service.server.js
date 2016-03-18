@@ -15,7 +15,15 @@ module.exports = function(app, userModel){
 
 
     function findUserByCredentials(req, res) {
-        var credentials=req.body;
+
+        var username=req.query.username;
+        var password=req.query.password;
+
+
+        var credentials={
+            "username": username,
+            "password": password
+        };
 
         userModel.findUserByCredentials(credentials)
             .then(
@@ -30,8 +38,15 @@ module.exports = function(app, userModel){
 
     function getAllUsers(req, res){
 
-        console.log("HI");
-        if(req.query.username==null && req.query.password==null) {
+        //console.log("HI");
+
+        var username=req.query.username;
+        var password=req.query.password;
+
+        //console.log(username);
+        //console.log(password);
+
+        if(username==null && password==null) {
         userModel.findAllUsers()
             .then(
                 function (doc) {
@@ -44,10 +59,10 @@ module.exports = function(app, userModel){
             );
         }
 
-        else if(req.query.username!=null && req.query.password==null){
+        else if(username!=null && password==null){
             getUserByUsername(req,res);
         }
-        else if(req.query.username!=null && req.query.password!=null){
+        else if(username!=null && password!=null){
             findUserByCredentials(req,res);
         }
 
@@ -69,7 +84,7 @@ module.exports = function(app, userModel){
     }
 
     function getUserByUsername(req,res){
-        var userName = req.params.username;
+        var userName = req.query.username;
         userModel.findUserByUsername(userName)
             .then(
                 function (doc) {
@@ -97,10 +112,11 @@ module.exports = function(app, userModel){
 
 
     function updateUserById(req,res){
-        var userId=req.params.id;
         var user=req.body;
-
-        userModel.updateUserById(userId,user)
+        var userId=req.params.id;
+        console.log(user);
+        console.log(userId);
+        userModel.updateUser(userId,user)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -114,15 +130,6 @@ module.exports = function(app, userModel){
     function deleteUserById(req,res){
         var userId=req.params.id;
 
-        userModel.deleteUserById(userId)
-            .then(
-                function (doc) {
-                    res.json(doc);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
     }
 
 

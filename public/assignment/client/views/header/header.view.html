@@ -11,11 +11,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="checkRootScope()"><a href="#/login">Login</a></li>
-                <li ng-show="checkRootScope()"><a href="#/register">Register</a></li>
-                <li ng-show="checkAdmin()"><a href="#/admin">Admin</a></li>
-                <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
-                <li ng-show="!checkRootScope()"><a ng-click="logout()" href="#/home">Logout</a></li>
+                <li ng-show="model.checkRootScope()"><a href="#/login">Login</a></li>
+                <li ng-show="model.checkRootScope()"><a href="#/register">Register</a></li>
+                <!--<li ng-show="checkAdmin()"><a href="#/admin">Admin</a></li>-->
+                <li ng-show="!model.checkRootScope()"><a href="#/profile">{{model.user}}</a></li>
+                <li ng-show="!model.checkRootScope()"><a ng-click="logout()" href="#/home">Logout</a></li>
             </ul>
         </div>
     </div>

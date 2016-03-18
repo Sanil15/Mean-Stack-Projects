@@ -8,31 +8,30 @@
     angular.module("FormBuilderApp")
            .controller("LoginController",LoginController);
 
-    function LoginController($scope, UserService, $location){
+    function LoginController(UserService, $location){
 
         var vm=this;
 
         vm.login=login;
-
-        //$scope.login=login;
 
         function init(){
 
         }
 
         // function for checking login of a controller
-        function login(username,password){
+        function login(user){
             //console.log(username,password);
-            UserService.findUserByUsernameAndPassword(username,password,render);
-        }
-
-        // callback of a function for login
-        function render(user) {
-            if(user != null){
-                UserService.setCurrentUser(user);
-                //console.log(user);
-                $location.path("/profile");
+            if(!user)
+            {
+                return;
             }
+
+            UserService
+                .findUserByCredentials(user.username,user.password)
+                .then(function(response){
+                    UserService.setCurrentUser(response.data);
+                    $location.url("/profile");
+                });
         }
     }
 })();

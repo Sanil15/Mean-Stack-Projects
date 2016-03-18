@@ -77,7 +77,7 @@ module.exports = function(){
                 userForms.push(mock[i]);
             }
         }
-
+        console.log("FORM MODEL"+userForms);
         deferred.resolve(userForms);
         return deferred.promise;
     }
@@ -99,10 +99,11 @@ module.exports = function(){
     // function updates the form by its id
     function updateFormById(formId,newForm){
         var deferred = q.defer();
-
+        console.log("NEWFORM-TITLE"+newForm.title);
         for(var i=0;i<mock.length;i++) {
             if(mock[i]._id == formId) {
                 mock[i].title=newForm.title;
+                console.log("Update Done"+mock[i].title);
                 //currentForms[i].userId=newForm.userId;
             }
         }

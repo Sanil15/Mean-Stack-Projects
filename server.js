@@ -4,18 +4,24 @@ var https = require('https');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.json());
+
+var urlencodedParser = bodyParser.urlencoded({extended: false});
+
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var request = require('request');
 
+
+
 require("./public/assignment/server/app.js")(app);
+
 
 app.get('/hello', function(req, res){
     res.send('hello world');
 });
 app.listen(port, ipaddress);
 
-var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 
 app.post('/maps', urlencodedParser, function (req, results) {

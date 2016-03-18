@@ -55,7 +55,7 @@
 
 
         // function to update a user and its various attributes
-        function updateUser(userId, user, callback){
+        function updateUser(userId,user){
             return $http.put("/api/assignment/user/"+userId,user);
         }
 

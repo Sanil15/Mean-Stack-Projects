@@ -14,15 +14,17 @@
         $routeProvider
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                //controller: "views/home/home.controller.js"
+                //controller: "views/home/home.controller.js"]
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
                 //controller: "views/admin/admin.controller.js"
+
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller: "RegisterController"
+                controller: "RegisterController",
+                controllerAs: "model"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
@@ -31,7 +33,8 @@
             })
             .when("/profile", {
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController"
+                controller: "ProfileController",
+                controllerAs: "model"
             })
             .when("/fields", {
                 templateUrl: "views/forms/fields.view.html",
@@ -39,11 +42,14 @@
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
-                controller: "FormController"
+                controller: "FormController",
+                controllerAs: "model"
             })
 
             .otherwise({
                 redirectTo: "/home"
             });
     }
+
+
 })();

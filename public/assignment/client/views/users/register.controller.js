@@ -9,35 +9,32 @@
         .module("FormBuilderApp")
         .controller("RegisterController",RegisterController)
 
-        function RegisterController($scope, UserService, $location){
+        function RegisterController(UserService, $location) {
 
-            $scope.register=register;
+            var vm = this;
+
+            vm.register = register;
+
+            function init() {
+
+            }
+
+            init();
 
             // function to register a current user
-            function register(username,password,confirmPassword,email){
+            function register(user) {
 
-                var user;
+                user.firstName = null;
+                user.lastName = null;
 
-                if(password==confirmPassword){
-                    user={
-                        "_id": (new Date).getTime(),
-                        "firstName":null,
-                        "lastName":null,
-                        "username":username,
-                        "password":password,
-                        "roles": []};
-
-                UserService.createUser(user, render);
-                }
+                UserService.createUser(user)
+                    .then(function (response) {
+                        var users=response.data;
+                        console.log(users[users.length]);
+                        UserService.setCurrentUser(users[users.length]);
+                        $location.url("/profile");
+                    });
             }
-
-            // function for callBack for registered user
-            function render (user) {
-                UserService.setCurrentUser(user);
-                //console.log(user);
-                $location.path("/profile");
-            }
-
         }
 
 })();

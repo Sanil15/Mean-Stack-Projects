@@ -9,73 +9,71 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController)
 
-    function FormController($scope,FormService, UserService){
+    function FormController(FormService, UserService){
 
-        $scope.addForm=addForm;
-        $scope.deleteForm=deleteForm;
-        $scope.selectForm=selectForm;
-        $scope.updateForm=updateForm;
-        $scope.selectedIndex=-1;
 
-        FormService.findAllFormsForUser(UserService.getCurrentUser()._id, renderUserForms);
+        var vm = this;
 
-        // call back function to render User Forms
-        function renderUserForms(userForms) {
-            $scope.userForms=userForms;
+        vm.addForm=addForm;
+        vm.deleteForm=deleteForm;
+        vm.selectForm=selectForm;
+        vm.updateForm=updateForm;
+
+        vm.userForms=[];
+        function init() {
+            vm.selectedIndex=-1;
+            var userId=UserService.getCurrentUser()._id;
+            FormService
+                .findAllFormsForUser(userId)
+                .then(function(response){
+                        console.log(response);
+                        vm.userForms=response.data;
+                    }
+                );
         }
 
+        init();
+
+
         //function to add forms
-        function addForm(formName){
-            if(formName!=null) {
-                var newForm = {
-                    "_id": null,
-                    "title": formName,
-                    "userId": null
-                }
-                FormService.createFormForUser(UserService.getCurrentUser()._id, newForm, renderAddForm);
+        function addForm(form){
+            if(form.title!=null){
+                FormService.createFormForUser(UserService.getCurrentUser()._id,form)
+                    .then(function(response){
+                     init();
+                     vm.form.title=null;
+                    });
             }
         }
 
-        // function is a callback for adding a form
-        function renderAddForm(form){
-            $scope.userForms.push(form);
-            $scope.formName=null;
-        }
 
         // function that deletes a form
         function deleteForm(index){
-            FormService.deleteFormById($scope.userForms[index]._id,renderDelete);
-        }
-
-        // function deletes the form clicked on
-        function renderDelete(forms){
-            FormService.findAllFormsForUser(UserService.getCurrentUser()._id,renderUserForms);
+            FormService.deleteFormById(vm.userForms[index]._id)
+                .then(function(response){
+                    init();
+                });
         }
 
         // function to select a form
         function selectForm(index){
-            $scope.formName=$scope.userForms[index].title;
-            $scope.selectedIndex=index;
+            vm.form={};
+            vm.form.title=vm.userForms[index].title;
+            vm.selectedIndex=index;
         }
 
         // function to update Form Name of the selected function
-        function updateForm(formName){
-           if(formName !=null && $scope.selectedIndex!=-1){
-                var form=$scope.userForms[$scope.selectedIndex];
-                var newForm ={
-                    "_id" : form._id,
-                    "title" : formName,
-                    "userId": form.userId
-                }
-                FormService.updateFormById(newForm._id,newForm,renderUpdate);
+        function updateForm(newForm){
+            if(vm.form.title!=null && vm.selectedIndex!=-1){
+                var form=vm.userForms[vm.selectedIndex];
+                //console.log("Update Form"+form);
+                FormService.updateFormById(form._id,newForm)
+                    .then(function(response){
+                        init();
+                        vm.form.title=null;
+                    });
             }
         }
 
-        // call back function for updated form
-        function renderUpdate(form){
-            FormService.findAllFormsForUser(UserService.getCurrentUser()._id,renderUserForms);
-            $scope.formName=null;
-            $scope.selectedIndex=-1;
-        }
     }
 })();
