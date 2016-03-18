@@ -6,10 +6,21 @@
  */
 (function(){
     angular
-        .module("FormBuilderApp", ["divSortable"])
+        .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController($scope) {
+    function FieldController(FieldService,FormService,UserService) {
+
+        var vm = this;
+
+        function init() {
+        FieldService.getFieldsForForm(FormService.getCurrentFormId())
+            .then(function (response){
+               vm.fields=response.data;
+            });
+        }
+        init();
+
 
     }
 })();

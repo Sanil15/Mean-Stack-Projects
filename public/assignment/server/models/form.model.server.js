@@ -20,7 +20,8 @@ module.exports = function(){
         findAllFieldsForForm:findAllFieldsForForm,
         findFieldByIdForForm:findFieldByIdForForm,
         deleteFieldByIdForForm: deleteFieldByIdForForm,
-        createFieldForForm: createFieldForForm
+        createFieldForForm: createFieldForForm,
+        updateFieldByIdForForm: updateFieldByIdForForm
     }
 
     return api;
@@ -195,7 +196,7 @@ module.exports = function(){
         return deferred.promise;
     }
 
-    function updateFieldForForm(formId,fieldId,field){
+    function updateFieldByIdForForm(formId,fieldId,field){
         var deferred = q.defer();
         var form=null;
 

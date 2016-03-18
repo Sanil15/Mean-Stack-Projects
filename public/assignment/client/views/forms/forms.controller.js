@@ -9,7 +9,7 @@
         .module("FormBuilderApp")
         .controller("FormController",FormController)
 
-    function FormController(FormService, UserService){
+    function FormController(FormService, UserService,$location){
 
 
         var vm = this;
@@ -18,6 +18,7 @@
         vm.deleteForm=deleteForm;
         vm.selectForm=selectForm;
         vm.updateForm=updateForm;
+        vm.fields=fields;
 
         vm.userForms=[];
         function init() {
@@ -73,6 +74,11 @@
                         vm.form.title=null;
                     });
             }
+        }
+
+        function fields(formId){
+            FormService.setCurrentFormId(formId);
+            $location.path("/fields");
         }
 
     }

@@ -6,7 +6,7 @@ module.exports = function(app, formModel, userModel) {
     app.get("/api/assignment/form/:formId/field/:fieldId", findFieldByIdForForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByIdForForm);
     app.post("/api/assignment/form/:formId/field", createFieldForForm);
-    app.put("/api/assignment/form/:formId", updateFieldForForm);
+    app.put("/api/assignment/form/:formId", updateFieldByIdForForm);
 
     function findAllFieldsForForm(req, res) {
         var formId = req.params.formId;

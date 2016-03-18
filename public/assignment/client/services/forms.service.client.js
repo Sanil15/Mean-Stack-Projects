@@ -9,13 +9,15 @@
         .module("FormBuilderApp")
         .factory("FormService",FormService)
 
-    function FormService($http){
+    function FormService($http, $rootScope){
 
        var api = {
            createFormForUser: createFormForUser,
            findAllFormsForUser: findAllFormsForUser,
            deleteFormById: deleteFormById,
-           updateFormById: updateFormById
+           updateFormById: updateFormById,
+           setCurrentFormId: setCurrentFormId,
+           getCurrentFormId: getCurrentFormId
        };
 
        return api;
@@ -41,6 +43,13 @@
             return $http.put("/api/assignment/form/"+formId,newForm);
         }
 
+        function setCurrentFormId(formId){
+            $rootScope.currentForm=formId;
+        }
+
+        function getCurrentFormId(){
+            return $rootScope.currentForm;
+        }
     }
 
 })();
