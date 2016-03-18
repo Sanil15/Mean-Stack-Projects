@@ -10,7 +10,7 @@ module.exports = function(app, formModel, userModel){
 
     function getFormsByUserId(req,res){
         var userId = req.params.userId;
-        userModel.getFormsByUserId(userId)
+        formModel.findAllFormsForUser(userId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -23,7 +23,7 @@ module.exports = function(app, formModel, userModel){
 
     function getFormById(req,res){
         var frmId= req.params.formId;
-        userModel.getFormById(frmId)
+        formModel.findFormById(frmId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -36,7 +36,7 @@ module.exports = function(app, formModel, userModel){
 
     function deleteFormById(req,res){
         var frmId= req.params.formId;
-        userModel.deleteFormById(frmId)
+        formModel.deleteFormById(frmId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -51,7 +51,7 @@ module.exports = function(app, formModel, userModel){
         var userId= req.params.userId;
         var form= req.body;
 
-        userModel.createFormForUser(form,userId)
+        formModel.createFormForUser(form,userId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -66,7 +66,7 @@ module.exports = function(app, formModel, userModel){
         var formId=req.params.formId;
         var form=req.body;
 
-        userModel.updateFormById(formId,form)
+        formModel.updateFormById(formId,form)
             .then(
                 function (doc) {
                     res.json(doc);

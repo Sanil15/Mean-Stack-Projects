@@ -6,8 +6,8 @@
       {"_id": "333", "label": "Address", "type": "TEXT", "placeholder": "Address"},
       {"_id": "444", "label": "State", "type": "OPTIONS", "options": [
         {"label": "Massachussetts", "value": "MA"},
-        {"label": "New Hampshire", "value": "NH"
-          }]},
+        {"label": "New Hampshire", "value": "NH"}
+          ]},
         {"_id": "555", "label": "ZIP", "type": "TEXT", "placeholder": "ZIP"},
         {"_id": "666", "label": "Email", "type": "EMAIL", "placeholder": "Email"}
       ]

@@ -1,7 +1,7 @@
 /**
  * Created by Sanil on 3/16/2016.
  */
-var mock= require("./user.mock.json");
+var mock= require("./form.mock.json");
 
 // load the promise library
 var q = require("q");
@@ -13,7 +13,8 @@ module.exports = function(){
         createFormForUser: createFormForUser,
         findAllFormsForUser: findAllFormsForUser,
         deleteFormById: deleteFormById,
-        updateFormById: updateFormById
+        updateFormById: updateFormById,
+        findFormById: findFormById
     }
 
     return api;
@@ -21,67 +22,92 @@ module.exports = function(){
     // function finds form by title
 
     function findFormByTitle(title){
+        var deferred = q.defer();
+        var form=null;
+
         for(var u in mock){
-            if(mock[u].title==title)
-            return mock[u];
+            if(mock[u].title==title) {
+                form = mock[u];
+                break;
+            }
         }
-        return null;
+        deferred.resolve(form);
+        return deferred.promise;
+
     }
 
     //
     function findFormById(id){
+        var deferred = q.defer();
+        var form=null;
+
         for(var u in mock){
-            if(mock[u]._id==id)
-                return mock[u];
+            if(mock[u]._id==id) {
+                form = mock[u];
+                break;
+            }
         }
-        return null;
+
+        deferred.resolve(form);
+        return deferred.promise;
     }
 
 
     // function to create forms for a user
     function createFormForUser(form, userId){
+        var deferred = q.defer();
+
         form._id=(new Date).getTime();
         form.userId=userId;
         mock.push(form);
-        return mock;
+
+        var forms=mock;
+        deferred.resolve(forms);
+        return deferred.promise;
     }
 
 
     // functions finds forms of all users
     function findAllFormsForUser(userId){
+        var deferred = q.defer();
+
         var userForms=[];
         for(var i=0;i<mock.length;i++){
             if(mock[i].userId == userId){
-                mock.push(mock[i]);
+                userForms.push(mock[i]);
             }
         }
-        return userForms;
+
+        deferred.resolve(userForms);
+        return deferred.promise;
     }
 
     // function to delete form by id
     function deleteFormById(formId){
+        var deferred = q.defer();
+
         for(var i=0;i<mock.length;i++) {
             if(mock[i]._id == formId)
-            {
                 mock.splice(i,1);
-                return mock;
-            }
+
         }
-        return mock;
+
+        deferred.resolve(mock);
+        return deferred.promise;
     }
 
     // function updates the form by its id
     function updateFormById(formId,newForm){
+        var deferred = q.defer();
+
         for(var i=0;i<mock.length;i++) {
             if(mock[i]._id == formId) {
                 mock[i].title=newForm.title;
                 //currentForms[i].userId=newForm.userId;
-                return mock;
             }
         }
-        return mock;
+
+        deferred.resolve(mock);
+        return deferred.promise;
     }
-
-
-
 }

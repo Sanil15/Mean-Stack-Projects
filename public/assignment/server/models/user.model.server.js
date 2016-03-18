@@ -35,7 +35,6 @@ module.exports = function(){
         }
 
         deferred.resolve(user);
-
         return deferred.promise;
     }
 
@@ -84,7 +83,7 @@ module.exports = function(){
         var deferred = q.defer();
         var user=null;
         for(var u in mock){
-            if(mock[u].username === username)
+            if(mock[u]._id == id)
                 user=mock[u];
 
         }

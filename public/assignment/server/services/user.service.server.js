@@ -4,8 +4,8 @@
 module.exports = function(app, userModel){
     app.post("/api/assignment/user", createUser);
 
-    app.get(" /api/assignment/user", getAllUsers);
-    app.get("/api/assignment/user/:id", getUserbyId);
+    app.get("/api/assignment/user", getAllUsers);
+    app.get("/api/assignment/user/:id", getUserById);
 
     //app.get("/api/assignment/user?username=username", getUserByUsername);
     //app.get("/api/assignment/user?username=alice&password=wonderland", findUserByCredentials);
@@ -30,10 +30,12 @@ module.exports = function(app, userModel){
 
     function getAllUsers(req, res){
 
+        console.log("HI");
         if(req.query.username==null && req.query.password==null) {
         userModel.findAllUsers()
             .then(
                 function (doc) {
+                    console.log(doc);
                     res.json(doc);
                 },
                 function (err) {
