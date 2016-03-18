@@ -6,7 +6,7 @@ module.exports = function(app, formModel, userModel){
     app.get("/api/assignment/form/:formId", getFormById);
     app.delete("/api/assignment/form/:formId", deleteFormById);
     app.post("/api/assignment/user/:userId/form",createFormForUser);
-    app.put(" /api/assignment/form/:formId", updateFormById);
+    app.put("/api/assignment/form/:formId", updateFormById);
 
     function getFormsByUserId(req,res){
         var userId = req.params.userId;
