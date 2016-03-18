@@ -98,19 +98,19 @@
                     <div class="col-sm-4 col-md-4">
                         <label for="dropdownMenu2">Add New Field</label>
                         <select id="dropdownMenu2" class="form-control" ng-model="model.fieldType">
-                            <option><a href="#">Single Line Text</a></option>
-                            <option><a href="#">Date</a></option>
-                            <option><a href="#">Dropdown</a></option>
-                            <option><a href="#">Checkboxes</a></option>
-                            <option><a href="#">Radio Buttons</a></option>
-                            <option><a href="#">Paragraph Text Field</a></option>
+                            <option value="TEXT">Single Line Text Field</option>
+                            <option value="TEXTAREA">Multi Line Text Field</option>
+                            <option value="DATE">Date Field</option>
+                            <option value="OPTIONS">Dropdown Field</option>
+                            <option value="CHECKBOXES">Checkboxes Field</option>
+                            <option value="RADIOS">Radio Buttons Field</option>
                         </select>
                     </div>
 
                     <div class="col-sm-4 col-md-4 col-md-offset-2 edit">
                         <span class="plus"></span>
 
-                        <a class="btn btn-default" ng-click="addField(model.fieldType)">
+                        <a class="btn btn-default" ng-click="model.addField(model.fieldType)">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         </a>
                     </div>
