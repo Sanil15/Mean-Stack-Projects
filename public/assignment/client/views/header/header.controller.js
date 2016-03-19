@@ -18,7 +18,7 @@
         vm.logout=logout;
 
         function init(){
-            vm.$location = $location;
+
         }
 
         init();
@@ -30,7 +30,7 @@
                 return true;
 
             else{
-                vm.user=UserService.getCurrentUser().username;
+                vm.username=UserService.getCurrentUser().username;
                 return false;
             }
         }
@@ -48,8 +48,10 @@
 
         // function to logout current user
         function logout(){
+
             UserService.setCurrentUser(null);
-            $location.path("/home");
+            console.log()
+            vm.username=null;
         }
 
     }

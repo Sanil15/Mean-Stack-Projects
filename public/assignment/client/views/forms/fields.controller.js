@@ -9,7 +9,7 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController(FieldService,FormService,UserService) {
+    function FieldController(FieldService,FormService,UserService,$scope) {
 
         var vm = this;
         vm.addField=addField;
@@ -18,10 +18,18 @@
         vm.selectField=selectField;
         vm.editField=editField;
 
+        $scope.users = [
+            {first: "Alice", last: "Wonderland"},
+            {first: "Bob", last: "Hope"},
+            {first: "Charlie", last: "Brown"}
+        ];
+
+
         function init() {
         FieldService.getFieldsForForm(FormService.getCurrentFormId())
             .then(function (response){
                vm.fields=response.data;
+               $scope.fields=vm.fields;
             });
         }
         init();

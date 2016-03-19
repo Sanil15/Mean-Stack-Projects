@@ -13,9 +13,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="model.checkRootScope()"><a href="#/login">Login</a></li>
                 <li ng-show="model.checkRootScope()"><a href="#/register">Register</a></li>
-                <!--<li ng-show="checkAdmin()"><a href="#/admin">Admin</a></li>-->
-                <li ng-show="!model.checkRootScope()"><a href="#/profile">{{model.user}}</a></li>
-                <li ng-show="!model.checkRootScope()"><a ng-click="logout()" href="#/home">Logout</a></li>
+                <li ng-show="model.username"><a href="#/profile">{{model.username}}</a></li>
+                <li ng-show="!model.checkRootScope()"><a ng-click="model.logout()" href="#/home">Logout</a></li>
             </ul>
         </div>
     </div>

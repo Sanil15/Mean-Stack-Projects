@@ -6,6 +6,6 @@
     'use strict';
 
     angular
-        .module("FormBuilderApp",["ngRoute"])
+        .module("FormBuilderApp",["ngRoute","divSortable","ui.bootstrap"]);
 
 })();
