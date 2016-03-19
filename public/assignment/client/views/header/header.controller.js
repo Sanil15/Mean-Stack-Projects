@@ -18,7 +18,7 @@
         vm.logout=logout;
 
         function init(){
-
+            vm.$location=$location;
         }
 
         init();
