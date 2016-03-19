@@ -15,6 +15,8 @@
         vm.addField=addField;
         vm.removeField=removeField;
         vm.clone=clone;
+        vm.selectField=selectField;
+        vm.editField=editField;
 
         function init() {
         FieldService.getFieldsForForm(FormService.getCurrentFormId())
@@ -84,6 +86,57 @@
                 .then(function (response){
                     init();
                 });
+        }
+
+        function selectField(field){
+
+            vm.updatedField = field;
+
+            vm.label = field.label;
+
+            if(field.options){
+                var val="";
+                for(var i in field.options){
+                    val = val + field.options[i].label;
+                    val+=":"
+                    val = val + field.options[i].value;
+                    val+="\n";
+                }
+                vm.options = val;
+            }
+
+            if(field.placeholder){
+                vm.placeholder = field.placeholder;
+            }
+        }
+
+        function editField(){
+            if(vm.updatedField.options){
+                var opts = vm.options.split("\n");
+                var opt = [];
+
+                for (var i in opts){
+                    var pair = opts[i].split(":");
+                    var obj = {"label" :pair[0] ,"value" :pair[1]};
+                    opt.push(obj);
+                }
+
+                vm.updatedField.options = opt;
+            }
+
+            if(vm.updatedField.placeholder){
+                vm.updatedField.placeholder  = vm.placeholder
+            }
+
+            vm.updatedField.label = vm.label;
+
+            FieldService
+                .updateField(FormService.getCurrentFormId(),vm.updatedField._id,vm.updatedField)
+                .then(
+                    function(doc){
+                        init();
+                    }
+                );
         }
     }
 })();

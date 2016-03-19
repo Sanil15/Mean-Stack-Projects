@@ -38,6 +38,7 @@
         }
 
         function updateField(formId, fieldId, field) {
+            console.log("/api/assignment/form/"+formId+"/field/"+fieldId);
             return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId,field);
         }
     }

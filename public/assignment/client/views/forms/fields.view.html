@@ -74,7 +74,7 @@
                     </ANY>
 
                     <div class="col-sm-4 col-md-4 col-md-offset-2 edit">
-                        <a ng-click="" class="btn btn-default" aria-label="Left Align">
+                        <a class="btn btn-default" aria-label="Left Align" ng-click="model.selectField(field)" data-toggle="modal" data-target="#myModal">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         </a>
                         <a ng-click="model.clone(field)" class="btn btn-default">
@@ -89,6 +89,10 @@
                     </div>
 
                     <br>
+                    <br>
+
+
+
 
                 </div>
 
@@ -117,5 +121,40 @@
                 </div>
 
             </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{model.updatedField.label}}</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label>Label:</label>
+                            <input type="text" class="form-control" ng-model="model.label">
+                        </div>
+
+                        <div class="form-group" ng-show="model.updatedField.placeholder">
+                            <label>Placeholder:</label>
+                            <input type="text" class="form-control" ng-model="model.placeholder">
+                        </div>
+
+                        <div class="form-group" ng-show="model.updatedField.options">
+                            <label>Options:</label>
+                            <textarea class="form-control" ng-model="model.options"></textarea>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+                        <a ng-click="model.editField()" class="btn btn-primary" data-dismiss="modal">Ok</a>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 </div>
