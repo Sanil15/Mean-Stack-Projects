@@ -13,9 +13,8 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var request = require('request');
 
 
-
 require("./public/assignment/server/app.js")(app);
-
+require("./public/project/server/app.js")(app);
 
 app.get('/hello', function(req, res){
     res.send('hello world');
