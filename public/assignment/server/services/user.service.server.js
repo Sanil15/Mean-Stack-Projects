@@ -114,8 +114,7 @@ module.exports = function(app, userModel){
     function updateUserById(req,res){
         var user=req.body;
         var userId=req.params.id;
-        console.log(user);
-        console.log(userId);
+
         userModel.updateUser(userId,user)
             .then(
                 function (doc) {
@@ -129,7 +128,15 @@ module.exports = function(app, userModel){
 
     function deleteUserById(req,res){
         var userId=req.params.id;
-
+        userModel.deleteUserById(userId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
 
