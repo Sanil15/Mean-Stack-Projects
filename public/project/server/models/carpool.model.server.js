@@ -81,7 +81,7 @@ module.exports = function (){
 
 
     // function to delete CarPool by id
-    function deleteCarPoolById(carPoolId,userId){
+    function deleteCarPoolById(carPoolId){
         var deferred = q.defer();
 
         for(var i=0;i<mock.length;i++) {

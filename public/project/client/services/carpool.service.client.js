@@ -11,14 +11,7 @@
 
     function CarPoolService(){
 
-        var currentCarPools = [
-            {"_id": "000", "userId":"123", "city":"Boston", "source": "Waltham", "destination": "Longwood", "date": "2016-03-15T04:00:00.000Z", "time": "03:00 pm",
-                "carInfo": "XUV","basePrice":"$10", "noOfSeats": "4", "comments":"Please Notify in Advance like a day before"},
-            {"_id": "010","userId":"123", "city":"Boston", "source": "Bedford", "destination": "Salem", "date": "2016-03-16T04:00:00.000Z", "time": "04:00 pm",
-                "carInfo": "Chevrolet Beat","basePrice":"$7", "noOfSeats": "2", "comments":"Ping me asap!!"},
-            {"_id": "020","userId":"234", "city":"Boston", "source": "Westford", "destination": "Umass", "date": "2016-03-15T04:00:00.000Z", "time": "07:00 pm",
-                "carInfo": "Toyota Prius", "basePrice":"$9", "noOfSeats": "3", "comments":"Time flexible can be adjusted"}
-        ];
+
 
         var api = {
             createCarPoolByUser: createCarPoolByUser,
@@ -32,89 +25,36 @@
         return api;
 
         // function to create Carpool for all user
-        function createCarPoolByUser(userId, pool, callback){
-            pool._id=(new Date).getTime();
-            pool.userId=userId;
-            pool.city="Boston";
-            currentCarPools.push(pool);
-            callback(pool);
+        function createCarPoolByUser(userId, pool){
+            return $http.post("/api/project/user/"+userId+"/carPool",pool);
         }
 
 
         // functions finds all CarPool's created by user
-        function findAllCarPoolByUser(userId, callback){
-            var userCarPools=[];
-            for(var i=0;i<currentCarPools.length;i++){
-                if(currentCarPools[i].userId == userId){
-                    userCarPools.push(currentCarPools[i]);
-                }
-            }
-            callback(userCarPools);
+        function findAllCarPoolByUser(userId){
+            return $http.get("/api/project/user/"+userId+"/carpool");
         }
 
         // functions finds all CarPool's by source and destination
-        function findCarPoolBySourceDestination(source, destination, callback){
-            var carPools=[];
-            for(var i=0;i<currentCarPools.length;i++){
-                if(currentCarPools[i].source == source && currentCarPools[i].destination == destination){
-                    carPools.push(currentCarPools[i]);
-                }
-            }
-            callback(carPools);
+        function findCarPoolBySourceDestination(source, destination){
+            return $http.get("/api/project/carpool?"+"source="+source+"&"+"destination="+destination);
         }
 
         // functions finds all CarPool's by city
-        function findCarPoolByCity(city, callback){
-            var carPools=[];
-            for(var i=0;i<currentCarPools.length;i++){
-                if(currentCarPools[i].city == city){
-                    carPools.push(currentCarPools[i]);
-                }
-            }
-            callback(carPools);
+        function findCarPoolByCity(city){
+            return $http.get("/api/project/carpool?"+"city="+destination);
         }
 
 
         // function to delete CarPool by id
-        function deleteCarPoolById(carPoolId,userId,callback){
-            for(var i=0;i<currentCarPools.length;i++) {
-                if(currentCarPools[i]._id == carPoolId)
-                {
-                    currentCarPools.splice(i,1);
-                }
-            }
-            findAllCarPoolByUser(userId, renderList);
-            var userCarPools;
-            function renderList(pools){
-                userCarPools=pools;
-            }
-            callback(userCarPools);
+        function deleteCarPoolById(carPoolId){
+            return $http.delete("/api/project/carpool/"+carPoolId);
         }
 
         // function updates the CarPool by its id
-        function updateCarPoolById(carPoolId,pool,callBack){
-            var a;
-            for(var i=0;i<currentCarPools.length;i++) {
-                if(currentCarPools[i]._id == carPoolId){
-                    currentCarPools[i].basePrice=pool.basePrice;
-                    currentCarPools[i].carInfo=pool.carInfo;
-                    currentCarPools[i].comments=pool.comments;
-                    currentCarPools[i].date=pool.date;
-                    currentCarPools[i].destination=pool.destination;
-                    currentCarPools[i].source=pool.source;
-                    currentCarPools[i].time=pool.time;
-                    currentCarPools[i].noOfSeats=pool.noOfSeats;
-                    findAllCarPoolByUser(currentCarPools[i].userId, renderList);
-                    break;
-                }
-            }
-
-            function renderList(list){
-                a=list;
-            }
-            callBack(a);
+        function updateCarPoolById(carPoolId,pool) {
+            return $http.put("/api/project/carpool/"+carPoolId,pool);
         }
-
     }
 
 })();

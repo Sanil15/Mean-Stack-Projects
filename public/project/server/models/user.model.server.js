@@ -15,19 +15,34 @@ module.exports = function (){
         createUser : createUser,
         deleteUserById : deleteUserById,
         updateUser : updateUser,
-        setCurrentUser : setCurrentUser,
-        getCurrentUser : getCurrentUser
+        findUserByUsername: findUserByUsername,
+        findUserById: findUserById
     };
 
     return api;
 
+    function findUserById(userId){
+
+        var deferred = q.defer();
+        var user=null;
+
+        for(var u in mock){
+            if(mock[u]._id == userId){
+                user= mock[u];
+            }
+        }
+
+        deferred.resolve(user);
+
+        return deferred.promise;
+    }
 
     // function to find Email and Password
     function findUserByCredentials(credentials){
         var deferred = q.defer();
         var user=null;
         for(var i=0; i<mock.length;i++) {
-            if (credentials.email == mock[i].email && credentials.password == mock[i].password) {
+            if (credentials.username == mock[i].username && credentials.password == mock[i].password) {
                 user=mock[i];
             }
         }
@@ -75,6 +90,22 @@ module.exports = function (){
 
     }
 
+    function findUserByUsername(username){
+
+        var deferred = q.defer();
+        var user=null;
+
+        for(var u in mock){
+            if(mock[u].username === username){
+                user= mock[u];
+            }
+        }
+
+        deferred.resolve(user);
+
+        return deferred.promise;
+    }
+
 
     // function to update a user and its various attributes
     function updateUser(userId, user){
@@ -83,7 +114,6 @@ module.exports = function (){
             if(mock[i]._id==userId)
                 break;
         }
-
         mock[i].firstName = user.firstName;
         mock[i].lastName = user.lastName;
         mock[i].password = user.password;

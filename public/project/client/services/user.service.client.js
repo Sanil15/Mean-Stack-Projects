@@ -9,10 +9,10 @@
         .module("CarPoolApp")
         .factory("UserService",UserService);
 
-    function UserService($rootScope){
+    function UserService($rootScope,$http){
 
         var api = {
-            findUserByEmailAndPassword : findUserByEmailAndPassword,
+            findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             createUser : createUser,
             deleteUserById : deleteUserById,
@@ -34,57 +34,29 @@
         }
 
         // function to find Email and Password
-        function findUserByEmailAndPassword(email, password, callback){
-            for(var i=0; i<currentUsers.length;i++) {
-                if (email == currentUsers[i].email && password == currentUsers[i].password) {
-                    callback(currentUsers[i]);
-                    }
-                }
-            callback(null);
+        function findUserByCredentials(username, password){
+           return $http.get("/api/project/user?"+"username=" + username + "&password=" + password);
         }
 
         // function returns all set of users
-        function findAllUsers(callback){
-            callback(currentUsers);
+        function findAllUsers(){
+            return $http.get("/api/project/user");
         }
 
         // function creates a set of users
-        function createUser(user, callback){
-            currentUsers.push(user);
-               console.log(currentUsers);
-            callback(user);
+        function createUser(user){
+            return $http.post("/api/project/user",user);
         }
 
         // function deletes a user by userId
-        function deleteUserById(userId, callback){
-            var i;
-            for(i=0;i<currentUsers.length;i++) {
-                if(currentUsers[i]._id==userId)
-                    break;
-            }
-            currentUsers.splice(i,1);
+        function deleteUserById(userId){
+            return $http.delete("/api/project/user/"+userId);
         }
 
 
         // function to update a user and its various attributes
-        function updateUser(userId, user, callback){
-            var i;
-            for( i=0;i<currentUsers.length;i++) {
-                if(currentUsers[i]._id==userId)
-                break;
-            }
-
-            currentUsers[i].firstName = user.firstName;
-            currentUsers[i].lastName = user.lastName;
-            currentUsers[i].password = user.password;
-            currentUsers[i].email = user.email;
-            currentUsers[i].address=user.address;
-            currentUsers[i].city=user.city;
-            currentUsers[i].contact=user.contact;
-            currentUsers[i].dob=user.dob;
-            currentUsers[i].zipCode=user.zipCode;
-
-            callback(currentUsers[i]);
+        function updateUser(userId, user){
+            return $http.put("/api/project/user/"+userId,user);
         }
     }
 })();

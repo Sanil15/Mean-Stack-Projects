@@ -1,0 +1,5 @@
+[
+  {"_id": "000", "message": "Hi Wassup!!!", "fromUser": "Alice123", "toUser": "Bob_Hope"},
+  {"_id": "010", "message": "Hey, How you doin?", "fromUser": "Bob_Hope", "toUser": "CharlieCool"},
+  {"_id": "020", "message": "Hey Hello", "fromUser": "CharlieCool", "toUser": "Alice123"}
+]

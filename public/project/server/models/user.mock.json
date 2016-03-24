@@ -10,5 +10,6 @@
   {	"_id":345, "firstName":"Charlie", "lastName":"Brown","userName": "CharlieCool",
     "email":"charlie@yahoo.com","password":"charlie", "roles": ["general"],
     "dob":"2/4/1983", "country":"USA", "state": "MA", "city": "Maine",
-    "address": "Stephen Street", "zipCode":"02220", "contact":"+1 876-300-8688"                                                   },
+    "address": "Stephen Street", "zipCode":"02220", "contact":"+1 876-300-8688"
+  }
 ]

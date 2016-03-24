@@ -13,7 +13,8 @@ module.exports = function() {
         findAllMessages: findAllMessages,
         findAllMessagesForUser: findAllMessagesForUser,
         deleteMessageById: deleteMessgaeById,
-        updateMessageById: updateMessageById
+        updateMessageById: updateMessageById,
+        findMessageById: findMessageById
     };
 
     return api;
@@ -21,8 +22,24 @@ module.exports = function() {
     function findAllMessages(){
         var deferred = q.defer();
         var messages=mock;
+        console.log("YES");
+        deferred.resolve(mock);
+        return deferred.promise;
+    }
 
-        deferred.resolve(messages);
+    function findMessageById(messageId){
+        var deferred = q.defer();
+        var msg=null;
+        for(var i=0;i<mock.length;i++) {
+
+            if(mock[i]._id == messageId)
+            {
+                msg=mock[i];
+                break;
+            }
+        }
+
+        deferred.resolve(msg);
         return deferred.promise;
     }
 
@@ -41,7 +58,7 @@ module.exports = function() {
 
         var userMessages=[];
         for(var i=0;i<mock.length;i++){
-            if(messageList[i].toUser == userName){
+            if(mock[i].toUser == userName){
                 userMessages.push(mock[i]);
             }
         }
