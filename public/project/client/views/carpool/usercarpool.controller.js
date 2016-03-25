@@ -14,49 +14,54 @@
 
     function UserCarPoolController($scope,CarPoolService, UserService,$location){
 
-        $scope.deleteCarPool=deleteCarPool;
-        $scope.updateCarPool=updateCarPool;
-        $scope.selectCarPool=selectCarPool;
-        $scope.selectedPool=null;
+        var vm = this;
 
+        vm.deleteCarPool=deleteCarPool;
+        vm.updateCarPool=updateCarPool;
+        vm.selectCarPool=selectCarPool;
 
-        if(UserService.getCurrentUser()!=null)
-        CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser()._id,renderUserCarPools);
+        var pools=null;
+        function init() {
+            vm.selectedPool=null;
 
-        var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
-        var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
+            var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
+            var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
 
+            if(UserService.getCurrentUser()!=null)
+                CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser()._id)
+                    .then(function(response){
+                        vm.carPools=response.data;
+                        pools=response.data;
+                        vm.selectedPool=null;
+                    });
 
-        function renderUserCarPools(pools) {
-            console.log(pools);
-            $scope.carPools=pools;
-            $scope.selectedPool=null;
         }
 
+        init();
+
+
         function deleteCarPool(index){
-            CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser()._id,getList);
-            var a;
-            function getList(list){
-                a=list;
-            }
-            CarPoolService.deleteCarPoolById(a[index]._id,a[index].userId,renderUserCarPools);
+
+            CarPoolService.deleteCarPoolById(pools[index]._id)
+                .then(function (response){
+                    init();
+                    vm.selectedPool=null;
+                });
         }
 
 
         function selectCarPool(index){
-
-            CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser()._id,getList);
-            var a;
-            function getList(list){
-                a=list;
-            }
-            $scope.selectedPool=a[index];
+             vm.selectedPoolId=pools[index]._id;
+             vm.selectedPool=pools[index];
         }
 
-        function updateCarPool(){
-            $scope.selectedPool.source = document.getElementById("origin-input").value;
-            $scope.selectedPool.destination = document.getElementById("destination-input").value;
-            CarPoolService.updateCarPoolById($scope.selectedPool._id,$scope.selectedPool,renderUserCarPools);
+        function updateCarPool(selectedPool){
+            selectedPool.source = document.getElementById("origin-input").value;
+            selectedPool.destination = document.getElementById("destination-input").value;
+            CarPoolService.updateCarPoolById(selectedPool._id,selectedPool)
+                .then(function(response){
+                    init();
+                });
         }
 
     }

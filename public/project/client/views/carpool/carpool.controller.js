@@ -11,8 +11,6 @@
 
         function CarPoolController(UserService, CarPoolService, $location){
 
-            $scope.createCarPool=createCarPool;
-            $scope.initMap=initMap;
 
             var vm = this;
 

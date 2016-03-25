@@ -45,7 +45,6 @@ module.exports = function (){
                 userCarPools.push(mock[i]);
             }
         }
-
         deferred.resolve(userCarPools);
         return deferred.promise;
     }
@@ -87,7 +86,7 @@ module.exports = function (){
         for(var i=0;i<mock.length;i++) {
             if(mock[i]._id == carPoolId)
             {
-                currentCarPools.splice(i,1);
+                mock.splice(i,1);
             }
         }
 

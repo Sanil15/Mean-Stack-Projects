@@ -16,6 +16,7 @@ module.exports = function(app, userModel) {
         var username = req.query.username;
         var password = req.query.password;
 
+        //console.log("Hi"+username+" Pass "+password);
 
         var credentials = {
             "username": username,

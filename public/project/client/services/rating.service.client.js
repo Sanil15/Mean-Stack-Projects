@@ -9,7 +9,7 @@
         .module("CarPoolApp")
         .factory("ReviewService",ReviewService);
 
-    function ReviewService(){
+    function ReviewService($http){
 
         var api = {
             createReview: createReview,

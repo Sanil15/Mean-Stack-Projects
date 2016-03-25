@@ -32,17 +32,21 @@
     <script src="views/header/header.controller.js"></script>
     <script src="views/users/login.controller.js"></script>
     <script src="views/main/main.controller.js"></script>
+
     <script src="services/user.service.client.js"></script>
+
     <script src="views/users/profile.controller.js"></script>
     <script src="views/users/editprofile.controller.js"></script>
     <script src="views/users/register.controller.js"></script>
+
     <script src="services/carpool.service.client.js"></script>
+
     <script src="views/carpool/carpool.controller.js"></script>
     <script src="views/carpool/usercarpool.controller.js"></script>
     <script src="views/home/home.controller.js"></script>
     <script src="views/carpool/carpoolcrud.controller.js"></script>
 
-    <script src="services/message.service.js"></script>
+    <script src="services/message.service.client.js"></script>
     <script src="views/message/message.controller.js"></script>
 
     <script src="views/rating/ratingcrud.controller.js"></script>
@@ -66,7 +70,7 @@
 <body ng-controller="MainController" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
 <!-- Header for all The pages -->
-<div ng-include="'../project/views/header/header.view.html'"></div>
+<div ng-include="'../client/views/header/header.view.html'"></div>
 
 <div ng-view></div>
 

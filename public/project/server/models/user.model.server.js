@@ -41,9 +41,11 @@ module.exports = function (){
     function findUserByCredentials(credentials){
         var deferred = q.defer();
         var user=null;
+        console.log("Hi");
         for(var i=0; i<mock.length;i++) {
-            if ((credentials.username == mock[i].username || credentials.username == mock[i].email) && credentials.password == mock[i].password) {
+            if ((credentials.username == mock[i].userName || credentials.username == mock[i].email) && credentials.password == mock[i].password) {
                 user=mock[i];
+                console.log(user);
             }
         }
 

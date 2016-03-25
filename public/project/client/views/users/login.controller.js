@@ -8,7 +8,7 @@
     angular.module("CarPoolApp")
         .controller("LoginController",LoginController);
 
-    function LoginController($scope, UserService, $location){
+    function LoginController(UserService, $location){
 
         var vm=this;
 
@@ -30,8 +30,10 @@
             //console.log(username,password);
             UserService.findUserByCredentials(user.email,user.password)
                 .then(function (response){
-                   UserService.setCurrentUser(response.data);
-                    $location.url("/showprofile");
+                        if(response.data !=null) {
+                            UserService.setCurrentUser(response.data);
+                            $location.url("/showprofile");
+                        }
                 });
 
         }

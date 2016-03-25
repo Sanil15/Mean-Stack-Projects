@@ -9,7 +9,7 @@
         .module("CarPoolApp")
         .factory("MessageService",MessageService);
 
-    function MessageService(){
+    function MessageService($http){
 
         var api = {
             createMessage: createMessage,

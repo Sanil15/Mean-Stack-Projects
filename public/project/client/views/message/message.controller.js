@@ -6,17 +6,39 @@
         .module("CarPoolApp")
         .controller("MessageController",MessageController);
 
-    function MessageController($scope, $location, UserService, MessageService){
+    function MessageController($location, UserService, MessageService){
 
-        $scope.createMessage=createMessage;
-        $scope.deleteMessage=deleteMessage;
-        $scope.updateMessage=updateMessage;
-        $scope.selectMessage=selectMessage;
-        $scope.selectedMessageId=-1;
+        var vm = this;
+
+        vm.createMessage=createMessage;
+        vm.deleteMessage=deleteMessage;
+        vm.updateMessage=updateMessage;
+        vm.selectMessage=selectMessage;
 
 
-        UserService.findAllUsers(renderUser);
-        MessageService.findAllMessages(renderMessages);
+        function init() {
+            vm.selectedMessageId=-1;
+
+            UserService.findAllUsers()
+                .then(function (response){
+                    vm.userList=list;
+                });
+
+            MessageService.findAllMessages
+                .then(function (response){
+                    vm.messages=list;
+                    vm.msg=null;
+                    vm.selectedMessage=null;
+                    vm.selectedMessageId=-1;
+                });
+
+        }
+
+        init();
+
+
+
+
 
         function renderUser(list){
             //console.log(list);
@@ -31,28 +53,41 @@
 
         }
 
-        function createMessage(){
-            //console.log($scope.msg);
-            MessageService.createMessage($scope.msg,renderMessages);
+        function createMessage(message){
+
+            MessageService.createMessage(message)
+                .then(function (response){
+                    vm.messages=response.data;
+                    vm.msg=null;
+                    vm.selectedMessage=null;
+                    vm.selectedMessageId=-1;
+            });
         }
 
         function deleteMessage(index){
             var a;
-            MessageService.findAllMessages(getList);
-            function getList(list){
-                a=list;
-            }
-            MessageService.deleteMessageById(a[index]._id,renderMessages);
+            MessageService.findAllMessages()
+                .then(function (response) {
+                    a=response.data;
+                });
+
+            MessageService.deleteMessageById(a[index]._id)
+                .then(function (response){
+                    vm.messages=response.data;
+                    vm.msg=null;
+                    vm.selectedMessage=null;
+                    vm.selectedMessageId=-1;
+                });
         }
 
         function selectMessage(index) {
             var a;
-            MessageService.findAllMessages(getList);
-            function getList(list) {
-                a = list;
-            }
+            MessageService.findAllMessages()
+                .then(function (response) {
+                    a=response.data;
+                });
 
-            $scope.selectedMessageId = a[index]._id;
+            vm.selectedMessageId = a[index]._id;
 
             var msg = {
                 "message": a[index].message,
@@ -60,11 +95,17 @@
                 "toUser": a[index].toUser
             }
 
-            $scope.selectedMessage = msg;
+            vm.selectedMessage = msg;
         }
 
-        function updateMessage(){
-            MessageService.updateMessageById($scope.selectedMessageId,$scope.selectedMessage,renderMessages);
+        function updateMessage(msg){
+            MessageService.updateMessageById(vm.selectedMessageId,msg)
+                .then(function (response){
+                    vm.messages=response.data;
+                    vm.msg=null;
+                    vm.selectedMessage=null;
+                    vm.selectedMessageId=-1;
+                });
         }
 
     }

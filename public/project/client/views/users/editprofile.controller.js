@@ -23,14 +23,13 @@
         init();
 
         // function to update a user
-        function update(user,confirmPassword) {
-            if(confirmPassword==user.password) {
+        function update(user) {
                 UserService.updateUser(user._id, user)
                     .then(function (response) {
                         UserService.setCurrentUser(response.data);
                         $location.path("/showprofile");
                     });
-            }
+
         }
     }
 })();

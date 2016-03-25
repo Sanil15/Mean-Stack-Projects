@@ -21,35 +21,43 @@
         $routeProvider
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
-                controller: "HomeController"
+                controller: "HomeController",
+                controllerAs: "model"
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
-                controller: "AdminController"
+                controller: "AdminController",
+                controllerAs: "model"
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller: "RegisterController"
+                controller: "RegisterController",
+                controllerAs: "model"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
-                controller: "LoginController"
+                controller: "LoginController",
+                controllerAs: "model"
             })
             .when("/editprofile", {
                 templateUrl: "views/users/editprofile.view.html",
-                controller: "EditProfileController"
+                controller: "EditProfileController",
+                controllerAs: "model"
             })
             .when("/showprofile", {
                 templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController"
+                controller: "ProfileController",
+                controllerAs: "model"
             })
             .when("/carpool", {
                 templateUrl: "views/carpool/carpool.view.html",
-                controller: "CarPoolController"
+                controller: "CarPoolController",
+                controllerAs: "model"
             })
             .when("/usercarpool", {
                 templateUrl: "views/carpool/usercarpool.view.html",
-                controller: "UserCarPoolController"
+                controller: "UserCarPoolController",
+                controllerAs: "model"
             })
             .when("/rating", {
                 templateUrl: "views/rating/rating.view.html",
@@ -57,15 +65,18 @@
             })
             .when("/ratingcrud", {
                 templateUrl: "views/rating/ratingcrud.view.html",
-                controller: "ReviewCRUDController"
+                controller: "ReviewCRUDController",
+                controllerAs: "model"
             })
             .when("/carpoolcrud", {
                 templateUrl: "views/carpool/carpoolcrud.view.html",
-                controller: "CarPoolCRUDController"
+                controller: "CarPoolCRUDController",
+                controllerAs: "model"
             })
             .when("/message", {
                 templateUrl: "views/message/message.view.html",
-                controller: "MessageController"
+                controller: "MessageController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"

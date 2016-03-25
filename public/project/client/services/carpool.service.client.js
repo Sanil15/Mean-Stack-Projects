@@ -9,7 +9,7 @@
         .module("CarPoolApp")
         .factory("CarPoolService",CarPoolService)
 
-    function CarPoolService(){
+    function CarPoolService($http){
 
 
 
