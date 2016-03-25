@@ -15,6 +15,7 @@
 
         var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
         var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
+
         var URL="http://maps.googleapis.com/maps/api/directions/json?&origin=ORIGIN&destination=DESTINATION&key=AIzaSyD_70F4Mj8HaLj4AS8IYt4ZXyJGm2v-KD0";
 
 
@@ -103,41 +104,12 @@
                 $scope.legs = response.routes[0].legs[0];
                 }
 
-            //$http.get(URL).success(renderData);
-
-                /*var request = {
-                    origin:origin,
-                    destination:destination,
-                    travelMode: google.maps.TravelMode.DRIVING
-                };
-                var directionsService = new google.maps.DirectionsService;
-                directionsService.route(request, renderData);*/
 
             function renderData(result, status){
                 if (status == google.maps.DirectionsStatus.OK) {
                     //console.log(result);
                 }
             }
-
-            /*var service = new google.maps.DistanceMatrixService;
-            service.getDistanceMatrix({
-                origins: [origin],
-                destinations: [destination],
-                travelMode: google.maps.TravelMode.DRIVING,
-                unitSystem: google.maps.UnitSystem.METRIC,
-                avoidHighways: false,
-                avoidTolls: false
-            }, rederData2);
-
-            function rederData2(response, status) {
-                if (status !== google.maps.DistanceMatrixStatus.OK) {
-                    alert('Error was: ' + status);
-                } else {
-                    //console.log(response);
-                    $scope.data=response;
-                    $location.path('/carpoolcrud').search({'response': response});
-                }
-            }*/
 
         }
     }

@@ -1,5 +1,5 @@
 
-<div class="container-fluid page" ng-controller="AdminController">
+<div class="container-fluid page">
 
     <div class="page-header">
         <h1>Admin CRUD</h1>
@@ -18,17 +18,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in users">
+            <tr ng-repeat="user in model.users">
                 <td>{{user.userName}}</td>
                 <td>{{user.firstName}}</td>
                 <td>{{user.lastName}}</td>
                 <td>{{user.email}}</td>
                 <td>
-                    <a ng-click="userDetails($index)" class="btn btn-info btn-block" aria-label="Left Align">
+                    <a ng-click="model.userDetails($index)" class="btn btn-info btn-block" aria-label="Left Align">
                         DETAILS</a>
                 </td>
                 <td>
-                    <a ng-click="deleteUser($index)" class="btn btn-danger btn-block" aria-label="Left Align">
+                    <a ng-click="model.deleteUser($index)" class="btn btn-danger btn-block" aria-label="Left Align">
                         DELETE</a>
                 </td>
             </tr>
@@ -36,7 +36,7 @@
         </table>
     </div>
 
-    <div ng-show="user!=null">
+    <div ng-show="model.user!=null">
         <div class="col-md-6">
         <table class="table table-resposive table-hover">
 
@@ -48,43 +48,43 @@
                 <tbody>
                 <tr>
                     <td><label class="control-label">First Name:</label></td>
-                    <td>{{user.firstName}}</td>
+                    <td>{{model.user.firstName}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Last Name:</label></td>
-                    <td>{{user.lastName}}</td>
+                    <td>{{model.user.lastName}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Email:</label></td>
-                    <td>{{user.email}}</td>
+                    <td>{{model.user.email}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">DOB</label></td>
-                    <td>{{user.dob}}</td>
+                    <td>{{model.user.dob}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Country</label></td>
-                    <td>{{user.country}}</td>
+                    <td>{{model.user.country}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">State</label></td>
-                    <td> {{user.state}}</td>
+                    <td> {{model.user.state}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">City</label></td>
-                    <td> {{user.city}}</td>
+                    <td> {{model.user.city}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Address</label></td>
-                    <td>{{user.address}}</td>
+                    <td>{{model.user.address}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Zip Code</label></td>
-                    <td>{{user.zipCode}}</td>
+                    <td>{{model.user.zipCode}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Contact No.</label></td>
-                    <td>{{user.contact}}</td>
+                    <td>{{model.user.contact}}</td>
                 </tr>
                 </tbody>
         </table>
@@ -101,7 +101,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="rve in reviews">
+                <tr ng-repeat="rve in model.reviews">
                     <td>{{rve.fromUser}}</td>
                     <td>{{rve.toUser}}</td>
                     <td>{{rve.review}}</td>

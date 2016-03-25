@@ -42,7 +42,7 @@ module.exports = function (){
         var deferred = q.defer();
         var user=null;
         for(var i=0; i<mock.length;i++) {
-            if (credentials.username == mock[i].username && credentials.password == mock[i].password) {
+            if ((credentials.username == mock[i].username || credentials.username == mock[i].email) && credentials.password == mock[i].password) {
                 user=mock[i];
             }
         }
@@ -65,11 +65,10 @@ module.exports = function (){
 
         var deferred = q.defer();
         user._id = (new Date()).getTime();
+        user.roles=["general"];
         mock.push(user);
 
-        var users=mock;
-
-        deferred.resolve(users);
+        deferred.resolve(user);
         return deferred.promise;
     }
 

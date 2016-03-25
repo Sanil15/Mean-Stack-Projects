@@ -11,12 +11,6 @@
 
     function ReviewService(){
 
-        var reviewList = [
-            {"_id": "000", "review": "Nice!!!", "fromUser": "Alice123", "toUser": "Bob_Hope","rating": 3.5 },
-            {"_id": "010", "review": "Easy Goin", "fromUser": "Bob_Hope", "toUser": "CharlieCool","rating": 5 },
-            {"_id": "020", "review": "Great", "fromUser": "CharlieCool", "toUser": "Alice123","rating": 4.4}
-        ];
-
         var api = {
             createReview: createReview,
             findAllReviews: findAllReviews,
@@ -27,45 +21,24 @@
 
         return api;
 
-        function findAllReviews(callback){
-            callback(reviewList);
+        function findAllReviews(){
+            return $http.get("/api/project/rating");
         }
 
-        function createReview(review, callback){
-            review._id=(new Date).getTime();
-            reviewList.push(review);
-            callback(reviewList);
+        function createReview(review){
+            return $http.post("/api/project/rating",review);
         }
 
-        function findAllReviewsForUser(userName, callback){
-            var userReviews=[];
-            for(var i=0;i<reviewList.length;i++){
-                if(reviewList[i].toUser == userName){
-                    userReviews.push(reviewList[i]);
-                }
-            }
-            callback(userReviews);
+        function findAllReviewsForUser(userName){
+            return $http.get("/api/project/rating?&userName="+userName);
         }
 
-        function deleteReviewById(reviewId,callback){
-            for(var i=0;i<reviewList.length;i++) {
-                if(reviewList[i]._id == reviewId)
-                {
-                    reviewList.splice(i,1);
-                }
-            }
-            callback(reviewList);
+        function deleteReviewById(reviewId){
+            return $http.delete("/api/project/rating/"+reviewId);
         }
 
-        function updateReviewById(ratingId,rat,callback){
-            for(var i=0;i<reviewList.length;i++) {
-                if(reviewList[i]._id == ratingId) {
-                    reviewList[i].rating=rat.rating;
-                    reviewList[i].review=rat.review;
-                    break;
-                }
-            }
-            callback(reviewList);
+        function updateReviewById(ratingId,rat){
+            return $http.put("/api/project/rating/"+ratingId,rat);
         }
 
 

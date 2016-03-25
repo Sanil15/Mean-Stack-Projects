@@ -10,21 +10,31 @@
 
     function LoginController($scope, UserService, $location){
 
-        $scope.login=login;
+        var vm=this;
+
+        vm.login=login;
+
+        function init() {
+
+        }
+
 
         // function for checking login of a controller
-        function login(email,password){
+        function login(user){
+
+            if(!user)
+            {
+                return;
+            }
+
             //console.log(username,password);
-            UserService.findUserByEmailAndPassword(email,password,render);
+            UserService.findUserByCredentials(user.email,user.password)
+                .then(function (response){
+                   UserService.setCurrentUser(response.data);
+                    $location.url("/showprofile");
+                });
+
         }
 
-        // callback of a function for login
-        function render(user) {
-            if(user != null){
-                UserService.setCurrentUser(user);
-                //console.log(user);
-                $location.path("/showprofile");
-            }
-        }
     }
 })();

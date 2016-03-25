@@ -1,5 +1,5 @@
 
-<div class="container-fluid page" ng-controller="CarPoolController">
+<div class="container-fluid page">
     <div class="row">
 
         <div class="page-header">
@@ -16,55 +16,55 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Source</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.source" id="origin-input" type="text" class="form-control" placeholder="Source"/>
+                    <input ng-model="model.pool.source" id="origin-input" type="text" class="form-control" placeholder="Source"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Destination</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.destination" id="destination-input" type="text" class="form-control" placeholder="Destination"/>
+                    <input ng-model="model.pool.destination" id="destination-input" type="text" class="form-control" placeholder="Destination"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Date</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.date" class="form-control" type="date">
+                    <input ng-model="model.pool.date" class="form-control" type="date">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Time</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.time" class="form-control" placeholder="time">
+                    <input ng-model="model.pool.time" class="form-control" placeholder="time">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Car Info</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.carInfo" class="form-control" placeholder="carInfo">
+                    <input ng-model="model.pool.carInfo" class="form-control" placeholder="carInfo">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Base Price</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.basePrice" class="form-control" placeholder="$">
+                    <input ng-model="model.pool.basePrice" class="form-control" placeholder="$">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">No. Of Seats</label>
                 <div class="col-sm-10">
-                    <input ng-model="pool.noOfSeats" class="form-control" placeholder="No of Seats Available">
+                    <input ng-model="model.pool.noOfSeats" class="form-control" placeholder="No of Seats Available">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="createCarPool()" class="btn btn-success btn-block">Create Carpool</a>
+                    <a ng-click="model.createCarPool(model.pool)" class="btn btn-success btn-block">Create Carpool</a>
                 </div>
             </div>
         </form>

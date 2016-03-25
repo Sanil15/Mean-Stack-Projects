@@ -1,22 +1,22 @@
 /**
  * Created by Sanil on 3/23/2016.
  */
-module.exports = function(app, messageModel, userModel) {
+module.exports = function(app, ratingModel, userModel) {
 
-    app.get("/api/project/rating/:ratingId", getMessageById);
+    app.get("/api/project/rating/:ratingId", getRatingById);
 
-    app.get("/api/project/message", getAllMessages);
+    app.get("/api/project/rating", getAllRating);
 
-    app.delete("/api/project/message/:messageId", deleteMessageById);
+    app.delete("/api/project/rating/:ratingId", deleteRatingById);
 
-    app.post("/api/project/message", createMessageByUser);
+    app.post("/api/project/rating", createRatingByUser);
 
-    app.put("/api/project/message/:messageId", updateMessageById);
+    app.put("/api/project/rating/:ratingId", updateRatingById);
 
-    function getMessageById(req,res){
-        var messageId=req.params.messageId;
+    function getRatingById(req,res){
+        var ratingId=req.params.ratingId;
 
-        messageModel.findMessageById(messageId)
+        ratingModel.findReviewById(ratingId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -27,16 +27,16 @@ module.exports = function(app, messageModel, userModel) {
             );
     }
 
-    function getAllMessages(req,res){
+    function getAllRating(req,res){
 
-        var userName=req.query.userName;
+        var forUser=req.query.userName;
 
-        if(userName!=null){
-            getMessageForUser(req,res);
+        if(forUser!=null){
+            getRatingForUser(req,res);
         }
 
         else {
-            messageModel.findAllMessages()
+            ratingModel.findAllReviews()
                 .then(
                     function (doc) {
                         res.json(doc);
@@ -48,11 +48,11 @@ module.exports = function(app, messageModel, userModel) {
         }
     }
 
-    function getMessageForUser(req,res){
+    function getRatingForUser(req,res){
 
         var userName=req.query.userName;
         console.log("Yes"+userName);
-        messageModel.findAllMessagesForUser(userName)
+        ratingModel.findAllReviewsForUser(userName)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -63,11 +63,11 @@ module.exports = function(app, messageModel, userModel) {
             );
     }
 
-    function deleteMessageById(req,res){
+    function deleteRatingById(req,res){
 
-        var messageId=req.params.messageId;
+        var ratingId=req.params.ratingId;
 
-        messageModel.deleteMessageById(messageId)
+        ratingModel.deleteReviewById(ratingId)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -78,11 +78,11 @@ module.exports = function(app, messageModel, userModel) {
             );
     }
 
-    function createMessageByUser(req,res){
+    function createRatingByUser(req,res){
 
-        var message=req.body;
+        var rating=req.body;
 
-        messageModel.createMessage(message)
+        ratingModel.createRatingByUser(rating)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -93,10 +93,11 @@ module.exports = function(app, messageModel, userModel) {
             );
     }
 
-    function updateMessageById(req,res){
-        var messageId=req.params.messageId;
-        var message=req.body;
-        messageModel.updateMessage(messageId,message)
+    function updateRatingById(req,res){
+
+        var ratingId=req.params.ratingId;
+        var rating=req.body;
+        ratingModel.updateReviewById(ratingId,rating)
             .then(
                 function (doc) {
                     res.json(doc);

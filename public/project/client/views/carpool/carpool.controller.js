@@ -9,42 +9,37 @@
         .module("CarPoolApp")
         .controller("CarPoolController",CarPoolController)
 
-        function CarPoolController($scope,UserService, CarPoolService, $location){
+        function CarPoolController(UserService, CarPoolService, $location){
 
             $scope.createCarPool=createCarPool;
             $scope.initMap=initMap;
-            window.onload=initMap();
 
-            console.log($scope.selectedPool);
+            var vm = this;
 
-            if($scope.selectedPool!=null) {
-                $scope.pool=$scope.selectedPool;
+            vm.createCarPool = createCarPool;
+            vm.initMap = initMap;
+
+            function init() {
+                initMap();
+                if(vm.selectedPool!=null) {
+                    vm.pool=vm.selectedPool;
+                }
             }
 
+            init();
 
-            function createCarPool(){
+            function createCarPool(newPool){
 
                     var userId = UserService.getCurrentUser();
-                    var newPool = $scope.pool;
                     newPool.source = document.getElementById("origin-input").value;
                     newPool.destination = document.getElementById("destination-input").value;
-                    CarPoolService.createCarPoolByUser(userId._id, newPool, render);
+                    CarPoolService.createCarPoolByUser(userId._id, newPool)
+                        .then(function(response){
+                            $location.path("/usercarpool");
+                        })
 
             }
 
-            // function for callBack for registered user
-            function render(pool) {
-                //console.log(pool);
-                $location.path("/usercarpool");
-            }
-
-            //var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
-            //var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination_input"));
-
-
-            // This example requires the Places library. Include the libraries=places
-            // parameter when you first load the API. For example:
-            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
             function initMap() {
 
@@ -110,6 +105,7 @@
                     route(origin_place_id, destination_place_id, travel_mode,
                         directionsService, directionsDisplay);
                 });
+
 
                 function route(origin_place_id, destination_place_id, travel_mode,
                                directionsService, directionsDisplay) {

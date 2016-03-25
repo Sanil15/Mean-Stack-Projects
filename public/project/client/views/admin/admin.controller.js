@@ -10,51 +10,45 @@
         .module("CarPoolApp")
         .controller("AdminController",AdminController)
 
-    function AdminController($scope, UserService, $location, ReviewService) {
+    function AdminController(UserService, $location, ReviewService) {
 
-        $scope.deleteUser=deleteUser;
-        $scope.userDetails=userDetails;
+        var vm = this;
 
-        UserService.findAllUsers(renderUsers);
-        //console.log($rootScope);
+        vm.deleteUser = deleteUser;
+        vm.userDetails = vm.userDetails;
 
-        function renderUsers(list){
-            $scope.users=list;
+
+        var users;
+        function init() {
+
+            UserService.findAllUsers()
+                .then(function (response){
+                    vm.users=response.data;
+                    users=response.data;
+                });
         }
 
-        function deleteUser(index){
-            var a;
-            UserService.findAllUsers(getList);
+        init();
 
-            function getList(list){
-                a=list;
-            }
-            UserService.deleteUserById(a[index]._id,renderUsers);
-            $scope.reviews=null;
-            $scope.user=null;
+
+        function deleteUser(index){
+
+            UserService.deleteUserById(users[index]._id)
+                .then(function (response){
+                    init();
+                    vm.reviews=null;
+                    vm.user=null;
+                })
+
         }
 
         function userDetails(index){
-            var a;
-            UserService.findAllUsers(getList);
+            vm.user=users[index];
 
-            function getList(list){
-                a=list;
-            }
-            $scope.user=a[index];
-
-            ReviewService.findAllReviewsForUser(a[index].userName,renderUser)
-
-            function renderUser(list){
-                console.log(list);
-                $scope.reviews=list;
-            }
-
+            ReviewService.findAllReviewsForUser(users[index].userName)
+                .then(function (response){
+                    vm.reviews=response.data;
+                });
         }
-
-
-
     }
-
-
 })();

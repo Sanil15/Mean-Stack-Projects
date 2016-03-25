@@ -9,26 +9,29 @@
         .module("CarPoolApp")
         .controller("RegisterController",RegisterController)
 
-        function RegisterController($scope, UserService, $location){
+        function RegisterController( UserService, $location){
 
-            $scope.register=register;
+            var vm = this;
 
-            // function to register a current user
-            function register(password,confirmPassword){
+            vm.register = register;
 
-                if(password==confirmPassword){
+            function init() {
 
-                    $scope.user._id=(new Date).getTime();
-                    $scope.user.roles=["general"];
-                    UserService.createUser($scope.user, render);
-                }
             }
 
-            // function for callBack for registered user
-            function render(user) {
-                UserService.setCurrentUser(user);
-                console.log(user);
-                $location.path("/showprofile");
+            init();
+
+            // function to register a current user
+            function register(user,confirmPassword){
+
+                if(user.password==confirmPassword){
+
+                    UserService.createUser(user)
+                        .then(function (response){
+                                UserService.setCurrentUser(response.data);
+                                $location.url("/showprofile");
+                        });
+                }
             }
 
         }

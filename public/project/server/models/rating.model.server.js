@@ -13,7 +13,8 @@ module.exports = function() {
         findAllReviews: findAllReviews,
         findAllReviewsForUser: findAllReviewsForUser,
         deleteReviewById: deleteReviewById,
-        updateReviewById: updateReviewById
+        updateReviewById: updateReviewById,
+        findReviewById:findReviewById
     };
 
     return api;
@@ -50,7 +51,23 @@ module.exports = function() {
         return deferred.promise;
     }
 
-    function deleteReviewById(reviewId,callback){
+    function findReviewById(ratingId){
+        var deferred = q.defer();
+        var review=null;
+        for(var i=0;i<mock.length;i++) {
+            if(mock[i]._id == ratingId)
+            {
+                review=mock[i];
+                break;
+            }
+        }
+
+        deferred.resolve(review);
+        return deferred.promise;
+
+    }
+
+    function deleteReviewById(reviewId){
         var deferred = q.defer();
 
         for(var i=0;i<mock.length;i++) {

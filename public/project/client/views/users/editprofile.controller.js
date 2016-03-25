@@ -10,23 +10,27 @@
         .module("CarPoolApp")
         .controller("EditProfileController",EditProfileController)
 
-    function EditProfileController($scope, UserService, $location){
-        $scope.user=UserService.getCurrentUser();
-        //console.log($rootScope);
+    function EditProfileController(UserService, $location){
 
-        $scope.update=update;
+        var vm = this;
 
-        // function to update a user
-        function update(user) {
-            console.log(user);
-            UserService.updateUser(user._id,user,render);
+        vm.update = update;
+
+        function init() {
+        vm.user=UserService.getCurrentUser();
         }
 
-        // callback function to update a user
-        function render (user) {
-            UserService.setCurrentUser(user);
-            //console.log(user);
-            $location.path("/showprofile");
+        init();
+
+        // function to update a user
+        function update(user,confirmPassword) {
+            if(confirmPassword==user.password) {
+                UserService.updateUser(user._id, user)
+                    .then(function (response) {
+                        UserService.setCurrentUser(response.data);
+                        $location.path("/showprofile");
+                    });
+            }
         }
     }
 })();

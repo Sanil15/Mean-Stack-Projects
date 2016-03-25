@@ -10,9 +10,15 @@
         .module("CarPoolApp")
         .controller("ProfileController",ProfileController)
 
-    function ProfileController($scope, UserService, $location) {
-        $scope.user = UserService.getCurrentUser();
-        //console.log($rootScope);
+    function ProfileController(UserService, $location) {
+
+        var vm = this;
+
+        function init() {
+            vm.user=UserService.getCurrentUser();
+        }
+
+        init();
 
     }
 
