@@ -5,12 +5,27 @@ module.exports = function(app, carPoolModel, userModel){
 
     app.get("/api/project/user/:userId/carpool",getCarPoolByUserId);
     app.get("/api/project/carpool", getCarPoolByAttributes);
+    app.get("/api/project/carpool/:carPoolId",getCarPoolById);
 
     app.delete("/api/project/carpool/:carPoolId", deleteCarPoolById);
 
     app.post("/api/project/user/:userId/carPool",createCarPoolByUser);
 
     app.put("/api/project/carpool/:carPoolId", updateCarPoolById);
+
+    function getCarPoolById(req,res){
+        var carPoolId=req.params.carPoolId;
+
+        carPoolModel.findCarPoolById(carPoolId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function getCarPoolByUserId(req,res){
         var userId=req.params.userId;

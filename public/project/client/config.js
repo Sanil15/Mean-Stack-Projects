@@ -78,6 +78,11 @@
                 controller: "MessageController",
                 controllerAs: "model"
             })
+            .when("/searchresults/:id", {
+                templateUrl: "views/search/search.view.html",
+                controller: "SearchController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/home"
             });

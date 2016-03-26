@@ -12,7 +12,6 @@
     function CarPoolService($http){
 
 
-
         var api = {
             createCarPoolByUser: createCarPoolByUser,
             findAllCarPoolByUser: findAllCarPoolByUser,
@@ -20,7 +19,8 @@
             updateCarPoolById: updateCarPoolById,
             findCarPoolBySourceDestination: findCarPoolBySourceDestination,
             findCarPoolByCity: findCarPoolByCity,
-            findAllCarPools: findAllCarPools
+            findAllCarPools: findAllCarPools,
+            findCarPoolById: findCarPoolById
         };
 
         return api;
@@ -28,6 +28,10 @@
         // function to create Carpool for all user
         function createCarPoolByUser(userId, pool){
             return $http.post("/api/project/user/"+userId+"/carPool",pool);
+        }
+
+        function findCarPoolById(carPoolId){
+            return $http.get("/api/project/carpool/"+carPoolId);
         }
 
         function findAllCarPools(){
@@ -46,7 +50,7 @@
 
         // functions finds all CarPool's by city
         function findCarPoolByCity(city){
-            return $http.get("/api/project/carpool?"+"city="+destination);
+            return $http.get("/api/project/carpool?"+"city="+city);
         }
 
 

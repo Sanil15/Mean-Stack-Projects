@@ -15,17 +15,15 @@
         var vm = this;
 
         vm.deleteUser = deleteUser;
-        vm.userDetail = vm.userDetail;
+        vm.findDetail = findDetail;
 
 
-        var users;
         function init() {
 
             UserService.findAllUsers()
                 .then(function (response){
                     //console.log("Hi");
                     vm.users=response.data;
-                    users=response.data;
                 });
         }
 
@@ -34,15 +32,7 @@
 
         function deleteUser(index){
 
-            var userList;
-            UserService.findAllUsers()
-                .then(function (response){
-                    //console.log("Hi");
-                    userList=response.data;
-                    console.log(userList);
-                });
-
-            UserService.deleteUserById(userList[index]._id)
+            UserService.deleteUserById(vm.users[index]._id)
                 .then(function (response){
                     init();
                     vm.reviews=null;
@@ -51,18 +41,10 @@
 
         }
 
-        function userDetail(index){
+        function findDetail(index){
 
-            var userList;
-            UserService.findAllUsers()
-                .then(function (response){
-                    //console.log("Hi");
-                    userList=response.data;
-                });
-
-            var user=userList[index];
-
-            ReviewService.findAllReviewsForUser(user.userName)
+            vm.user=vm.users[index];
+            ReviewService.findAllReviewsForUser(vm.users[index].userName)
                 .then(function (response){
                     console.log(response.data);
                     vm.reviews=response.data;

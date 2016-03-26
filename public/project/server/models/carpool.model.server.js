@@ -16,7 +16,8 @@ module.exports = function (){
         updateCarPoolById: updateCarPoolById,
         findCarPoolBySourceDestination: findCarPoolBySourceDestination,
         findCarPoolByCity: findCarPoolByCity,
-        findAllCarPool: findAllCarPool
+        findAllCarPool: findAllCarPool,
+        findCarPoolById: findCarPoolById
     };
 
     return api;
@@ -26,6 +27,20 @@ module.exports = function (){
         deferred.resolve(mock);
         return deferred.promise;
 
+    }
+
+    function findCarPoolById(carPoolId){
+        var deferred = q.defer();
+        console.log(carPoolId);
+        var carPool=null;
+        for(var i=0;i<mock.length;i++){
+            if(mock[i]._id == carPoolId){
+                carPool=mock[i];
+                break;
+            }
+        }
+        deferred.resolve(carPool);
+        return deferred.promise;
     }
 
     // function to create Carpool for all user
@@ -78,7 +93,7 @@ module.exports = function (){
 
         var carPools=[];
         for(var i=0;i<mock.length;i++){
-            if(mock[i].city == city){
+            if((mock[i].source.toLowerCase().indexOf(city.toLowerCase()) > -1) || (mock[i].destination.toLowerCase().indexOf(city.toLowerCase()) > -1)){
                 carPools.push(mock[i]);
             }
         }

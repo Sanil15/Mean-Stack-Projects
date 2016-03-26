@@ -2,6 +2,47 @@
 <section id="intro" class="intro-section" xmlns="http://www.w3.org/1999/html">
     <div class="container">
         <div class="row">
+                <div class="field" id="searchform">
+                    <input ng-model="model.city" type="text" id="searchterm" placeholder="Type Here to Search Carpool?" />
+                    <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
+                </div>
+        </div>
+    </div>
+
+    <div class="container">
+            <div class="row">
+               <div class="table-responsive" ng-show="model.carPools">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Source</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Destination</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Time</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Date</th>
+                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Details</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="pool in model.carPools">
+                            <td>{{pool.source}}</td>
+                            <td>{{pool.destination}}</td>
+                            <td>{{pool.time}}</td>
+                            <td>{{pool.date}}</td>
+                            <td>
+                                <a ng-click="model.details($index)" class="btn btn-success btn-block" aria-label="Left Align">
+                                    Details
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+               </div>
+            </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
                     <h3>Login For Following Privilege</h3>
@@ -14,7 +55,6 @@
 
                     </ul>
                 </div>
-
                 <div class="page-header">
                     <h3>CRUD & API USAGES</h3>
                     <ul class="nav nav-pills nav-justified">
@@ -24,10 +64,14 @@
                         <li role="presentation"><a href="#/ratingcrud">Rating CRUD</a></li>
                     </ul>
                 </div>
-
+            </div>
         </div>
     </div>
+
 </section>
+
+
+
 
 <!-- Intro -->
 <div id="about">
@@ -40,7 +84,7 @@
                 </div>
                 <div class="divide50"></div>
                 <div class="col-sm-4">
-                    <figure><img src="img/office.jpg" alt="" style="width: 100%;"></figure>
+                    <figure><img src="" alt="" style="width: 100%;"></figure>
                 </div>
                 <div class="col-sm-8">
                     <h4>Our Working Place</h4>
