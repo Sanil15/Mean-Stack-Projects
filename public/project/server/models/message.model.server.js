@@ -77,13 +77,13 @@ module.exports = function() {
             }
         }
 
-        deferred.resolve(messageList);
+        deferred.resolve(mock);
         return deferred.promise;
     }
 
     function updateMessageById(messageId,mes){
         var deferred= q.defer();
-
+        console.log(messageId+" :: "+mes.message);
         for(var i=0;i<mock.length;i++) {
             if(mock[i]._id == messageId) {
                 mock[i].message=mes.message;
@@ -91,6 +91,7 @@ module.exports = function() {
             }
         }
 
+        deferred.resolve(mock);
         return deferred.promise;
     }
 

@@ -14,7 +14,6 @@
 
 .form-top {
     overflow: hidden;
-    font-family: "Lato","Helvetica Neue",Arial,sans-serif;
     padding: 0 25px 15px 25px;
     background: #fff;
     -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; border-radius: 4px 4px 0 0;
@@ -66,7 +65,6 @@
 .page {
     white-space: nowrap;
     padding: 100px;
-    font-family: "Lato","Helvetica Neue",Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857;
     color: #767676;
@@ -123,7 +121,8 @@
 
 #map {
     height: 400px;
-    border: dashed;
+    width: 100%;
+    border: transparent;
 }
 
 #right-panel {
@@ -151,11 +150,38 @@
 
 @media print {
     #map {
-        height: 500px;
+        height: 400px;
         margin: 0;
+        width: 100%;
     }
     #right-panel {
         float: none;
         width: auto;
     }
+}
+
+
+/***************************************************/
+
+.todo-search {
+    position: relative;
+    background: #1abc9c;
+    background-size: 16px 16px;
+    border-radius: 6px 6px 0 0;
+    color: #34495e;
+    padding: 19px 25px 20px;
+}
+
+.todo-search-field {
+    background: none;
+    border: none;
+    color: #34495e;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 23px;
+    padding: 5px 0;
+    text-indent: 0;
+    box-shadow: none;
+    outline: none;
 }

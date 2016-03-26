@@ -9,7 +9,18 @@
         .module("CarPoolApp")
         .controller("HomeController",HomeController)
 
-    function HomeController ($scope) {
+    function HomeController ($scope,CarPoolService) {
+
+        var vm=this;
+
+        function init() {
+            CarPoolService.findAllCarPools()
+                .then(function (response) {
+                    console.log(response.data);
+                });
+        }
+
+        init();
 
         var cities = [
             {

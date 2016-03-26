@@ -21,12 +21,13 @@
 
             UserService.findAllUsers()
                 .then(function (response){
-                    vm.userList=list;
+                    console.log(response.data);
+                    vm.userList=response.data;
                 });
 
-            MessageService.findAllMessages
+            MessageService.findAllMessages()
                 .then(function (response){
-                    vm.messages=list;
+                    vm.messages=response.data;
                     vm.msg=null;
                     vm.selectedMessage=null;
                     vm.selectedMessageId=-1;
@@ -36,22 +37,6 @@
 
         init();
 
-
-
-
-
-        function renderUser(list){
-            //console.log(list);
-            $scope.userList=list;
-        }
-
-        function renderMessages(list){
-            $scope.messages=list;
-            $scope.msg=null;
-            $scope.selectedMessage=null;
-            $scope.selectedMessageId=-1;
-
-        }
 
         function createMessage(message){
 
@@ -65,13 +50,8 @@
         }
 
         function deleteMessage(index){
-            var a;
-            MessageService.findAllMessages()
-                .then(function (response) {
-                    a=response.data;
-                });
 
-            MessageService.deleteMessageById(a[index]._id)
+            MessageService.deleteMessageById(vm.messages[index]._id)
                 .then(function (response){
                     vm.messages=response.data;
                     vm.msg=null;
@@ -82,20 +62,17 @@
 
         function selectMessage(index) {
             var a;
-            MessageService.findAllMessages()
-                .then(function (response) {
-                    a=response.data;
-                });
 
-            vm.selectedMessageId = a[index]._id;
+            vm.selectedMessageId = vm.messages[index]._id;
 
             var msg = {
-                "message": a[index].message,
-                "fromUser": a[index].fromUser,
-                "toUser": a[index].toUser
+                "message": vm.messages[index].message,
+                "fromUser": vm.messages[index].fromUser,
+                "toUser": vm.messages[index].toUser
             }
 
             vm.selectedMessage = msg;
+            console.log(vm.selectedMessageId);
         }
 
         function updateMessage(msg){

@@ -6,15 +6,24 @@
         .module("CarPoolApp")
         .controller("CarPoolCRUDController", CarPoolCRUDController)
 
-    function CarPoolCRUDController($scope,$http,$location){
+    function CarPoolCRUDController($http,$location){
 
-        $scope.createCarPool=createCarPool;
-        $scope.details=details;
-        $scope.carPools=[];
-        $scope.selectedIndex=-1;
+        var vm = this;
 
-        var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
-        var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
+        vm.createCarPool=createCarPool;
+        vm.details=details;
+
+
+        function init() {
+            vm.carPools = [];
+            vm.selectedIndex = -1;
+            var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
+            var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
+
+        }
+
+        init();
+
 
         var URL="http://maps.googleapis.com/maps/api/directions/json?&origin=ORIGIN&destination=DESTINATION&key=AIzaSyD_70F4Mj8HaLj4AS8IYt4ZXyJGm2v-KD0";
 
@@ -28,10 +37,10 @@
                 'destination': destination
             };
 
-            $scope.carPools.push(pool);
-            $scope.source=null;
-            $scope.destination=null;
-            $scope.selectedIndex=-1;
+            vm.carPools.push(pool);
+            vm.source=null;
+            vm.destination=null;
+            vm.selectedIndex=-1;
         }
 
 
@@ -40,7 +49,7 @@
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
 
-            $scope.show = 1;
+            vm.show = 1;
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 7,
@@ -52,8 +61,8 @@
             directionsDisplay.setPanel(document.getElementById('right-panel'));
 
             directionsService.route({
-                    origin: $scope.carPools[index].origin,
-                    destination: $scope.carPools[index].destination,
+                    origin: vm.carPools[index].origin,
+                    destination: vm.carPools[index].destination,
                     travelMode: google.maps.TravelMode.DRIVING},
                 renderRouteMap);
 
@@ -69,7 +78,7 @@
 
         function details(index){
 
-            $scope.selectedIndex=1;
+            vm.selectedIndex=1;
             //console.log(origin);
             //console.log(destination);
 
@@ -78,8 +87,8 @@
 
             //initMap(index);
 
-            var a=URL.replace("ORIGIN",$scope.carPools[index].origin);
-            var b=a.replace("DESTINATION",$scope.carPools[index].destination);
+            var a=URL.replace("ORIGIN",vm.carPools[index].origin);
+            var b=a.replace("DESTINATION",vm.carPools[index].destination);
 
             //$http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -101,15 +110,9 @@
 
             function render(response){
                 console.log(response);
-                $scope.legs = response.routes[0].legs[0];
-                }
-
-
-            function renderData(result, status){
-                if (status == google.maps.DirectionsStatus.OK) {
-                    //console.log(result);
-                }
+                vm.legs = response.routes[0].legs[0];
             }
+
 
         }
     }

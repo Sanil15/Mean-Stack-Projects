@@ -96,7 +96,7 @@ module.exports = function(app, messageModel, userModel) {
     function updateMessageById(req,res){
         var messageId=req.params.messageId;
         var message=req.body;
-        messageModel.updateMessage(messageId,message)
+        messageModel.updateMessageById(messageId,message)
             .then(
                 function (doc) {
                     res.json(doc);

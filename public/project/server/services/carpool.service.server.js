@@ -56,6 +56,18 @@ module.exports = function(app, carPoolModel, userModel){
                 );
         }
 
+        else{
+            carPoolModel.findAllCarPool()
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
+
     }
 
     function deleteCarPoolById(req,res){

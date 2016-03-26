@@ -22,14 +22,14 @@
                 <label class="col-sm-2 control-label">From User</label>
                 <div class="col-sm-4">
                     <select ng-model="model.msg.fromUser" class="form-control" name="repeatFromUser" id="repeatFromUser">
-                        <option ng-repeat="user in userList" value="{{user.userName}}">{{user.userName}} | {{user.firstName}} {{user.lastName}}</option>
+                        <option ng-repeat="user in model.userList" value="{{user.userName}}">{{user.userName}} | {{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
 
                 <label class="col-sm-1 control-label">To User</label>
                 <div class="col-sm-5">
                     <select ng-model="model.msg.toUser" class="form-control" name="repeatToUser" id="repeatToUser" >
-                        <option ng-repeat="user in userList" value="{{user.userName}}">{{user.userName}} | {{user.firstName}} {{user.lastName}}</option>
+                        <option ng-repeat="user in model.userList" value="{{user.userName}}">{{user.userName}} | {{user.firstName}} {{user.lastName}}</option>
                     </select>
                 </div>
             </div>

@@ -15,10 +15,18 @@ module.exports = function (){
         deleteCarPoolById: deleteCarPoolById,
         updateCarPoolById: updateCarPoolById,
         findCarPoolBySourceDestination: findCarPoolBySourceDestination,
-        findCarPoolByCity: findCarPoolByCity
+        findCarPoolByCity: findCarPoolByCity,
+        findAllCarPool: findAllCarPool
     };
 
     return api;
+
+    function findAllCarPool(){
+        var deferred = q.defer();
+        deferred.resolve(mock);
+        return deferred.promise;
+
+    }
 
     // function to create Carpool for all user
     function createCarPoolByUser(userId, pool){

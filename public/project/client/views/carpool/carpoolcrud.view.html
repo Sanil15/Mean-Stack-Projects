@@ -1,5 +1,5 @@
 
-<div class="container-fluid page" ng-controller="CarPoolCRUDController">
+<div class="container-fluid page">
     <div class="row">
 
         <div class="page-header">
@@ -10,20 +10,20 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Source</label>
                     <div class="col-sm-10">
-                        <input ng-model="source" id="origin-input" type="text" class="form-control" placeholder="Source"/>
+                        <input ng-model="model.source" id="origin-input" type="text" class="form-control" placeholder="Source"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Destination</label>
                     <div class="col-sm-10">
-                        <input ng-model="destination" id="destination-input" type="text" class="form-control" placeholder="Destination"/>
+                        <input ng-model="model.destination" id="destination-input" type="text" class="form-control" placeholder="Destination"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <a ng-click="createCarPool()" class="btn btn-success btn-block">Create Carpool</a>
+                        <a ng-click="model.createCarPool()" class="btn btn-success btn-block">Create Carpool</a>
                     </div>
                 </div>
             </form>
@@ -39,11 +39,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="pool in carPools">
+            <tr ng-repeat="pool in model.carPools">
                 <td>{{pool.origin}}</td>
                 <td>{{pool.destination}}</td>
                 <td>
-                    <a ng-click="details($index)" class="btn btn-success btn-block" aria-label="Left Align">
+                    <a ng-click="model.details($index)" class="btn btn-success btn-block" aria-label="Left Align">
                     DETAILS</a>
                 </td>
             </tr>
@@ -51,11 +51,11 @@
         </table>
     </div>
 
-    <div class="row" ng-show="selectedIndex!=-1">
+    <div class="row" ng-show="model.selectedIndex!=-1">
     <div class="map-container">
     </div>
 
-     <div class="table-responsive" ng-show="selectedIndex!=-1">
+     <div class="table-responsive" ng-show="model.selectedIndex!=-1">
             <br>
             <table class="table table-stripped table-bordered">
                 <thead>
@@ -64,25 +64,25 @@
                 <tbody>
                 <tr>
                     <td>Origin :</td>
-                    <td>{{legs.start_address}} ({{legs.start_location.lat}},{{legs.start_location.lng}})</td>
+                    <td>{{model.legs.start_address}} ({{model.legs.start_location.lat}},{{model.legs.start_location.lng}})</td>
                 </tr>
                 <tr>
                     <td>Destination :</td>
-                    <td>{{legs.end_address}} ({{legs.end_location.lat}},{{legs.end_location.lng}})</td>
+                    <td>{{model.legs.end_address}} ({{model.legs.end_location.lat}},{{model.legs.end_location.lng}})</td>
                 </tr>
                 <tr>
                     <td>Distance :</td>
-                    <td>{{legs.distance.text}}</td>
+                    <td>{{model.legs.distance.text}}</td>
                 </tr>
                 <tr>
                     <td>Time :</td>
-                    <td>{{legs.duration.text}}</td>
+                    <td>{{model.legs.duration.text}}</td>
                 </tr>
                 </tbody>
             </table>
      </div>
     </div>
-<div class="row" ng-show="selectedIndex!=-1">
+<div class="row" ng-show="model.selectedIndex!=-1">
     <div id="map" class="col-md-8"></div>
     <div id="right-panel" class="col-md-4"></div>
 </div>

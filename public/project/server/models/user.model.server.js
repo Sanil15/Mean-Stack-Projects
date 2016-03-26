@@ -45,7 +45,7 @@ module.exports = function (){
         for(var i=0; i<mock.length;i++) {
             if ((credentials.username == mock[i].userName || credentials.username == mock[i].email) && credentials.password == mock[i].password) {
                 user=mock[i];
-                console.log(user);
+                //console.log(user);
             }
         }
 
@@ -85,6 +85,7 @@ module.exports = function (){
         }
 
         mock.splice(i,1);
+        console.log("HERE");
         var users=mock;
         deferred.resolve(users);
         return deferred.promise;

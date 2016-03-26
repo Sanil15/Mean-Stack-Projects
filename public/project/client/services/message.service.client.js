@@ -38,7 +38,7 @@
         }
 
         function updateMessageById(messageId,mes){
-            return $http.put("/api/project/message/:messageId",mes);
+            return $http.put("/api/project/message/"+messageId,mes);
         }
 
 

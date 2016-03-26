@@ -82,7 +82,7 @@ module.exports = function(app, ratingModel, userModel) {
 
         var rating=req.body;
 
-        ratingModel.createRatingByUser(rating)
+        ratingModel.createReview(rating)
             .then(
                 function (doc) {
                     res.json(doc);

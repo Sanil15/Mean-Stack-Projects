@@ -8,7 +8,7 @@ module.exports = function(app, db, mongoose) {
     var userModel    = require("./models/user.model.server.js")(db, mongoose);
     var carPoolModel   = require("./models/carpool.model.server.js")(db, mongoose);
     var  messageModel = require("./models/message.model.server.js")(db,mongoose);
-    var ratingModel = require("./models/message.model.server.js")(db,mongoose);
+    var ratingModel = require("./models/rating.model.server.js")(db,mongoose);
 
     var userService  = require("./services/user.service.server.js") (app,userModel);
     var carPoolService = require("./services/carpool.service.server.js")(app,carPoolModel,userModel);

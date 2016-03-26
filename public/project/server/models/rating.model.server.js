@@ -78,6 +78,7 @@ module.exports = function() {
             }
         }
 
+        deferred.resolve(mock);
         return deferred.promise;
     }
 
@@ -91,6 +92,7 @@ module.exports = function() {
                 break;
             }
         }
+        deferred.resolve(mock);
         return deferred.promise;
     }
 

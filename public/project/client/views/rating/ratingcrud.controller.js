@@ -3,67 +3,79 @@
         .module("CarPoolApp")
         .controller("ReviewCRUDController",ReviewCRUDController);
 
-    function ReviewCRUDController($scope, $location, UserService, ReviewService){
+    function ReviewCRUDController($location, UserService, ReviewService){
 
-        $scope.createReview=createReview;
-        $scope.deleteReview=deleteReview;
-        $scope.selectReview=selectReview;
-        $scope.updateReview=updateReview;
-        $scope.selectedReviewId=-1;
+        var vm = this;
 
+        vm.createReview=createReview;
+        vm.deleteReview=deleteReview;
+        vm.selectReview=selectReview;
+        vm.updateReview=updateReview;
 
-        UserService.findAllUsers(renderUser);
-        ReviewService.findAllReviews(renderReviews);
+        function init() {
+            vm.selectedReviewId=-1;
 
-        function renderUser(list){
-            //console.log(list);
-            $scope.userList=list;
+            UserService.findAllUsers()
+                .then(function (response){
+                    //console.log(response.data);
+                    vm.userList=response.data;
+                });
+
+            ReviewService.findAllReviews()
+                .then(function(response){
+                    //console.log(response.data);
+                    vm.reviews=response.data;
+                    vm.review=null;
+                    vm.selectedReview=null;
+                    vm.selectedReviewId=-1
+                });
         }
 
-        function renderReviews(list){
-            $scope.reviews=list;
-            $scope.review=null;
-            $scope.selectedReview=null;
-            $scope.selectedReviewId=-1;
-        }
+        init();
 
         function createReview(){
             //console.log($scope.msg);
-            ReviewService.createReview($scope.review,renderReviews);
+            ReviewService.createReview(vm.review)
+                .then(function(response){
+                    vm.reviews=response.data;
+                    vm.review=null;
+                    vm.selectedReview=null;
+                    vm.selectedReviewId=-1
+                });
         }
 
         function deleteReview(index){
-            var a;
-            ReviewService.findAllReviews(getList);
-            function getList(list){
-                a=list;
-            }
-            ReviewService.deleteReviewById(a[index]._id,renderReviews);
+
+            ReviewService.deleteReviewById(vm.reviews[index]._id)
+                .then(function(response){
+                    vm.reviews=response.data;
+                    vm.review=null;
+                    vm.selectedReview=null;
+                    vm.selectedReviewId=-1
+                });
         }
 
 
         function selectReview(index){
-            var a;
-            ReviewService.findAllReviews(getList);
-            function getList(list){
-                a=list;
-            }
 
             var rat={
-                "rating": a[index].rating,
-                "fromUser": a[index].fromUser,
-                "toUser": a[index].toUser,
-                "review":a[index].review
+                "rating": vm.reviews[index].rating,
+                "fromUser": vm.reviews[index].fromUser,
+                "toUser": vm.reviews[index].toUser,
+                "review":vm.reviews[index].review
             }
-            $scope.selectedReview=rat;
-
-            $scope.selectedReviewId=a[index]._id;
+            vm.selectedReview=rat;
+            vm.selectedReviewId=vm.reviews[index]._id;
         }
 
-        function updateReview(){
-            ReviewService.updateReviewById($scope.selectedReviewId,$scope.selectedReview,renderReviews);
+        function updateReview(review){
+            ReviewService.updateReviewById(vm.selectedReviewId,review)
+                .then(function(response){
+                    vm.reviews=response.data;
+                    vm.review=null;
+                    vm.selectedReview=null;
+                    vm.selectedReviewId=-1
+                });
         }
-
-
     }
 })();

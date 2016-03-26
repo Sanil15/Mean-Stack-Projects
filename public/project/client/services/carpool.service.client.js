@@ -19,7 +19,8 @@
             deleteCarPoolById: deleteCarPoolById,
             updateCarPoolById: updateCarPoolById,
             findCarPoolBySourceDestination: findCarPoolBySourceDestination,
-            findCarPoolByCity: findCarPoolByCity
+            findCarPoolByCity: findCarPoolByCity,
+            findAllCarPools: findAllCarPools
         };
 
         return api;
@@ -29,6 +30,9 @@
             return $http.post("/api/project/user/"+userId+"/carPool",pool);
         }
 
+        function findAllCarPools(){
+            return $http.get("/api/project/carpool");
+        }
 
         // functions finds all CarPool's created by user
         function findAllCarPoolByUser(userId){
