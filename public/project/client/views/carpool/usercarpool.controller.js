@@ -12,7 +12,7 @@
         .module("CarPoolApp")
         .controller("UserCarPoolController",UserCarPoolController)
 
-    function UserCarPoolController($scope,CarPoolService, UserService,$location){
+    function UserCarPoolController(CarPoolService, UserService,$location){
 
         var vm = this;
 

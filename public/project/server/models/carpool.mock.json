@@ -2,9 +2,9 @@
   {"_id": "000", "userId":"123", "source": "75 St Alphonsus St, MA, United States", "destination": "75 Peterborough Street, Boston, MA, United States", "date": "2016-03-15T04:00:00.000Z", "time": "03:00 pm",
     "carInfo": "XUV","basePrice":"$10", "noOfSeats": "4", "comments":"Please Notify in Advance like a day before"},
 
-  {"_id": "010","userId":"123", "source": "Bedford", "destination": "Salem", "date": "2016-03-16T04:00:00.000Z", "time": "04:00 pm",
+  {"_id": "010","userId":"123", "source": "Fenway Park, Yawkey Way, Boston, MA, United States", "destination": "871 Beacon Street, Boston, MA, United States", "date": "2016-03-16T04:00:00.000Z", "time": "04:00 pm",
     "carInfo": "Chevrolet Beat","basePrice":"$7", "noOfSeats": "2", "comments":"Ping me asap!!"},
 
-  {"_id": "020","userId":"234", "source": "Westford", "destination": "Umass", "date": "2016-03-15T04:00:00.000Z", "time": "07:00 pm",
+  {"_id": "020","userId":"234", "source": "Salem, MA, United States", "destination": "888 Huntington Avenue, Boston, MA, United States", "date": "2016-03-15T04:00:00.000Z", "time": "07:00 pm",
     "carInfo": "Toyota Prius", "basePrice":"$9", "noOfSeats": "3", "comments":"Time flexible can be adjusted"}
 ]

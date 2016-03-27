@@ -1,10 +1,11 @@
 
 <div class="container-fluid page">
+
+
     <div class="row">
 
-        <div class="page-header">
-            <h1>API-USAGE(GOOGLE-MAPS)/CARPOOL</h1>
-        </div>
+            <h1 class="page-header">API/CARPOOL</h1>
+
 
         <form class="form-horizontal">
                 <div class="form-group">
@@ -82,9 +83,18 @@
             </table>
      </div>
     </div>
-<div class="row" ng-show="model.selectedIndex!=-1">
-    <div id="map" class="col-md-8"></div>
-    <div id="right-panel" class="col-md-4"></div>
-</div>
+
+    <div class="row" ng-show="model.selectedIndex!=-1">
+        <table class="table table-responsive">
+             <div id="map"></div>
+        </table>
+    </div>
+
+
+    <div class="row" ng-show="model.selectedIndex!=-1">
+        <div class="table table-responsive">
+            <div id="right-panel" class="overflow-class"></div>
+        </div>
+    </div>
 
 </div>

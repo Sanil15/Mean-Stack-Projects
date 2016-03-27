@@ -9,12 +9,20 @@
         .module("CarPoolApp")
         .controller("HeaderController",HeaderController)
 
-    function HeaderController($scope, $rootScope){
+    function HeaderController($location, UserService) {
 
-        /*    UserService.setCurrentUser(null);
-        $scope.checkRootScope=checkRootScope;
-        $scope.logout=logout;
-        $scope.checkAdmin=checkAdmin;
+        var vm= this;
+
+        vm.checkRootScope=checkRootScope;
+        vm.checkAdmin=checkAdmin;
+        vm.logout=logout;
+
+        function init(){
+            vm.$location=$location;
+        }
+
+        init();
+
 
         // function to check the $rootScope current user
         function checkRootScope(){
@@ -22,7 +30,7 @@
                 return true;
 
             else{
-                $scope.username=UserService.getCurrentUser().username;
+                vm.username=UserService.getCurrentUser().username;
                 return false;
             }
         }
@@ -35,15 +43,17 @@
                         return true;
                 }
             }
-
             return false;
         }
 
         // function to logout current user
         function logout(){
+
             UserService.setCurrentUser(null);
-        }*/
+            console.log()
+            vm.username=null;
+        }
+
 
     }
-
 })();

@@ -50,7 +50,6 @@
         function logout(){
 
             UserService.setCurrentUser(null);
-            console.log()
             vm.username=null;
         }
 

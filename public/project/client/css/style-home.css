@@ -111,6 +111,8 @@ h1.header-text {
   color: white;
   font-size: 73px;
   font-weight: bold;
+  word-wrap: break-word;
+
 }
 h3.header-text{
   color: #EC7787;
@@ -344,17 +346,6 @@ a#menu-close:hover {
 }
 /* Full Page Image Header Area */
 
-.header {
-  display: table;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  background: url(../img/bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 /* Intro */
 

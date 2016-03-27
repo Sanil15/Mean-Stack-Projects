@@ -30,15 +30,14 @@
 
         function details(index){
 
-            $location.path("/searchresults/"+vm.carPools[index]._id);
-
-            /*if(UserService.getCurrentUser()==null){
+            if(UserService.getCurrentUser()==null){
                 $location.path("/login");
             }
 
             else{
-                $location.path("/searchresults?id="+vm.carPools[index]._id);
-            }*/
+             $location.path("/searchresults/"+vm.carPools[index]._id);
+
+             }
 
         }
 

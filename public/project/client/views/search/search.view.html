@@ -1,71 +1,75 @@
-<div class="container-fluid page">
+<div class="container-fluid container page">
+
+    <div class="row ">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <h1 class="page-header">CARPOOL DETAILS</h1>
+    </div>
+    </div>
+
+
     <div class="row">
-
-        <div class="page-header">
-            <h1>CARPOOL DETAILS</h1>
-        </div>
-
+       <div class="col-md-6 col-sm-12">
         <form class="form-horizontal" >
             <div class="form-group">
-                <label class="col-sm-2 control-label">Source</label>
-                <div class="col-sm-10">
-                    {{model.selectedPool.source}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Destination</label>
-                <div class="col-sm-10">
+                <label class="col-md-3 col-sm-6">Source</label>
+                <div class="col-md-9 col-sm-6 ">
                     {{model.selectedPool.destination}}
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Date</label>
-                <div class="col-sm-10">
+                <label class="col-md-3 col-sm-6">Destination</label>
+                <div  class="col-md-9 col-sm-6 ">
+                    {{model.selectedPool.destination}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 col-sm-6">Date</label>
+                <div class="col-md-9 col-sm-6 ">
                     {{model.selectedPool.date}}
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Time</label>
-                <div class="col-sm-10">
+                <label class="col-md-3 col-sm-6">Time</label>
+                <div class="col-md-9 col-sm-6 ">
                     {{model.selectedPool.time}}
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Car Info</label>
-                <div class="col-sm-10">
+                <label class="col-md-3 col-sm-6">Car Info</label>
+                <div class="col-md-9 col-sm-6 ">
                     {{model.selectedPool.carInfo}}
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">Base Price</label>
-                <div class="col-sm-10">
+                <label class="col-md-3 col-sm-6">Base Price</label>
+                <div class="col-md-9 col-sm-6 ">
                   {{model.selectedPool.basePrice}}
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">No. Of Seats</label>
-                <div class="col-sm-10">
+                <label class="col-md-3 col-sm-6">No. Of Seats</label>
+                <div class="col-md-9 col-sm-6 ">
                     {{model.selectedPool.noOfSeats}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.ContactUser(model.selectedPool)" class="btn btn-success btn-block">Update Carpool</a>
                 </div>
             </div>
         </form>
     </div>
 
-    <div class="row" >
-        <div class="map-container"></div>
+       <div class="col-md-6 col-sm-12 col-xs-12">
+           <div class="table table-responsive overflow-class">
+               <div id="right-panel"></div>
+           </div>
+        </div>
 
+    </div>
+
+    <div class="row">
         <div class="table-responsive" >
             <br>
             <table class="table table-stripped table-bordered">
@@ -94,9 +98,8 @@
         </div>
     </div>
 
-    <div class="row" >
+    <div class="row " >
         <div id="map" class="col-md-8"></div>
-        <div id="right-panel" class="col-md-4"></div>
     </div>
 
 </div>

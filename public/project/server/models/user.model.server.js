@@ -121,6 +121,7 @@ module.exports = function (){
         mock[i].password = user.password;
         mock[i].email = user.email;
         mock[i].address=user.address;
+        mock[i].country=user.country;
         mock[i].city=user.city;
         mock[i].contact=user.contact;
         mock[i].dob=user.dob;

@@ -9,9 +9,10 @@
         .module("CarPoolApp")
         .controller("SearchController", SearchController)
 
-    function SearchController(CarPoolService, UserService, $location, $routeParams) {
+    function SearchController($http, CarPoolService, UserService, $location, $routeParams) {
 
         var vm = this;
+        var URL="http://maps.googleapis.com/maps/api/directions/json?&origin=ORIGIN&destination=DESTINATION&key=AIzaSyD_70F4Mj8HaLj4AS8IYt4ZXyJGm2v-KD0";
 
         function init() {
             console.log($routeParams.id);
@@ -19,16 +20,18 @@
                 .then(function(response){
                     console.log(response.data);
                     vm.selectedPool=response.data;
+                    details(response.data);
+                    getMap(response.data);
                 });
+
 
         }
 
         init();
 
-        var URL="http://maps.googleapis.com/maps/api/directions/json?&origin=ORIGIN&destination=DESTINATION&key=AIzaSyD_70F4Mj8HaLj4AS8IYt4ZXyJGm2v-KD0";
 
 
-        function getMap(index){
+        function getMap(pool){
 
             var directionsService = new google.maps.DirectionsService;
             var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -45,8 +48,8 @@
             directionsDisplay.setPanel(document.getElementById('right-panel'));
 
             directionsService.route({
-                    origin: vm.selectedPool.origin,
-                    destination: vm.selectedPool.destination,
+                    origin: pool.source,
+                    destination: pool.destination,
                     travelMode: google.maps.TravelMode.DRIVING},
                 renderRouteMap);
 
@@ -60,23 +63,11 @@
 
         }
 
-        function details(index){
+        function details(pool){
 
-            vm.selectedIndex=1;
-            //console.log(origin);
-            //console.log(destination);
+            var a=URL.replace("ORIGIN",pool.source);
+            var b=a.replace("DESTINATION",pool.destination);
 
-
-            getMap(index);
-
-            //initMap(index);
-
-            var a=URL.replace("ORIGIN",vm.selectedPool.origin);
-            var b=a.replace("DESTINATION",vm.selectedPool.destination);
-
-            //$http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-            //alert(b);
 
             var req = {
                 method: 'POST',
@@ -90,15 +81,10 @@
 
             $http(req).success(render);
 
-            //$http.post('/maps',{'test': "123"}).success(render);
-
             function render(response){
                 console.log(response);
                 vm.legs = response.routes[0].legs[0];
             }
-
-
         }
-
 
     }}())

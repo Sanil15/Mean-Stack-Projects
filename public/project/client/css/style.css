@@ -63,9 +63,12 @@
     box-shadow: 0 1px 1px rgba(0,0,0,0.05);
 }
 .page {
-    white-space: nowrap;
-    padding: 100px;
+
+    padding-top: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
     font-size: 14px;
+    width: 100%;
     line-height: 1.42857;
     color: #767676;
 }
@@ -128,24 +131,14 @@
 #right-panel {
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
-
 }
 
 #right-panel select, #right-panel input {
     font-size: 15px;
 }
 
-#right-panel select {
-    width: 100%;
-}
-
 #right-panel i {
     font-size: 12px;
-}
-#right-panel {
-    height: 100%;
-    float: right;
-    overflow: auto;
 }
 
 @media print {
@@ -154,15 +147,15 @@
         margin: 0;
         width: 100%;
     }
-    #right-panel {
-        float: none;
-        width: auto;
-    }
+
 }
 
 
 /***************************************************/
+.overflow-class{
 
+    width: 100%;
+}
 
 .field {
     display:flex;
@@ -199,3 +192,4 @@
     color:white;
     border:none;
 }
+
