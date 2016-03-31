@@ -21,7 +21,7 @@
         // function for checking login of a controller
         function login(user){
             //console.log(username,password);
-            if(!user)
+            if(!user || user.password==null || user.username==null)
             {
                 return;
             }
@@ -30,6 +30,7 @@
                 .findUserByCredentials(user.username,user.password)
                 .then(
                     function(response){
+                        //console.log(response.data);
                         UserService.setCurrentUser(response.data);
                         $location.url("/profile");
                     },

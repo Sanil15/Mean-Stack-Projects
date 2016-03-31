@@ -16,7 +16,12 @@
         vm.update=update;
 
         function init(){
-            vm.user=UserService.getCurrentUser();
+            UserService.getCurrentUser()
+                .then(function(response){
+                   console.log(response.data);
+                    UserService.setCurrentUser(response.data);
+                    vm.user=response.data;
+                });
         }
         init();
 

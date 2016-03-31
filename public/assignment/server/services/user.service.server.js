@@ -3,6 +3,8 @@
  */
 module.exports = function(app, userModel){
     app.post("/api/assignment/user", createUser);
+    app.get("/api/assignment/loggedin", loggedIn);
+    app.post("/api/assignment/logout",logout)
 
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
@@ -28,12 +30,23 @@ module.exports = function(app, userModel){
         userModel.findUserByCredentials(credentials)
             .then(
                 function (doc) {
+                    req.session.currentUser = doc;
                     res.json(doc);
                 },
                 function (err) {
                     res.status(400).send(err);
                 }
             );
+    }
+
+    function loggedIn(req, res) {
+        console.log(req.session.currentUser);
+        res.json(req.session.currentUser);
+    }
+
+    function logout(req,res){
+        req.session.destroy();
+        res.send(200);
     }
 
     function getAllUsers(req, res){
@@ -98,11 +111,14 @@ module.exports = function(app, userModel){
 
     function createUser(req,res){
         var user = req.body;
-
+        var emails=user.emails.split(",");
+        user.emails=emails;
         userModel.createUser(user)
             .then(
                 function (doc) {
+                    req.session.currentUser = doc;
                     res.json(doc);
+
                 },
                 function (err) {
                     res.status(400).send(err);
@@ -114,7 +130,8 @@ module.exports = function(app, userModel){
     function updateUserById(req,res){
         var user=req.body;
         var userId=req.params.id;
-
+        var emails=user.emails.split(",");
+        user.emails=emails;
         userModel.updateUser(userId,user)
             .then(
                 function (doc) {

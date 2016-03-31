@@ -13,35 +13,12 @@
 
         var vm= this;
 
-        vm.checkLogin=checkLogin;
-        vm.checkAdmin=checkAdmin;
-
         function init(){
 
         vm.$location=$location;
         }
-
         init();
 
-        // function to check login of a current User
-        function checkLogin(){
-            if(UserService.getCurrentUser() == null)
-                return false;
-
-            else
-                return true;
-        }
-
-        // function to check whether current user is Admin
-        function checkAdmin(){
-            if (UserService.getCurrentUser() != null){
-                for (var i = 0; i < UserService.getCurrentUser().roles.length; i++){
-                    if (UserService.getCurrentUser().roles[i] == "admin")
-                        return true;
-                }
-            }
-            return false;
-        }
 
     }
 

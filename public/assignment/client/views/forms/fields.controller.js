@@ -9,7 +9,7 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController(FieldService,FormService,UserService,$scope) {
+    function FieldController($routeParams,FieldService,FormService,UserService,$scope) {
 
         var vm = this;
         vm.addField=addField;
@@ -20,15 +20,17 @@
 
 
         function init() {
-        FieldService.getFieldsForForm(FormService.getCurrentFormId())
+        FieldService.getFieldsForForm($routeParams.formId)
             .then(function (response){
-               vm.fields=response.data;
+               console.log("FIelds"+response.data.fields);
+                vm.fields=response.data.fields;
                $scope.fields=vm.fields;
             });
         }
         init();
 
         function addField(fieldType){
+
             var newField;
 
             switch(fieldType) {
@@ -70,21 +72,21 @@
                     break;
             }
 
-            FieldService.createFieldForForm(FormService.getCurrentFormId(),newField)
+            FieldService.createFieldForForm($routeParams.formId,newField)
                 .then(function (response){
                     init();
                 });
         }
 
         function removeField(fieldId){
-            FieldService.deleteFieldFromForm(FormService.getCurrentFormId(),fieldId)
+            FieldService.deleteFieldFromForm($routeParams.formId,fieldId)
                 .then(function (response){
                     init();
                 });
         }
 
         function clone(field){
-            FieldService.createFieldForForm(FormService.getCurrentFormId(),field)
+            FieldService.createFieldForForm($routeParams.formId,field)
                 .then(function (response){
                     init();
                 });

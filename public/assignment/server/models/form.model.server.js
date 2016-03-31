@@ -146,7 +146,7 @@ module.exports = function(db){
        return Form.findById(formId)
            .then(function(form){
               form.fields.push(field);
-              return form.save();
+              return form.update(form);
            });
     }
 

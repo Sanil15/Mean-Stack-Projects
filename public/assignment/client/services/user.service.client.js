@@ -18,7 +18,8 @@
             deleteUserById : deleteUserById,
             updateUser : updateUser,
             setCurrentUser : setCurrentUser,
-            getCurrentUser : getCurrentUser
+            getCurrentUser : getCurrentUser,
+            logout:logout
          };
 
         return api;
@@ -29,8 +30,12 @@
         }
 
         // Getter function to get the $rootScope of current user
-        function getCurrentUser () {
-            return $rootScope.user;
+        function getCurrentUser() {
+            return $http.get("/api/assignment/loggedin");
+        }
+
+        function logout(){
+            return $http.post("/api/assignment/logout");
         }
 
         // function to find Username and Password

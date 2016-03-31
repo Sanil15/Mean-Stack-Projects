@@ -59,11 +59,13 @@ module.exports = function(app, formModel, userModel) {
     function createFieldForForm(req, res) {
         var formId = req.params.formId;
         var newField = req.body;
+        //console.log("Field Service"+newField);
         //console.log("I am here");
         formModel
             .createFieldForForm(formId, newField)
             .then(
                 function (doc) {
+                    console.log(doc);
                     res.json(doc)
                 },
 

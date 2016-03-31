@@ -31,7 +31,7 @@
                                 </td>
                             </tr>
                             <tr ng-repeat="f in model.userForms">
-                                <td><a ng-click="model.fields(f._id)">{{f.title}}</a></td>
+                                <td><a href="#/form/{{f._id}}/fields" ng-click="model.fields(f._id)">{{f.title}}</a></td>
                                 <td>
                                     <a ng-click="model.deleteForm($index)" class="btn btn-default" aria-label="Left Align">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

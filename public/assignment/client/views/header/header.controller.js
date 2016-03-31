@@ -13,8 +13,6 @@
 
         var vm= this;
 
-        vm.checkRootScope=checkRootScope;
-        vm.checkAdmin=checkAdmin;
         vm.logout=logout;
 
         function init(){
@@ -22,37 +20,17 @@
         }
 
         init();
-
-
-        // function to check the $rootScope current user
-        function checkRootScope(){
-            if(UserService.getCurrentUser() == null)
-                return true;
-
-            else{
-                vm.username=UserService.getCurrentUser().username;
-                return false;
-            }
-        }
-
-        // function to check whether current user is admin
-        function checkAdmin(){
-            if(UserService.getCurrentUser() != null) {
-                for (var i = 0; i < UserService.getCurrentUser().roles.length; i++){
-                    if (UserService.getCurrentUser().roles[i] == "admin")
-                        return true;
-                }
-            }
-            return false;
-        }
-
+        
         // function to logout current user
         function logout(){
 
-            UserService.setCurrentUser(null);
-            vm.username=null;
+            UserService
+                .logout()
+                .then(function(){
+                   UserService.setCurrentUser(null);
+                   $location.url("/home");
+                });
         }
-
     }
 
 })();

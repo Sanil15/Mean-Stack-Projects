@@ -29,7 +29,7 @@
                     .then(
                         function (response) {
                             var user=response.data;
-                            console.log(user);
+                            //console.log(user);
                             UserService.setCurrentUser(user);
                             $location.url("/profile");
                         },

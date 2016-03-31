@@ -56,6 +56,7 @@ module.exports = function(app, formModel, userModel){
         formModel.createFormForUser(form,userId)
             .then(
                 function (doc) {
+                    //console.log("HERE 1"+doc);
                     res.json(doc);
                 },
                 function (err) {

@@ -19,6 +19,11 @@ var request = require('request');
 // load session support
 var session = require('express-session');
 
+app.use(session({
+    secret: 'sanil',
+    resave: true,
+    saveUinitialized: true
+}));
 
 require("./public/assignment/server/app.js")(app,db);
 require("./public/project/server/app.js")(app);

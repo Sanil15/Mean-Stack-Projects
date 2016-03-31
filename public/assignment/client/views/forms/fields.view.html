@@ -9,7 +9,7 @@
             </ul>
 
 
-            <div class="container border" ng-show="model.fields" div-sortable jga-axis="y">
+            <div class="container border" div-sortable jga-axis="y">
 
                 <div class="row" ng-repeat="field in model.fields">
 
@@ -90,14 +90,9 @@
 
                     <br>
                     <br>
-
-
-
-
                 </div>
-
-                <hr>
-
+            </div>
+        <hr>
                 <div class="row">
                     <div class="col-sm-4 col-md-4">
                         <label for="dropdownMenu2">Add New Field</label>
@@ -120,7 +115,6 @@
                     </div>
                 </div>
 
-            </div>
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -142,7 +136,7 @@
                             <input type="text" class="form-control" ng-model="model.placeholder">
                         </div>
 
-                        <div class="form-group" ng-show="model.updatedField.options">
+                        <div class="form-group" ng-show="model.updatedField.type == 'RADIOS' || model.updatedField.type == 'OPTIONS' || model.updatedField.type == 'CHECKBOXES' ">
                             <label>Options:</label>
                             <textarea class="form-control" ng-model="model.options"></textarea>
                         </div>
