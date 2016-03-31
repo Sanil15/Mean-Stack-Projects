@@ -25,6 +25,7 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "~3.4.4",
+    "express-session": "^1.13.0",
     "mongoose": "^4.4.10",
     "multer": "^1.1.0",
     "q": "^1.4.1",

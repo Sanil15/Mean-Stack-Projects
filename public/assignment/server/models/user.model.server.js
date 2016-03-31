@@ -8,7 +8,7 @@ var q = require("q");
 
 module.exports = function(db){
 
-    var UserSchema = require("./user.schema.server.js");
+    var UserSchema = require("./user.schema.server.js")();
     var User = mongoose.model("User",UserSchema);
 
 
@@ -97,8 +97,7 @@ module.exports = function(db){
     function findUserById(id){
         var deferred = q.defer();
         User
-            .findOne(
-                {_id: id},
+            .findById(id,
                 function (err, stats){
                     if(!err) {
                         deferred.resolve(stats);

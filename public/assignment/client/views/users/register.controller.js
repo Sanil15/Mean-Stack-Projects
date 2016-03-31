@@ -23,17 +23,20 @@
 
             // function to register a current user
             function register(user) {
-
-                user.firstName = null;
-                user.lastName = null;
-
+                //user.firstName = null;
+                //user.lastName = null;
                 UserService.createUser(user)
-                    .then(function (response) {
-                        var users=response.data;
-                        console.log(users[users.length]);
-                        UserService.setCurrentUser(users[users.length]);
-                        $location.url("/profile");
-                    });
+                    .then(
+                        function (response) {
+                            var user=response.data;
+                            console.log(user);
+                            UserService.setCurrentUser(user);
+                            $location.url("/profile");
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    );
             }
         }
 

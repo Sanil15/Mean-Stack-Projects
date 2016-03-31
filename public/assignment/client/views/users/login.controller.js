@@ -28,10 +28,15 @@
 
             UserService
                 .findUserByCredentials(user.username,user.password)
-                .then(function(response){
-                    UserService.setCurrentUser(response.data);
-                    $location.url("/profile");
-                });
+                .then(
+                    function(response){
+                        UserService.setCurrentUser(response.data);
+                        $location.url("/profile");
+                    },
+                    function(error){
+                        console.log(error);
+                    }
+                );
         }
     }
 })();
