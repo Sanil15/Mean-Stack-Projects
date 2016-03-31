@@ -59,7 +59,7 @@ module.exports = function(app, formModel, userModel) {
     function createFieldForForm(req, res) {
         var formId = req.params.formId;
         var newField = req.body;
-        console.log("I am here");
+        //console.log("I am here");
         formModel
             .createFieldForForm(formId, newField)
             .then(
@@ -77,7 +77,7 @@ module.exports = function(app, formModel, userModel) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var updatedField = req.body;
-        console.log("HIHIHI");
+        //console.log("HIHIHI");
         formModel
             .updateFieldByIdForForm(formId, fieldId, updatedField)
             .then(
