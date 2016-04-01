@@ -6,6 +6,6 @@
     'use strict';
 
     angular
-        .module("FormBuilderApp",["ngRoute","divSortable","ui.bootstrap"]);
+        .module("FormBuilderApp",["ngRoute","divSortable","ui.bootstrap","jgaDirectives"]);
 
 })();

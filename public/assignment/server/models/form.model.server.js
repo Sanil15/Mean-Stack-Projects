@@ -23,7 +23,8 @@ module.exports = function(db){
         findFieldByIdForForm:findFieldByIdForForm,
         deleteFieldByIdForForm: deleteFieldByIdForForm,
         createFieldForForm: createFieldForForm,
-        updateFieldByIdForForm: updateFieldByIdForForm
+        updateFieldByIdForForm: updateFieldByIdForForm,
+        sortField: sortField
     }
 
     return api;
@@ -134,11 +135,40 @@ module.exports = function(db){
     }
 
     function deleteFieldByIdForForm(formId,fieldId){
-        return Form.findById(formId)
-            .then(function (form){
-                form.fields.id(fieldId).remove();
-                return form.save();
-            });
+        var deferred = q.defer();
+        var form = null;
+
+        Form.find({_id : formId}, function (err,results){
+            if(!err) {
+                form = results[0];
+
+                for(var i in form.fields){
+                    if(form.fields[i]._id == fieldId){
+                        form.fields.splice(i,1);
+                        break;
+                    }
+                }
+
+                Form.update(
+                    {_id : formId},
+
+                    {$set: form},
+
+                    function (err,results){
+                        if(!err) {
+                            deferred.resolve(form);
+                        }
+                        else {
+                            deferred.resolve(null);
+                        }
+                    });
+            }
+            else{
+                deferred.resolve(null);
+            }
+        });
+
+        return deferred.promise;
     }
 
 
@@ -151,13 +181,53 @@ module.exports = function(db){
     }
 
     function updateFieldByIdForForm(formId,fieldId,field){
-       return Form.findById(formId)
-           .then(function(form){
-              var fieldOld= form.fields.id(fieldId);
-              fieldOld.label=field.label;
-              fieldOld.placeholder=field.placeholder;
-              fieldOld.options=field.options;
-              return form.save();
-           });
+     var deferred = q.defer();
+     var form = null;
+
+      Form.find({_id : formId}, function (err,results){
+            if(!err) {
+                form = results[0];
+                for(var i in form.fields){
+                    if(form.fields[i]._id == fieldId){
+                        form.fields[i] = field;
+                        break;
+                    }
+                }
+
+                Form.update(
+                    {_id : formId},
+
+                    {$set: form},
+
+                    function (err,results){
+                        if(!err) {
+                            deferred.resolve(form);
+                        }
+                        else {
+                            deferred.resolve(null);
+                        }
+                    });
+            }
+            else{
+                deferred.resolve(null);
+            }
+        });
+        return deferred.promise;
     }
+
+    function sortField(formId, startIndex, endIndex) {
+        var deferred = q.defer();
+        return Form
+            .findById(formId)
+            .then(
+                function(form) {
+                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+                    // notify mongoose 'pages' field changed
+                    form.markModified("fields");
+                    form.save();
+                }
+            );
+        return deferred.promise;
+    }
+
 }

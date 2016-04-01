@@ -12,20 +12,21 @@
     function FieldController($routeParams,FieldService,FormService,UserService,$scope) {
 
         var vm = this;
-        vm.addField=addField;
-        vm.removeField=removeField;
-        vm.clone=clone;
-        vm.selectField=selectField;
-        vm.editField=editField;
+        vm.addField = addField;
+        vm.removeField = removeField;
+        vm.clone = clone;
+        vm.selectField = selectField;
+        vm.editField = editField;
+        vm.sortField = sortField;
 
 
         function init() {
-        FieldService.getFieldsForForm($routeParams.formId)
-            .then(function (response){
-               console.log("FIelds"+response.data.fields);
-                vm.fields=response.data.fields;
-               $scope.fields=vm.fields;
-            });
+            FieldService.getFieldsForForm($routeParams.formId)
+                .then(function (response){
+                    console.log("FIelds"+response.data.fields);
+                    vm.fields=response.data.fields;
+                    $scope.fields=vm.fields;
+                });
         }
         init();
 
@@ -46,9 +47,9 @@
                 case "OPTIONS":
                     newField =
                     {"label": "New Dropdown", "type": "OPTIONS", "options": [
-                                    {"label": "Option 1", "value": "OPTION_1"},
-                                    {"label": "Option 2", "value": "OPTION_2"},
-                                    {"label": "Option 3", "value": "OPTION_3"}
+                        {"label": "Option 1", "value": "OPTION_1"},
+                        {"label": "Option 2", "value": "OPTION_2"},
+                        {"label": "Option 3", "value": "OPTION_3"}
                     ]}
 
                     break;
@@ -116,13 +117,18 @@
 
         function editField(){
             if(vm.updatedField.options){
-                var opts = vm.options.split("\n");
+                var options = vm.options.split("\n");
                 var opt = [];
 
-                for (var i in opts){
-                    var pair = opts[i].split(":");
-                    var obj = {"label" :pair[0] ,"value" :pair[1]};
-                    opt.push(obj);
+                for (var i in options){
+                    var pair = options[i].split(":");
+                    var obj = {
+                        "label" :pair[0] ,
+                        "value" :pair[1]
+                    };
+
+                    if(obj.label != "")
+                        opt.push(obj);
                 }
 
                 vm.updatedField.options = opt;
@@ -135,12 +141,27 @@
             vm.updatedField.label = vm.label;
 
             FieldService
-                .updateField(FormService.getCurrentFormId(),vm.updatedField._id,vm.updatedField)
+                .updateField($routeParams.formId,vm.updatedField._id,vm.updatedField)
                 .then(
                     function(doc){
                         init();
                     }
                 );
         }
+
+        function sortField(start, end) {
+            console.log([start, end]);
+            FieldService
+                .sortField($routeParams.formId, start, end)
+                .then(
+                    function (response) {
+                        vm.fields = response.data;
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
+        }
+
     }
 })();

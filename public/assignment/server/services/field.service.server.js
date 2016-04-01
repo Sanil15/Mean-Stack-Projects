@@ -7,6 +7,35 @@ module.exports = function(app, formModel, userModel) {
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldByIdForForm);
     app.post("/api/assignment/form/:formId/field", createFieldForForm);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldByIdForForm);
+    app.put("/api/assignment/form/:formId/field", reOrderFieldForForm);
+
+
+    function reOrderFieldForForm(req,res){
+        var formId = req.params.formId;
+        var startIndex = req.query.startIndex;
+        var endIndex = req.query.endIndex;
+
+        if(startIndex && endIndex) {
+            formModel
+                .sortField(formId, startIndex, endIndex)
+                .then(
+                    function(stat) {
+                        return formModel.findAllFieldsForForm(formId);
+                    },
+                    function(err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function(form) {
+                        res.json(form.fields);
+                    },
+                    function(err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
+    }
 
     function findAllFieldsForForm(req, res) {
         var formId = req.params.formId;
@@ -79,7 +108,7 @@ module.exports = function(app, formModel, userModel) {
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
         var updatedField = req.body;
-        //console.log("HIHIHI");
+        console.log("HIHIHI"+updatedField);
         formModel
             .updateFieldByIdForForm(formId, fieldId, updatedField)
             .then(

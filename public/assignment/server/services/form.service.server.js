@@ -68,7 +68,7 @@ module.exports = function(app, formModel, userModel){
     function updateFormById(req,res){
         var formId=req.params.formId;
         var form=req.body;
-
+        console.log("I am HERE "+form);
         formModel.updateFormById(formId,form)
             .then(
                 function (doc) {

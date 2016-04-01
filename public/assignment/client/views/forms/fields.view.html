@@ -9,10 +9,11 @@
             </ul>
 
 
-            <div class="container border" div-sortable jga-axis="y">
+            <div class="container border" jga-sortable jga-sortable-callback="model.sortPage">
 
                 <div class="row" ng-repeat="field in model.fields">
 
+                    <br>
                     <ANY ng-switch="field.type">
 
                         <ANY ng-switch-when="TEXT">
@@ -88,8 +89,6 @@
                         </a>
                     </div>
 
-                    <br>
-                    <br>
                 </div>
             </div>
         <hr>
