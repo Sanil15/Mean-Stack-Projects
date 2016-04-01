@@ -130,8 +130,13 @@ module.exports = function(app, userModel){
     function updateUserById(req,res){
         var user=req.body;
         var userId=req.params.id;
-        var emails=user.emails.split(",");
+        var emails=user.emails;
+
+        if(user.emails.indexOf(",")>-1)
+        emails=user.emails.split(",");
+
         user.emails=emails;
+
         userModel.updateUser(userId,user)
             .then(
                 function (doc) {

@@ -12,7 +12,7 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 var mongoose = require("mongoose");
 
 
-var connectionString = 'mongodb://127.0.0.1:27017/CS5610';
+var connectionString = 'mongodb://127.0.0.1:27017/form-maker';
 
 // use remote connection string
 // if running in remote server

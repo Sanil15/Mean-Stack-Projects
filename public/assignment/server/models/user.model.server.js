@@ -134,10 +134,15 @@ module.exports = function(db){
         User
             .update(
                 {_id: userId},
-                {$set: user},
-                function (err, stats){
+                {$set: {
+                    "password": user.password,
+                    "firstName": user.firstName,
+                    "lastName": user.lastName,
+                    "emails": user.emails
+                }},
+                function (err, results){
                     if(!err) {
-                        deferred.resolve(stats);
+                        deferred.resolve(results);
                     }
                     else{
                         deferred.reject(err);

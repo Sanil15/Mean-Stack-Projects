@@ -109,7 +109,9 @@ module.exports = function(db){
         Form
             .update(
                 {_id: formId},
-                {$set: newForm},
+                {$set: {
+                    "title": newForm.title
+                }},
                 function (err, stats){
                     if(!err) {
                         deferred.resolve(stats);
@@ -152,7 +154,9 @@ module.exports = function(db){
                 Form.update(
                     {_id : formId},
 
-                    {$set: form},
+                    {$set: {
+                        "fields": form.fields
+                    }},
 
                     function (err,results){
                         if(!err) {
@@ -197,11 +201,13 @@ module.exports = function(db){
                 Form.update(
                     {_id : formId},
 
-                    {$set: form},
+                    {$set: {
+                        "fields": form.fields
+                    }},
 
                     function (err,results){
                         if(!err) {
-                            deferred.resolve(form);
+                            deferred.resolve(results);
                         }
                         else {
                             deferred.resolve(null);
