@@ -185,9 +185,12 @@ module.exports = function(db){
             } else {
                 var form = doc;
                 form.fields.push(field);
-                FormModel.update(
+
+                Form.update(
                     { _id : formId},
-                    { $set: form
+                    { $set: {
+                        "fields": form.fields
+                    }
                     }, function (err, doc) {
                         if (err) {
                             deferred.reject(err);
@@ -195,7 +198,6 @@ module.exports = function(db){
                             deferred.resolve(doc);
                         }
                     });
-
             }
         });
 
