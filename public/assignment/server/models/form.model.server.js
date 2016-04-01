@@ -177,11 +177,29 @@ module.exports = function(db){
 
 
     function createFieldForForm(formId,field){
-       return Form.findById(formId)
-           .then(function(form){
-              form.fields.push(field);
-              return form.update(form);
-           });
+        var deferred = q.defer();
+
+        Form.findById(formId, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                var form = doc;
+                form.fields.push(field);
+                FormModel.update(
+                    { _id : formId},
+                    { $set: form
+                    }, function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+
+            }
+        });
+
+        return deferred.promise;
     }
 
     function updateFieldByIdForForm(formId,fieldId,field){
