@@ -40,6 +40,7 @@ module.exports = function(app, userModel){
     }
 
     function loggedIn(req, res) {
+        console.log("-----------------------------");
         console.log(req.session.currentUser);
         res.json(req.session.currentUser);
     }

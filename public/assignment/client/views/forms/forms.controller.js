@@ -23,14 +23,20 @@
         vm.userForms=[];
         function init() {
             vm.selectedIndex=-1;
-            var userId=UserService.getCurrentUser()._id;
-            FormService
-                .findAllFormsForUser(userId)
+            var userId;
+            UserService.getCurrentUser()
                 .then(function(response){
-                        //console.log(response);
-                        vm.userForms=response.data;
+                    if(response.data) {
+                        userId = response.data._id;
+                        FormService
+                            .findAllFormsForUser(userId)
+                            .then(function(response){
+                                    //console.log(response);
+                                    vm.userForms=response.data;
+                                }
+                            );
                     }
-                );
+                });
         }
 
         init();
@@ -39,11 +45,15 @@
         //function to add forms
         function addForm(form){
             if(form.title!=null){
-                FormService.createFormForUser(UserService.getCurrentUser()._id,form)
+                UserService.getCurrentUser()
                     .then(function(response){
-                     init();
-                     vm.form.title=null;
+                        FormService.createFormForUser(response.data._id,form)
+                            .then(function(response){
+                                init();
+                                vm.form.title=null;
+                            });
                     });
+
             }
         }
 
