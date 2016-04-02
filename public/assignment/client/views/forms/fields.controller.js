@@ -87,6 +87,7 @@
         }
 
         function clone(field){
+            delete field._id;
             FieldService.createFieldForForm($routeParams.formId,field)
                 .then(function (response){
                     init();

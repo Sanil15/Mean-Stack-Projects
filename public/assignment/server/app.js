@@ -6,9 +6,9 @@ module.exports = function(app, db) {
 
     // pass db and mongoose reference to model
     var userModel    = require("./models/user.model.server.js")(db);
-    var formModel   = require("./models/form.model.server.js")(db);
+    var formModel   = require("./models/form.model.server.js")(db,app);
 
     var userService  = require("./services/user.service.server.js") (app,userModel);
     var formService = require("./services/form.service.server.js")(app,formModel,userModel);
-    var fieldService= require("./services/field.service.server.js")(app,formModel,userModel);
+
 }
