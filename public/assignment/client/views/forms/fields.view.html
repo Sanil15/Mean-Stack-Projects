@@ -2,14 +2,14 @@
 <div class="container-fluid">
     <div class="row">
 
-            <h1 class="page-header">Forms: Registration Form</h1>
+            <h1 class="page-header">Forms: {{model.form.title}}</h1>
             <ul class="nav nav-tabs">
                 <li role="presentation"><a href="#/forms">Forms</a></li>
                 <li role="presentation" class="active"><a href="#">Fields</a></li>
             </ul>
 
 
-            <div class="container border" jga-sortable jga-sortable-callback="model.sortPage">
+            <div class="container border" jga-sortable jga-sortable-callback="model.sortField">
 
                 <div class="row" ng-repeat="field in model.fields">
 

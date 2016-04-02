@@ -16,6 +16,7 @@
            findAllFormsForUser: findAllFormsForUser,
            deleteFormById: deleteFormById,
            updateFormById: updateFormById,
+           findFormById : findFormById,
            setCurrentFormId: setCurrentFormId,
            getCurrentFormId: getCurrentFormId
        };
@@ -36,6 +37,10 @@
         // function to delete form by id
         function deleteFormById(formId){
             return $http.delete("/api/assignment/form/"+formId)
+        }
+
+        function findFormById(formId){
+            return $http.get("/api/assignment/form/"+ formId)
         }
 
         // function updates the form by its id

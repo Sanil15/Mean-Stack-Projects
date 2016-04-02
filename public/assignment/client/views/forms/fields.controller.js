@@ -27,6 +27,11 @@
                     vm.fields=response.data.fields;
                     $scope.fields=vm.fields;
                 });
+
+            FormService.findFormById($routeParams.formId)
+                .then(function(response){
+                    vm.form = response.data;
+                })
         }
         init();
 
