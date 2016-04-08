@@ -19,7 +19,8 @@
             updateUser : updateUser,
             setCurrentUser : setCurrentUser,
             getCurrentUser : getCurrentUser,
-            logout:logout
+            logout:logout,
+            findUserById: findUserById
          };
 
         return api;
@@ -34,13 +35,21 @@
             return $http.get("/api/assignment/loggedin");
         }
 
+        function login(user) {
+            return $http.post("/api/assignment/login", user);
+        }
+
         function logout(){
             return $http.post("/api/assignment/logout");
         }
 
         // function to find Username and Password
         function findUserByCredentials(username, password){
-            return $http.get("/api/assignment/user?"+"username=" + username + "&password=" + password);
+            return $http.post("/api/assignment/login?"+"username=" + username + "&password=" + password);
+        }
+
+        function findUserById(userId){
+            return $http.get("/api/assignment/user/"+userId);
         }
 
         // function returns all set of users

@@ -23,7 +23,6 @@
         
         // function to logout current user
         function logout(){
-
             UserService
                 .logout()
                 .then(function(){

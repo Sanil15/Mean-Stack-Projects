@@ -13,10 +13,7 @@
     function Configure($routeProvider) {
         $routeProvider
             .when("/home", {
-                templateUrl: "views/home/home.view.html",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                templateUrl: "views/home/home.view.html"
                 //controller: "views/home/home.controller.js"]
             })
             .when("/admin",{
@@ -79,24 +76,30 @@
     }
 
 
-    function checkLoggedIn(UserService, $q, $location) {
-
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response) {
-                var currentUser = response.data;
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    $location.url("/home");
-                }
-            });
+        $http.get('/api/assignment/loggedin')
+            .success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.user = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.error = 'You need to log in.';
+                deferred.reject();
+                $location.url('/');
+            }
+        });
 
         return deferred.promise;
-    }
+    };
 
 })();

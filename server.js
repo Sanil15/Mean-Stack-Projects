@@ -46,8 +46,9 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
 // configure session support
+var key=process.env.SESSION_SECRET;
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: key,
     resave: true,
     saveUinitialized: true
 }));

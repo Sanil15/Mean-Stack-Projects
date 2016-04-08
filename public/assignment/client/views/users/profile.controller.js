@@ -30,7 +30,7 @@
             UserService.updateUser(user._id,user)
                 .then(
                     function(response) {
-                        return UserService.findUserByCredentials(user.username, user.password);
+                        return UserService.findUserById(user._id);
                     })
                 .then(function(response){
                     if(response.data){
