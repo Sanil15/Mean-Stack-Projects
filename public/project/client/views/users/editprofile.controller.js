@@ -17,7 +17,7 @@
         vm.update = update;
 
         function init() {
-        var user=UserService.getCurrentUser();
+            var user=UserService.getCurrentUser();
 
             vm.selectedUserId=user._id;
             vm.user = {
@@ -39,12 +39,16 @@
 
         // function to update a user
         function update(user) {
-                UserService.updateUser(vm.selectedUserId, user)
-                    .then(function (response) {
+            UserService.updateUser(vm.selectedUserId, user)
+                .then(function (response) {
+                    return UserService.findUserById(vm.selectedUserId);
+                })
+                .then(function(response){
+                    if(response.data){
                         UserService.setCurrentUser(response.data);
                         $location.path("/showprofile");
-                    });
-
+                    }
+                });
         }
     }
 })();

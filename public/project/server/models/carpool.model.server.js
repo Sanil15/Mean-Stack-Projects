@@ -2,12 +2,15 @@
  * Created by Sanil on 3/23/2016.
  */
 
-var mock= require("./carpool.mock.json");
+var mongoose=require('mongoose');
 
 // load the promise library
 var q = require("q");
 
-module.exports = function (){
+module.exports = function (db){
+
+    var CarPoolSchema = require("./carpool.schema.server.js")();
+    var CarPoolModel = mongoose.model("CarPoolModel",CarPoolSchema)
 
     var api = {
         createCarPoolByUser: createCarPoolByUser,
@@ -24,22 +27,31 @@ module.exports = function (){
 
     function findAllCarPool(){
         var deferred = q.defer();
-        deferred.resolve(mock);
+        CarPoolModel
+            .find(
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
-
     }
 
     function findCarPoolById(carPoolId){
         var deferred = q.defer();
-        console.log(carPoolId);
-        var carPool=null;
-        for(var i=0;i<mock.length;i++){
-            if(mock[i]._id == carPoolId){
-                carPool=mock[i];
-                break;
-            }
-        }
-        deferred.resolve(carPool);
+        CarPoolModel
+            .findById(carPoolId,
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
     }
 
@@ -47,13 +59,18 @@ module.exports = function (){
     function createCarPoolByUser(userId, pool){
 
         var deferred = q.defer();
-
-        pool._id=(new Date).getTime();
         pool.userId=userId;
-        mock.push(pool);
 
-        var carpools=mock;
-        deferred.resolve(carpools);
+        CarPoolModel
+            .create(pool,
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
     }
 
@@ -61,82 +78,100 @@ module.exports = function (){
     // functions finds all CarPool's created by user
     function findAllCarPoolByUser(userId){
         var deferred = q.defer();
-
-        var userCarPools=[];
-        for(var i=0;i<mock.length;i++){
-            if(mock[i].userId == userId){
-                userCarPools.push(mock[i]);
-            }
-        }
-        deferred.resolve(userCarPools);
+        CarPoolModel
+            .find(
+                {userId: userId},
+                function (err, applications) {
+                    if (!err) {
+                        deferred.resolve (applications);
+                    } else {
+                        deferred.reject (err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
     // functions finds all CarPool's by source and destination
     function findCarPoolBySourceDestination(source, destination){
         var deferred = q.defer();
-
-        var carPools=[];
-        for(var i=0;i<mock.length;i++){
-            if(mock[i].source == source && mock[i].destination == destination){
-                carPools.push(mock[i]);
-            }
-        }
-
-        deferred.resolve(carPools);
+        CarPoolModel
+            .find(
+                {
+                    $or:
+                        [
+                            {'source': { "$regex": source, "$options": "i"}},
+                            {'destination': {"$regex": destination, "$options": "i" }}
+                        ]
+                },
+                function (err, applications) {
+                    if (!err) {
+                        deferred.resolve (applications);
+                    } else {
+                        deferred.reject (err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
     // functions finds all CarPool's by city
     function findCarPoolByCity(city){
         var deferred = q.defer();
-
-        var carPools=[];
-        for(var i=0;i<mock.length;i++){
-            if((mock[i].source.toLowerCase().indexOf(city.toLowerCase()) > -1) || (mock[i].destination.toLowerCase().indexOf(city.toLowerCase()) > -1)){
-                carPools.push(mock[i]);
-            }
-        }
-        deferred.resolve(carPools);
+        console.log("HI");
+        CarPoolModel
+            .find(
+                {
+                    $or:
+                        [
+                            {'source': { "$regex": city, "$options": "i"}},
+                            {'destination': {"$regex": city, "$options": "i" }}
+                        ]
+                },
+                function (err, results) {
+                    if (!err) {
+                        console.log(results);
+                        deferred.resolve (results);
+                    } else {
+                        deferred.reject (err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
 
     // function to delete CarPool by id
     function deleteCarPoolById(carPoolId){
-        var deferred = q.defer();
-
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == carPoolId)
-            {
-                mock.splice(i,1);
-            }
-        }
-
-        deferred.resolve(mock);
-        return deferred.promise;
+        return CarPoolModel.remove().where("_id").equals(carPoolId);
     }
 
     // function updates the CarPool by its id
     function updateCarPoolById(carPoolId,pool){
+
         var deferred = q.defer();
-
-        var a;
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == carPoolId){
-                mock[i].basePrice=pool.basePrice;
-                mock[i].carInfo=pool.carInfo;
-                mock[i].comments=pool.comments;
-                mock[i].date=pool.date;
-                mock[i].destination=pool.destination;
-                mock[i].source=pool.source;
-                mock[i].time=pool.time;
-                mock[i].noOfSeats=pool.noOfSeats;
-                break;
-            }
-        }
-
-        deferred.resolve(mock);
+        CarPoolModel
+            .update(
+                {_id: carPoolId},
+                {$set: {
+                    "basePrice":pool.basePrice,
+                    "carInfo":pool.carInfo,
+                    "comments":pool.comments,
+                    "date":pool.date,
+                    "destination":pool.destination,
+                    "source":pool.source,
+                    "time":pool.time,
+                    "noOfSeats":pool.noOfSeats
+                }},
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 

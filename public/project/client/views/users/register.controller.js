@@ -25,7 +25,6 @@
             function register(user,confirmPassword){
 
                 if(user.password==confirmPassword){
-
                     UserService.createUser(user)
                         .then(function (response){
                                 UserService.setCurrentUser(response.data);

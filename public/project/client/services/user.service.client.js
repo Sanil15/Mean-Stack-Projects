@@ -18,7 +18,8 @@
             deleteUserById : deleteUserById,
             updateUser : updateUser,
             setCurrentUser : setCurrentUser,
-            getCurrentUser : getCurrentUser
+            getCurrentUser : getCurrentUser,
+            findUserById: findUserById
          };
 
         return api;
@@ -37,6 +38,10 @@
         function findUserByCredentials(username, password){
            return $http.get("/api/project/user?"+"username=" + username + "&password=" + password);
         }
+
+       function findUserById(userId){
+           return $http.get("/api/project/user/"+userId);
+       }
 
         // function returns all set of users
         function findAllUsers(){

@@ -84,6 +84,7 @@ module.exports = function(db){
 
         User.create(user, function (err, stats){
             if(!err) {
+                console.log("YES WE ARE HERE !!!");
                 deferred.resolve(stats);
             }
             else{
