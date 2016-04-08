@@ -50,7 +50,7 @@
 
         // function creates a set of users
         function createUser(user){
-           return $http.post("/api/assignment/user",user);
+           return $http.post("/api/assignment/register",user);
         }
 
         // function deletes a user by userId

@@ -1,9 +1,13 @@
 var express = require('express');
+var app = express();
+
 var http=require('http');
 var https = require('https');
+
 var bodyParser = require('body-parser');
+
 var multer = require('multer');
-var app = express();
+
 app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
@@ -32,11 +36,27 @@ var request = require('request');
 // load session support
 var session = require('express-session');
 
+// load passport module
+var passport = require('passport');
+
+// load cookie parsers
+var cookieParser = require('cookie-parser');
+
+// configure cookie parser - needed for oauth
+app.use(cookieParser());
+
+// configure session support
 app.use(session({
-    secret: 'sanil',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUinitialized: true
 }));
+
+// initialize passport and session support
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 require("./public/assignment/server/app.js")(app,db);
 require("./public/project/server/app.js")(app,db);

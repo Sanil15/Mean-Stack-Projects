@@ -23,11 +23,15 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
     "express": "~3.4.4",
     "express-session": "^1.13.0",
     "mongoose": "^4.4.10",
     "multer": "^1.1.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "q": "^1.4.1",
     "request": "^2.69.0"
   },
