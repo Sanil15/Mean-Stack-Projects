@@ -83,6 +83,11 @@
                 controller: "SearchController",
                 controllerAs: "model"
             })
+            .when("/chat", {
+                templateUrl: "views/chat/chat.view.client.html",
+                controller: "ChatController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/home"
             });

@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 
-var http=require('http');
+var http=require('http').createServer(app);
 var https = require('https');
+
+var io=require('socket.io')(http);
 
 var bodyParser = require('body-parser');
 
@@ -65,7 +67,29 @@ require("./public/project/server/app.js")(app,db);
 app.get('/hello', function(req, res){
     res.send('hello world');
 });
-app.listen(port, ipaddress);
+//app.listen(port, ipaddress);
+http.listen(port, ipaddress);
+
+//on coonection disconnection
+
+io.sockets.on('connection', function(socket){
+
+    socket.on('chat',function(message){
+        console.log("chat");
+        console.log(message);
+        io.in(message.toUser).emit('chat',message.msg);
+    });
+
+    socket.on('create', function(user){
+        console.log("create socket");
+        socket.join(user);
+    });
+
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
+});
+
 
 
 app.post('/maps', urlencodedParser, function (req, results) {

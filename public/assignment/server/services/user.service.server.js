@@ -10,25 +10,26 @@ module.exports = function(app, userModel){
 
     var auth = authorized;
     app.post("/api/assignment/login",passport.authenticate('local'),login)
-    app.post("/api/assignment/register", createUser);
+    app.post("/api/assignment/register", register);
     app.get("/api/assignment/loggedin", loggedIn);
     app.post("/api/assignment/logout",logout)
 
-
     app.get("/api/assignment/user", auth, getAllUsers);
     app.get("/api/assignment/user/:id", auth , getUserById);
-
-    //app.get("/api/assignment/user?username=username", getUserByUsername);
-    //app.get("/api/assignment/user?username=alice&password=wonderland", findUserByCredentials);
-
     app.put("/api/assignment/user/:id", auth, updateUserById);
-    app.delete("/api/assignment/user/:id", auth,  deleteUserById);
 
+
+    // Admin priveleges
+    var admin =isAdmin;
+    app.post("/api/assignment/admin/user" ,createUser);
+    app.get("/api/assignment/admin/user" ,getAllUsers);
+    app.get("/api/assignment/admin/user/:userId" ,getUserById);
+    app.delete("/api/assignment/admin/user/:userId" ,deleteUserById);
+    app.put("/api/assignment/admin/user/:userId",updateUserById);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-
 
 
     function localStrategy(username, password, done) {
@@ -54,9 +55,21 @@ module.exports = function(app, userModel){
         if (!req.isAuthenticated()) {
             res.send(401);
         } else {
+            //console.log(req);
             next();
         }
     };
+
+    function isAdmin(req,res,next){
+        if (!req.isAuthenticated()
+            //&&
+            //(req.user.roles.indexOf("admin") > 0)
+        ) {
+            res.send(403);
+        } else {
+            next();
+        }
+    }
 
     function serializeUser(user, done) {
         delete user.password;
@@ -90,6 +103,46 @@ module.exports = function(app, userModel){
         var user = req.user;
         delete user.password;
         res.json(user);
+    }
+
+    function createUser(req,res){
+        var user = req.body;
+
+        if(user.roles && user.roles.length > 1) {
+            user.roles = user.roles.split(",");
+        } else {
+            user.roles = ["student"];
+        }
+
+        userModel
+            .findUserByUsername(user.username)
+            .then(
+                function(result){
+                    if(result){
+                        res.json(null);
+                    }else{
+                        user.password=bcrypt.hashSync(user.password);
+                        return userModel.createUser(user);
+                    }
+                }, function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (user) {
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
 
@@ -150,7 +203,12 @@ module.exports = function(app, userModel){
     }
 
     function getUserById(req,res){
-        var userId = req.params.id;
+
+        var userId;
+        if(req.params.id)
+        userId = req.params.id;
+        else
+        userId=req.params.userId;
 
         userModel.findUserById(userId)
             .then(
@@ -164,8 +222,8 @@ module.exports = function(app, userModel){
     }
 
     function getUserByUsername(req,res){
-        var userName = req.query.username;
-        userModel.findUserByUsername(userName)
+        var username = req.query.username;
+        userModel.findUserByUsername(username)
             .then(
                 function (doc) {
                     res.json(doc);
@@ -176,7 +234,7 @@ module.exports = function(app, userModel){
             );
     }
 
-    function createUser(req,res){
+    function register(req,res){
         var user = req.body;
         var emails=user.emails.split(",");
         user.emails=emails;
@@ -214,14 +272,25 @@ module.exports = function(app, userModel){
 
 
     function updateUserById(req,res){
+
+        console.log("HI HERE WE ARE RELOAD");
+
+        var userId;
+
+        userId=req.params.userId;
+
         var user=req.body;
-        var userId=req.params.id;
         var emails=user.emails;
+        var roles=user.roles;
 
         if(user.emails.indexOf(",")>-1)
         emails=user.emails.split(",");
 
+        if(user.roles.indexOf(",")>-1)
+        roles=user.roles.split(",");
+
         user.emails=emails;
+        user.roles=roles;
 
         userModel.updateUser(userId,user)
             .then(
@@ -235,7 +304,12 @@ module.exports = function(app, userModel){
     }
 
     function deleteUserById(req,res){
-        var userId=req.params.id;
+        var userId;
+        if(req.params.id)
+            userId = req.params.id;
+        else
+            userId=req.params.userId;
+
         userModel.deleteUserById(userId)
             .then(
                 function (doc) {

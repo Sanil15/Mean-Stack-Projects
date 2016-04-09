@@ -18,7 +18,8 @@
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
-                //controller: "views/admin/admin.controller.js"
+                controller: "AdminController",
+                controllerAs: "model"
 
             })
             .when("/register", {
