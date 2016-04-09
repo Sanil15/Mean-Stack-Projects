@@ -80,7 +80,7 @@
 
 
         function adminUpdateUser(userId,user){
-            return $http.put("/api/assignment/admin/user/",+userId,user);
+            return $http.put("/api/assignment/admin/user/"+userId,user);
         }
 
         function adminCreateUser(user){

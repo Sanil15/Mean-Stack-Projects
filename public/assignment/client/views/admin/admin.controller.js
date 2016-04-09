@@ -17,16 +17,24 @@
         vm.deleteUser = deleteUser;
         vm.add=add;
 
+
         function init(){
             vm.selectedUserId=null;
             vm.selectedUser=null;
+
+            vm.sortType = 'username';
+            vm.sortReverse = false;
+
             UserService
                 .adminFindAllUsers()
                 .then(function(response){
                     if(response.data){
                         vm.users=response.data;
+                    }},
+                    function (err) {
+                        vm.error = "You Do Not Have Admin Priveleges";
                     }
-                });
+                );
         }
         init();
 
@@ -43,15 +51,21 @@
         function update(user){
             UserService
                 .adminUpdateUser(vm.selectedUserId,user)
-                .then(
-                    function(response){
-                        if(response.data)
-                        init();
-                    }
+                .then(function(response){
+                        if(response)
+                            return UserService.adminFindAllUsers();
+                    })
+                .then(function(response){
+                    if(response.data){
+                        vm.users=response.data;
+                        vm.selectedUser=null;
+                        vm.selectedUserId=null;
+                    }}
                 );
         }
 
         function deleteUser(user){
+            console.log(user);
             UserService
                 .adminDeleteUserById(user._id)
                 .then(function(response){
@@ -65,7 +79,7 @@
             UserService
                 .adminCreateUser(user)
                 .then(function(response){
-                        if(response.data)
+                        if(response)
                             return UserService.adminFindAllUsers();
                     }
                 )

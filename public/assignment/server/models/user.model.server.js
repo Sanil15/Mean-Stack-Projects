@@ -84,7 +84,7 @@ module.exports = function(db){
 
         User.create(user, function (err, stats){
             if(!err) {
-                console.log("YES WE ARE HERE !!!");
+                //console.log("YES WE ARE HERE !!!");
                 deferred.resolve(stats);
             }
             else{
@@ -139,7 +139,8 @@ module.exports = function(db){
                     "password": user.password,
                     "firstName": user.firstName,
                     "lastName": user.lastName,
-                    "emails": user.emails
+                    "emails": user.emails,
+                    "roles": user.roles
                 }},
                 function (err, results){
                     if(!err) {

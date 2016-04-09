@@ -1,0 +1,42 @@
+<!doctype html>
+<head>
+    <title>Socket.IO chat</title>
+
+</head>
+<body ng-controller="ChatController">
+
+
+
+<ul id="messages"></ul>
+<form style="padding-top: 150px" class="form-horizontal">
+
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">From User</label>
+        <div class="col-sm-4">
+            <select ng-model="model.message.fromUser" class="form-control" name="repeatFromUser" id="repeatFromUser">
+                <option ng-repeat="user in model.userList" value="{{user.username}}">{{user.username}} | {{user.firstName}} {{user.lastName}}</option>
+            </select>
+        </div>
+
+        <label class="col-sm-1 control-label">To User</label>
+        <div class="col-sm-5">
+            <select ng-model="model.message.toUser" class="form-control" name="repeatToUser" id="repeatToUser" >
+                <option ng-repeat="user in model.userList" value="{{user.username}}">{{user.username}} | {{user.firstName}} {{user.lastName}}</option>
+            </select>
+        </div>
+    </div>
+
+
+    <input ng-model="model.message.msg">
+
+    <a ng-click="model.send(model.message)">Send</a>
+
+    <a ng-click="model.disconnect()">Disconnet</a>
+
+    <div style="background-color: #6DD1C9"><h3>{{model.mymsg}}</h3>
+    </div>
+
+</form>
+
+</body>

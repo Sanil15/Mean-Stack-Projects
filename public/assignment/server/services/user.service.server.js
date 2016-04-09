@@ -21,11 +21,11 @@ module.exports = function(app, userModel){
 
     // Admin priveleges
     var admin =isAdmin;
-    app.post("/api/assignment/admin/user" ,createUser);
-    app.get("/api/assignment/admin/user" ,getAllUsers);
-    app.get("/api/assignment/admin/user/:userId" ,getUserById);
-    app.delete("/api/assignment/admin/user/:userId" ,deleteUserById);
-    app.put("/api/assignment/admin/user/:userId",updateUserById);
+    app.post("/api/assignment/admin/user",admin ,createUser);
+    app.get("/api/assignment/admin/user", admin ,getAllUsers);
+    app.get("/api/assignment/admin/user/:userId", admin ,getUserById);
+    app.delete("/api/assignment/admin/user/:userId", admin ,deleteUserById);
+    app.put("/api/assignment/admin/user/:userId", admin ,updateUserById);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -61,13 +61,11 @@ module.exports = function(app, userModel){
     };
 
     function isAdmin(req,res,next){
-        if (!req.isAuthenticated()
-            //&&
-            //(req.user.roles.indexOf("admin") > 0)
-        ) {
-            res.send(403);
-        } else {
+
+        if (req.isAuthenticated() && (req.user.roles.indexOf("admin") > 0)){
             next();
+        } else {
+            res.send(403);
         }
     }
 
@@ -108,10 +106,14 @@ module.exports = function(app, userModel){
     function createUser(req,res){
         var user = req.body;
 
-        if(user.roles && user.roles.length > 1) {
+        if(user.roles && user.roles.substring) {
             user.roles = user.roles.split(",");
         } else {
             user.roles = ["student"];
+        }
+
+        if (user.emails && user.emails.substring) {
+            user.emails=user.emails.split(",");
         }
 
         userModel
@@ -236,8 +238,12 @@ module.exports = function(app, userModel){
 
     function register(req,res){
         var user = req.body;
-        var emails=user.emails.split(",");
-        user.emails=emails;
+
+
+        if (user.emails && user.emails.substring) {
+            user.emails=user.emails.split(",");
+        }
+
         user.roles=['student'];
         userModel
             .findUserByUsername(user.username)
@@ -273,24 +279,23 @@ module.exports = function(app, userModel){
 
     function updateUserById(req,res){
 
-        console.log("HI HERE WE ARE RELOAD");
-
         var userId;
-
-        userId=req.params.userId;
-
         var user=req.body;
-        var emails=user.emails;
-        var roles=user.roles;
 
-        if(user.emails.indexOf(",")>-1)
-        emails=user.emails.split(",");
+        if(req.params.userId)
+            userId=req.params.userId;
+        else
+            userId=req.params.id;
 
-        if(user.roles.indexOf(",")>-1)
-        roles=user.roles.split(",");
 
-        user.emails=emails;
-        user.roles=roles;
+        if (user.emails && user.emails.substring) {
+            user.emails=user.emails.split(",");
+        }
+
+        if(user.roles && user.roles.substring) {
+            user.roles = user.roles.split(",");
+        }
+
 
         userModel.updateUser(userId,user)
             .then(

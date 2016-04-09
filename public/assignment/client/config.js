@@ -19,7 +19,10 @@
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
 
             })
             .when("/register", {

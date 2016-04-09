@@ -4,14 +4,35 @@
 
             <h1 class="page-header">Admin</h1>
             <h3> Users </h3>
+
+            <div ng-if="model.error" class="alert alert-success" role="alert">
+                {{model.error}}
+            </div>
+
             <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> User Name</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Password</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> First Name</th>
+                    <th>
+                        <a ng-click="model.sortType = 'username'; model.sortReverse = !model.sortReverse">
+                        <span ng-show="model.sortType == 'username' && !model.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                        <span ng-show="model.sortType == 'username' && model.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                        User Name
+                        </a>
+                    </th>
+
+                    <th> Password</th>
+
+                    <th>
+                        <a ng-click="model.sortType = 'firstname'; model.sortReverse = !model.sortReverse">
+                        <span ng-show="model.sortType == 'firstname' && !model.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                        <span ng-show="model.sortType == 'firstname' && model.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                        First Name
+                        </a>
+                    </th>
+
                     <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Last Name</th>
+
                     <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Role</th>
                     <th>Action</th>
                 </tr>
@@ -36,7 +57,7 @@
                     </td>
                 </tr>
 
-                <tr ng-repeat="user in model.users">
+                <tr ng-repeat="user in model.users | orderBy: model.sortType:model.sortReverse">
 
                     <td>{{user.username}}</td>
                     <td>{{user.password}}</td>
@@ -44,7 +65,7 @@
                     <td>{{user.lastName}}</td>
                     <td>{{user.roles}}</td>
                     <td>
-                        <a ng-click="model.delete(user)" class="btn btn-default" aria-label="Left Align">
+                        <a ng-click="model.deleteUser(user)" class="btn btn-default" aria-label="Left Align">
                             Delete</span>
                         </a>
 
