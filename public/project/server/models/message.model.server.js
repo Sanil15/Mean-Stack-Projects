@@ -1,12 +1,16 @@
 /**
  * Created by Sanil on 3/23/2016.
  */
-var mock= require("./message.mock.json");
+var mongoose=require('mongoose');
 
 // load the promise library
 var q = require("q");
 
 module.exports = function() {
+
+    var MessageSchema = require("./message.schema.server.js")();
+    var MessageModel = mongoose.model("MessageModel",MessageSchema)
+
 
     var api = {
         createMessage: createMessage,
@@ -21,77 +25,111 @@ module.exports = function() {
 
     function findAllMessages(){
         var deferred = q.defer();
-        var messages=mock;
-        console.log("YES");
-        deferred.resolve(mock);
+        MessageModel
+            .find(
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
     }
 
     function findMessageById(messageId){
         var deferred = q.defer();
-        var msg=null;
-        for(var i=0;i<mock.length;i++) {
-
-            if(mock[i]._id == messageId)
-            {
-                msg=mock[i];
-                break;
-            }
-        }
-
-        deferred.resolve(msg);
+        MessageModel
+            .findById(messageId,
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
+
     }
 
     function createMessage(message){
         var deferred = q.defer();
+        MessageModel
+            .create(message,
+                function (err, stats){
+                    if(!err) {
 
-        message._id=(new Date).getTime();
-        mock.push(message);
-
-        deferred.resolve(mock);
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        console.log(err);
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
     }
 
     function findAllMessagesForUser(userName){
         var deferred = q.defer();
-
-        var userMessages=[];
-        for(var i=0;i<mock.length;i++){
-            if(mock[i].toUser == userName){
-                userMessages.push(mock[i]);
-            }
-        }
-        deferred.resolve(userMessages);
+        MessageModel
+            .find(
+                {
+                    $or:
+                    [
+                        { $and: [{ fromUser: userName}, {visibleFromUser: true}]},
+                        { $and: [{ toUser: userName}, {  visibleToUser: true}]}
+                    ]
+                 },
+                function (err, applications) {
+                    if (!err) {
+                        deferred.resolve (applications);
+                    } else {
+                        deferred.reject (err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
     function deleteMessgaeById(messageId){
         var deferred = q.defer();
-
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == messageId)
-            {
-                mock.splice(i,1);
-                break;
-            }
-        }
-
-        deferred.resolve(mock);
+        MessageModel
+            .update(
+                {_id: messageId},
+                {$set: {
+                    "visibleFromUser": false
+                }},
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
     function updateMessageById(messageId,mes){
-        var deferred= q.defer();
-        console.log(messageId+" :: "+mes.message);
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == messageId) {
-                mock[i].message=mes.message;
-                break;
-            }
-        }
-
-        deferred.resolve(mock);
+        var deferred = q.defer();
+        MessageModel
+            .update(
+                {_id: messageId},
+                {$set: {
+                    "toUser": false
+                }},
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 

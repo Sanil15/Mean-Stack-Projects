@@ -1,28 +1,27 @@
-<div class="row box">
-    <div class="col-sm-6 col-sm-offset-3 form-box">
-        <div class="form-top">
-            <div class="form-top-left">
-                <h3>Login to our site</h3>
-                <p>Enter your Username: Alice123</p>
-                <p>Enter your Password: alice</p>
-            </div>
-            <div class="form-top-right">
-                <i class="fa fa-key"></i>
-            </div>
+<div class="page page_login">
+    <div id="contact" class="container parallax">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h2 class="main-title">Login</h2>
+            <hr>
+            <div class="divide50"></div>
         </div>
-        <div class="form-bottom">
 
-            <div class="form-group">
-                    <label class="sr-only">Email/Username</label>
-                    <input type="text" ng-model="model.user.email" placeholder="Email" class="form-username form-control">
-                </div>
-                <div class="form-group">
-                    <label class="sr-only">Password</label>
-                    <input type="password" ng-model="model.user.password" placeholder="Password..." class="form-password form-control" >
-                </div>
+        <div class="inner contact">
+            <div class="contact-form">
+                <form id="contact-us">
+                    <div class="col-md-6 col-xs-12 col-md-offset-3 " data-animation="fadeInLeft" data-animation-delay="300">
+                        <input type="text" ng-model="model.user.email" name="name" id="name" required="required" class="form" placeholder="Userame/Email" />
+                        <input type="password" ng-model="model.user.password" name="subject" id="subject" required="required" class="form" placeholder="Password" />
+                    </div><!-- End Left Inputs -->
 
-            <div class="">
-                <a ng-click="model.login(model.user)" class="btn btn-success btn-block">Login</a>
+                    <!-- Bottom Submit -->
+                    <div class="relative fullwidth col-xs-12">
+                        <!-- Send Button -->
+                        <a ng-click="model.login(model.user)" type="submit" id="submit" name="submit" class="btn btn-block semibold form-btn">Sign-In</a>
+                    </div><!-- End Bottom Submit -->
+                    <!-- Clear -->
+                    <div class="clear"></div>
+                </form>
             </div>
         </div>
     </div>

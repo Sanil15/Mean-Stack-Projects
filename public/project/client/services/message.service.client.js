@@ -29,8 +29,8 @@
             return $http.post("/api/project/message",message);
         }
 
-        function findAllMessagesForUser(userName){
-            return $http.get("/api/project/message?userName="+userName);
+        function findAllMessagesForUser(username){
+            return $http.get("/api/project/message?userName="+username);
         }
 
         function deleteMessgaeById(messageId){

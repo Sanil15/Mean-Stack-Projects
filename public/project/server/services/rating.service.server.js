@@ -81,7 +81,7 @@ module.exports = function(app, ratingModel, userModel) {
     function createRatingByUser(req,res){
 
         var rating=req.body;
-
+        console.log(rating);
         ratingModel.createReview(rating)
             .then(
                 function (doc) {

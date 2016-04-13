@@ -1,89 +1,67 @@
 
 <div class="container-fluid page">
-    <div class="row">
 
-        <!--<div class="page-header">
-           <ul class="nav nav-pills nav-justified">
-               <li role="presentation"><a href="">Profile</a></li>
-               <li role="presentation" class="active"><a href="">Create a Carpool</a></li>
-               <li role="presentation"><a href="">Edit Profile</a></li>
-               <li role="presentation"><a href="">Message Box</a></li>
-               <li role="presentation"><a href="">My CarPools</a></li>
-           </ul>
-       </div>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="btn-panel btn-panel-conversation">
+                    <a href="" class="btn  col-lg-6 send-message-btn " role="button"><i class="fa fa-search"></i> Search</a>
+                    <a href="" class="btn  col-lg-6  send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> New Message</a>
+                </div>
+            </div>
 
-        <div class="page-header">
-            <h1>Message CRUD</h1>
+            <div class="col-lg-offset-1 col-lg-7">
+                <div class="btn-panel btn-panel-msg">
+
+                    <a href="" class="btn  col-lg-3  send-message-btn pull-right" role="button"><i class="fa fa-gears"></i> Settings</a>
+                </div>
+            </div>
         </div>
+        <div class="row">
 
-        <form class="form-horizontal">
+            <!-- FEED WITH USER CONVERSATIONS-->
+            <div class="conversation-wrap col-lg-3">
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label">From User</label>
-                <div class="col-sm-4">
-                    <select ng-model="model.msg.fromUser" class="form-control" name="repeatFromUser" id="repeatFromUser">
-                        <option ng-repeat="user in model.userList" value="{{user.userName}}">{{user.userName}} | {{user.firstName}} {{user.lastName}}</option>
-                    </select>
+                <div class="media conversation" ng-repeat="user in model.users">
+                    <a class="pull-left">
+                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><a ng-click="model.loadConversation(user)">{{user}}</a></h4>
+                        <small>Click user to load Conversation </small>
+                    </div>
+
                 </div>
 
-                <label class="col-sm-1 control-label">To User</label>
-                <div class="col-sm-5">
-                    <select ng-model="model.msg.toUser" class="form-control" name="repeatToUser" id="repeatToUser" >
-                        <option ng-repeat="user in model.userList" value="{{user.userName}}">{{user.userName}} | {{user.firstName}} {{user.lastName}}</option>
-                    </select>
-                </div>
             </div>
 
 
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Message</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.msg.message"  type="text" class="form-control" placeholder="Type Message Here...."/>
+            <!-- LOAD WITH MESSAGES-->
+            <div class="message-wrap col-lg-8 msg_box">
+                <div class="msg-wrap" ng-repeat="message in model.conversation">
+                    <div class="media msg ">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
+                        </a>
+                        <div class="media-body">
+                            <small class="pull-right time"><i class="fa fa-clock-o"></i>{{message.created}}</small>
+                            <h5 class="media-heading">{{message.fromUser}}</h5>
+                            <small class="col-lg-10">{{message.message}}</small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="send-wrap ">
+                    <textarea  ng-model="newMessage.message" class="form-control send-message" rows="3" placeholder="Write a reply..."></textarea>
+
+                </div>
+                <div class="btn-panel">
+                    <a ng-click="model.createNew(newMessage)" class=" col-lg-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.createMessage(model.msg)" class="btn btn-primary btn-block">SEND</a>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="table-responsive" >
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> From</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> To</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Message</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Update</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-show="model.selectedMessage!=null">
-                <td>{{model.selectedMessage.fromUser}}</td>
-                <td>{{model.selectedMessage.toUser}}</td>
-                <td><input ng-model="model.selectedMessage.message"  type="text" class="form-control"/></td>
-                <td><a ng-click="model.updateMessage(model.selectedMessage)" class="btn btn-success btn-block" aria-label="Left Align">
-                    Update</a></td>
-            </tr>
-            <tr ng-repeat="mg in model.messages">
-                <td>{{mg.fromUser}}</td>
-                <td>{{mg.toUser}}</td>
-                <td>{{mg.message}}</td>
-                <td>
-                    <a ng-click="model.selectMessage($index)" class="btn btn-info btn-block" aria-label="Left Align">
-                       Select</a>
-                </td>
-                <td>
-                    <a ng-click="model.deleteMessage($index)" class="btn btn-danger btn-block" aria-label="Left Align">
-                        DELETE</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        </div>
     </div>
 
 </div>

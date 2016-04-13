@@ -37,6 +37,11 @@
             //console.log($scope.msg);
             ReviewService.createReview(vm.review)
                 .then(function(response){
+
+
+                })
+                .then(function(response){
+                    //console.log(response.data);
                     vm.reviews=response.data;
                     vm.review=null;
                     vm.selectedReview=null;
@@ -48,6 +53,11 @@
 
             ReviewService.deleteReviewById(vm.reviews[index]._id)
                 .then(function(response){
+                    if(response.data)
+                        return  ReviewService.findAllReviews();
+                })
+                .then(function(response){
+                    //console.log(response.data);
                     vm.reviews=response.data;
                     vm.review=null;
                     vm.selectedReview=null;
@@ -71,6 +81,11 @@
         function updateReview(review){
             ReviewService.updateReviewById(vm.selectedReviewId,review)
                 .then(function(response){
+                    if(response.data)
+                        return  ReviewService.findAllReviews();
+                })
+                .then(function(response){
+                    //console.log(response.data);
                     vm.reviews=response.data;
                     vm.review=null;
                     vm.selectedReview=null;

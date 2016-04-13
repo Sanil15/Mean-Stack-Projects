@@ -31,6 +31,7 @@
                     console.log(response.data);
                     vm.userList=response.data;
                 });
+            console.log(UserService.getCurrentUser());
             socket.emit('create',UserService.getCurrentUser().username);
             socket.on('chat',function(message){
                 console.log("RECEIVE");

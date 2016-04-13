@@ -1,12 +1,16 @@
 /**
  * Created by Sanil on 3/23/2016.
  */
-var mock= require("./rating.mock.json");
+var mongoose=require('mongoose');
 
 // load the promise library
 var q = require("q");
 
-module.exports = function() {
+module.exports = function(db) {
+
+    var RatingSchema = require("./rating.schema.server.js")();
+    var RatingModel = mongoose.model("RatingModel",RatingSchema)
+
 
     var api = {
         createReview: createReview,
@@ -21,79 +25,92 @@ module.exports = function() {
 
     function findAllReviews(){
         var deferred = q.defer();
-        var reviews=mock;
-
-        deferred.resolve(reviews);
+        RatingModel
+            .find(
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
     }
 
     function createReview(review){
+        console.log(review);
         var deferred = q.defer();
+        RatingModel
+            .create(review,
+                function (err, stats){
+                    if(!err) {
 
-        review._id=(new Date).getTime();
-        mock.push(review);
-
-        deferred.resolve(mock);
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        console.log(err);
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
     }
 
     function findAllReviewsForUser(userName){
         var deferred = q.defer();
-
-        var userReviews=[];
-        for(var i=0;i<mock.length;i++){
-            if(mock[i].toUser == userName){
-                userReviews.push(mock[i]);
-            }
-        }
-
-        deferred.resolve(userReviews);
+        RatingModel
+            .find(
+                {toUser: userName},
+                function (err, applications) {
+                    if (!err) {
+                        deferred.resolve (applications);
+                    } else {
+                        deferred.reject (err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
     function findReviewById(ratingId){
         var deferred = q.defer();
-        var review=null;
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == ratingId)
-            {
-                review=mock[i];
-                break;
-            }
-        }
-
-        deferred.resolve(review);
+        RatingModel
+            .findById(ratingId,
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                });
         return deferred.promise;
 
     }
 
     function deleteReviewById(reviewId){
-        var deferred = q.defer();
-
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == reviewId)
-            {
-                mock.splice(i,1);
-                break;
-            }
-        }
-
-        deferred.resolve(mock);
-        return deferred.promise;
+        return RatingModel.remove().where("_id").equals(reviewId);
     }
+
 
     function updateReviewById(ratingId,rat){
         var deferred = q.defer();
-
-        for(var i=0;i<mock.length;i++) {
-            if(mock[i]._id == ratingId) {
-                mock[i].rating=rat.rating;
-                mock[i].review=rat.review;
-                break;
-            }
-        }
-        deferred.resolve(mock);
+        RatingModel
+            .update(
+                {_id: ratingId},
+                {$set: {
+                    "rating": rat.rating,
+                    "review": rat.review
+                }},
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
-
 }
