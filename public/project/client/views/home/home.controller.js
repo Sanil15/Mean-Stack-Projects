@@ -22,23 +22,17 @@
         init();
 
         function findCarPool(city){
+
+            $location.path("/searchlist/"+city);
+
             CarPoolService.findCarPoolByCity(city)
                 .then(function(response){
                    vm.carPools=response.data;
                 });
         }
 
-        function details(index){
-
-            if(UserService.getCurrentUser()==null){
-                $location.path("/login");
-            }
-
-            else{
-             $location.path("/searchresults/"+vm.carPools[index]._id);
-
-             }
-
+        function details(pool){
+             $location.path("/searchresults/"+pool._id);
         }
 
 

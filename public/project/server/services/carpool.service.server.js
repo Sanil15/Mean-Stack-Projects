@@ -6,7 +6,7 @@ module.exports = function(app, carPoolModel, userModel){
     app.get("/api/project/user/:userId/carpool",getCarPoolByUserId);
     app.get("/api/project/carpool", getCarPoolByAttributes);
     app.get("/api/project/carpool/:carPoolId",getCarPoolById);
-
+    app.get("/api/project/search/:location",getRecommendations);
     app.delete("/api/project/carpool/:carPoolId", deleteCarPoolById);
 
     app.post("/api/project/user/:userId/carPool",createCarPoolByUser);
@@ -31,6 +31,20 @@ module.exports = function(app, carPoolModel, userModel){
         var userId=req.params.userId;
 
         carPoolModel.findAllCarPoolByUser(userId)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function getRecommendations(req,res){
+
+        var location=req.params.location;
+        carPoolModel.findCarPoolByCity(location)
             .then(
                 function (doc) {
                     res.json(doc);

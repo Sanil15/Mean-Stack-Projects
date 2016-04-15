@@ -1,171 +1,125 @@
-
-<!-- Intro -->
-<div class="page">
-    <div class="light-wrapper">
-        <div class="container inner">
-            <div class="row">
-                <div class="text-center">
-                    <h2 class="main-title">User Profile</h2>
-                    <hr>
-                </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New message</h4>
             </div>
-
-            <div class="divide50"></div>
-
-            <div class="row well clearfix">
-                <div class="col-sm-3">
-                    <div class="thumbnail">
-                        <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" >
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea ng-model="model.message.message" rows="3" class="form-control" id="message-text"></textarea>
                     </div>
-                </div>
-
-                <ol class="progress-list col-sm-offset-1 col-sm-5">
-
-                    <li>
-                        <label class="control-label">First Name:</label>
-                            {{model.user.firstName}}
-                    </li>
-
-                    <li>
-                        <label class="control-label">Last Name:</label>
-                            {{model.user.lastName}}
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">User Name:</label>
-                                {{model.user.username}}
-                        </div>
-                    </li>
-
-                    <li>
-
-                        <div class="form-group">
-                            <label class="control-label">Email:</label>
-                                {{model.user.email}}
-                         </div>
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">DOB</label>
-                                {{model.user.dob}}
-                         </div>
-                    </li>
-
-                </ol>
-
-                <ol class="progress-list col-sm-4">
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">Country</label>
-                                {{model.user.country}}
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">State</label>
-                                {{model.user.state}}
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">City</label>
-                            {{model.user.city}}
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">Address</label>
-                            {{model.user.address}}
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">Zip Code</label>
-                            {{model.user.zipCode}}
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="form-group">
-                            <label class="control-label">Contact No.</label>
-                            {{model.user.contact}}
-                        </div>
-                    </li>
-
-                </ol>
-
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+                <a type="button" ng-click="model.sendMessage()" class="btn btn-primary">Send message</a>
             </div>
         </div>
     </div>
-    <!-- /.row -->
-
 </div>
-<!-- /.container -->
-</div>
-<!-- /.light-wrapper -->
-</div>
-<!-- /Intro -->
 
 
-<div class="container body_profile">
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <div class="well well-small clearfix">
-
-                <div class="row-fluid">
-                    <div class="col-md-2 col-xs-12">
-                        <img src="http://www.gravatar.com/avatar/f6112e781842d6a2b4636b35451401ff?s=125" class="img-polaroid"/>
-                    </div>
-
-                    <div class="col-md-4 col-xs-12">
-
-                    </div>
-
-                    <div class="col-md-6 col-xs-12">
-
-                    </div>
-                    <!--Body content-->
+<div class="profile_continer bootstrap snippet profile_page">
+    <div class="profile_row">
+        <div class="profile_panel">
+            <div class="cover-photo">
+                <div class="fb-timeline-img">
+                    <img src="http://lorempixel.com/930/287/nature/8/" alt="">
+                </div>
+                <div class="fb-name">
+                    <h2><a href="#">{{model.user.firstName}} {{model.user.lastName}}</a></h2>
                 </div>
             </div>
 
-            <div class="well clearfix">
-                <img class="pull-right" src="http://kcdn3.klout.com/static/images/developers/dev-assets/powered-by-klout.png" width="150px"/>
+            <div class="panel-body">
+                <div class="profile-thumb">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                </div>
+                <div class="fb-user-mail">
+                    <i class="fa fa-user"> {{model.user.username}}</i>
+                </div>
+                <div class="fb-user-mail">
+                    <i class="fa fa-map-marker"> {{model.user.state}},{{model.user.country}}</i>
+                </div>
+
+                <div class="fb-user-mail">
+                    <i class="fa fa-envelope-o"> {{model.user.email}}</i>
+                </div>
+
+                <div class="fb-user-mail">
+                    <i class="fa fa-phone"> {{model.user.contact}}</i>
+                </div>
+
+                <div class="pull-right">
+                <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-comments-o"></i>
+                    Message User
+                </a>
+                </div>
+
             </div>
         </div>
 
-    </div>
-</div>
-
-
-<div class="container-fluid page">
-
-    <div class="row">
-        <div class="page-header">
-            <ul class="nav nav-pills nav-justified">
-                <li role="presentation" class="active"><a href="#/showprofile">Profile</a></li>
-                <li role="presentation"><a href="#/carpool">Create a Carpool</a></li>
-                <li role="presentation"><a href="#/editprofile">Edit Profile</a></li>
-                <li role="presentation"><a href="#/usercarpool">My CarPools</a></li>
-            </ul>
+        <div class="profile_panel profile-info">
+                <form>
+                    <textarea ng-model="model.review.review" class="form-control input-lg p-text-area" rows="2" placeholder="Your Opinion Matters"></textarea>
+                </form>
+                <footer class="panel-footer">
+                    <a ng-click="model.createReview()" class="btn btn-primary pull-right">
+                        <i class="fa fa-check-square-o"></i>
+                        Post Review
+                    </a>
+                    <div class="nav">
+                        <div id="stars" class="starrr"></div>
+                        <div id="count"></div> stars
+                    </div>
+                </footer>
         </div>
 
-        <div class="col-md-10">
-            <form class="form-horizontal">
+        <div class="profile_panel" ng-repeat="review in model.reviews">
+            <div class="panel-body">
+
+                <div class="fb-user-thumb">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                </div>
+
+                <div class="fb-user-details">
+                    <h3><a href="#" class="#">{{review.fromUser}}</a></h3>
+                    <p>{{review.created | date}}</p>
+                    <p>{{review.rating}} stars</p>
+                </div>
 
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <a href="#/editprofile" class="btn btn-success btn-block">Edit Profile</a>
+
+                <div class="clearfix"></div>
+
+                <p class="fb-user-status">
+                    {{review.review}}
+                </p>
+
+                <div class="fb-status-container fb-border">
+                    <div class="fb-time-action">
+                        <a href="#" title="Find This Userful"> <i class="fa fa-thumbs-up"></i> Useful</a>
+                        <span>-</span>
+                        <a href="#" title="Not Userful"><i class="fa fa-thumbs-down"></i> Not Useful</a>
+                        <span>-</span>
+                        <a href="#" title="Send this to friend or post it on your time line"> <i class="fa fa-hand-stop-o"></i> Report</a>
                     </div>
                 </div>
-            </form>
+
+                <div class="fb-status-container fb-border fb-gray-bg">
+                    <div class="fb-time-action like-info">
+                        <a>40 Users</a>
+                        <span>find this useful!</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
+
     </div>
 </div>

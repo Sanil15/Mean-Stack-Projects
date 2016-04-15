@@ -2,14 +2,30 @@
  * Created by Sanil on 3/17/2016.
  */
 module.exports = function(app, userModel) {
-    app.post("/api/project/user", createUser);
 
+    app.post("/api/project/user", createUser);
     app.get("/api/project/user", getAllUsers);
     app.get("/api/project/user/:id", getUserById);
-
     app.put("/api/project/user/:id", updateUserById);
     app.delete("/api/project/user/:id", deleteUserById);
+    app.post("/api/project/logout", logout);
+    app.get("/api/project/loggedin", loggedin);
 
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
+    }
+
+    function loggedin(req,res){
+        console.log(req.session.user);
+        if(req.session.user != null){
+            console.log(req.session.user);
+            res.json(req.session.user);
+        }
+        else
+            res.json(null);
+
+    }
 
     function findUserByCredentials(req, res) {
 
@@ -26,6 +42,8 @@ module.exports = function(app, userModel) {
         userModel.findUserByCredentials(credentials)
             .then(
                 function (doc) {
+                    console.log("USER");
+                    req.session.user=doc;
                     res.json(doc);
                 },
                 function (err) {

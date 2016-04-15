@@ -1,67 +1,135 @@
 
-<div class="container-fluid page">
+<div class="container bootstrap snippet message_body">
+    <div class="tile tile-alt" id="messages-main">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="btn-panel btn-panel-conversation">
-                    <a href="" class="btn  col-lg-6 send-message-btn " role="button"><i class="fa fa-search"></i> Search</a>
-                    <a href="" class="btn  col-lg-6  send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> New Message</a>
+        <div class="ms-menu">
+            <div class="ms-user clearfix">
+                <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar pull-left">
+                <div>Signed in as <br> m-hollaway@gmail.com</div>
+            </div>
+
+            <div class="p-15">
+                <div class="dropdown">
+                    <a class="btn btn-primary btn-block" href="" data-toggle="dropdown">Messages <i class="caret m-l-5"></i></a>
+                    <ul class="dropdown-menu dm-icon w-100">
+                        <li><a href=""><i class="fa fa-envelope"></i> Messages</a></li>
+                        <li><a href=""><i class="fa fa-users"></i> Contacts</a></li>
+                        <li><a href=""><i class="fa fa-format-list-bulleted"> </i>Todo Lists</a></li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="col-lg-offset-1 col-lg-7">
-                <div class="btn-panel btn-panel-msg">
+            <div class="list-group lg-alt">
 
-                    <a href="" class="btn  col-lg-3  send-message-btn pull-right" role="button"><i class="fa fa-gears"></i> Settings</a>
-                </div>
+
+                <a class="list-group-item media" href="" ng-repeat="user in model.users" ng-click="model.loadConversation(user)">
+                    <div class="pull-left">
+                        <img src="http://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="img-avatar">
+                    </div>
+                    <div class="media-body">
+                        <div class="list-group-item-heading">{{user}}</div>
+                        <small class="list-group-item-text c-gray">Cum sociis natoque penatibus </small>
+                    </div>
+                </a>
             </div>
         </div>
-        <div class="row">
 
-            <!-- FEED WITH USER CONVERSATIONS-->
-            <div class="conversation-wrap col-lg-3">
-
-                <div class="media conversation" ng-repeat="user in model.users">
-                    <a class="pull-left">
-                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a ng-click="model.loadConversation(user)">{{user}}</a></h4>
-                        <small>Click user to load Conversation </small>
-                    </div>
-
+        <div class="ms-body">
+            <div class="action-header clearfix">
+                <div class="visible-xs" id="ms-menu-trigger">
+                    <i class="fa fa-bars"></i>
                 </div>
 
+                <div class="pull-left hidden-xs">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar m-r-10">
+                    <div class="lv-avatar pull-left">
+
+                    </div>
+                    <span>David Parbell</span>
+                </div>
+
+                <ul class="ah-actions actions">
+                    <li>
+                        <a href="">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-check"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa fa-clock-o"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" aria-expanded="true">
+                            <i class="fa fa-sort"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="">Latest</a>
+                            </li>
+                            <li>
+                                <a href="">Oldest</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" aria-expanded="true">
+                            <i class="fa fa-bars"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <a href="">Refresh</a>
+                            </li>
+                            <li>
+                                <a href="">Message Settings</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
 
+            <div class="scrolling">
+            <div ng-repeat="message in model.conversation">
 
-            <!-- LOAD WITH MESSAGES-->
-            <div class="message-wrap col-lg-8 msg_box">
-                <div class="msg-wrap" ng-repeat="message in model.conversation">
-                    <div class="media msg ">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACqUlEQVR4Xu2Y60tiURTFl48STFJMwkQjUTDtixq+Av93P6iBJFTgg1JL8QWBGT4QfDX7gDIyNE3nEBO6D0Rh9+5z9rprr19dTa/XW2KHl4YFYAfwCHAG7HAGgkOQKcAUYAowBZgCO6wAY5AxyBhkDDIGdxgC/M8QY5AxyBhkDDIGGYM7rIAyBgeDAYrFIkajEYxGIwKBAA4PDzckpd+322243W54PJ5P5f6Omh9tqiTAfD5HNpuFVqvFyckJms0m9vf3EY/H1/u9vb0hn89jsVj8kwDfUfNviisJ8PLygru7O4TDYVgsFtDh9Xo9NBrNes9cLgeTybThgKenJ1SrVXGf1WoVDup2u4jFYhiPx1I1P7XVBxcoCVCr1UBfTqcTrVYLe3t7OD8/x/HxsdiOPqNGo9Eo0un02gHkBhJmuVzC7/fj5uYGXq8XZ2dnop5Mzf8iwMPDAxqNBmw2GxwOBx4fHzGdTpFMJkVzNB7UGAmSSqU2RoDmnETQ6XQiOyKRiHCOSk0ZEZQcUKlU8Pz8LA5vNptRr9eFCJQBFHq//szG5eWlGA1ywOnpqQhBapoWPfl+vw+fzweXyyU+U635VRGUBOh0OigUCggGg8IFK/teXV3h/v4ew+Hwj/OQU4gUq/w4ODgQrkkkEmKEVGp+tXm6XkkAOngmk4HBYBAjQA6gEKRmyOL05GnR99vbW9jtdjEGdP319bUIR8oA+pnG5OLiQoghU5OElFlKAtCGr6+vKJfLmEwm64aosd/XbDbbyIBSqSSeNKU+HXzlnFAohKOjI6maMs0rO0B20590n7IDflIzMmdhAfiNEL8R4jdC/EZIJj235R6mAFOAKcAUYApsS6LL9MEUYAowBZgCTAGZ9NyWe5gCTAGmAFOAKbAtiS7TB1Ng1ynwDkxRe58vH3FfAAAAAElFTkSuQmCC">
-                        </a>
-                        <div class="media-body">
-                            <small class="pull-right time"><i class="fa fa-clock-o"></i>{{message.created}}</small>
-                            <h5 class="media-heading">{{message.fromUser}}</h5>
-                            <small class="col-lg-10">{{message.message}}</small>
+                <div class="message-feed media" ng-if="message.fromUser == model.currentUser._id">
+                    <div class="pull-left">
+                        <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar">
+                    </div>
+                    <div class="media-body">
+                        <div class="mf-content">
+                            {{message.message}}
                         </div>
+                        <small class="mf-date"><i class="fa fa-clock-o"></i>{{message.created | date:'MM/dd/yyyy @ h:mma'}}</small>
                     </div>
                 </div>
 
-
-                <div class="send-wrap ">
-                    <textarea  ng-model="newMessage.message" class="form-control send-message" rows="3" placeholder="Write a reply..."></textarea>
-
+                <div class="message-feed right" ng-if="message.fromUser != model.selectedUser._id">
+                <div class="pull-right">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar">
                 </div>
-                <div class="btn-panel">
-                    <a ng-click="model.createNew(newMessage)" class=" col-lg-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>
+                <div class="media-body">
+                    <div class="mf-content">
+                        {{message.message}}
+                    </div>
+                    <small class="mf-date"><i class="fa fa-clock-o"></i>{{message.created | date:'MM/dd/yyyy @ h:mma'}}</small>
                 </div>
+                  </div>
+
+            </div>
+            </div>
+
+            <div class="msb-reply">
+                <textarea ng-model="newMessage.message" placeholder="What's on your mind..."></textarea>
+                <button ng-click="model.createNew(newMessage)"><i class="fa fa-paper-plane-o"></i></button>
             </div>
 
         </div>
     </div>
-
 </div>

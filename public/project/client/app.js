@@ -6,6 +6,6 @@
     'use strict';
 
     angular
-        .module("CarPoolApp",["ngRoute"])
+        .module("CarPoolApp",["ngRoute","angucomplete-alt"])
 
 })();

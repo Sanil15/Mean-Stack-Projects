@@ -1,245 +1,33 @@
 
 
 <!-- Full Page Image Header Area -->
-<div id="top" class="header ">
+<div id="top" class="header">
     <div class="vert-text parallax">
         <h1 class="header-text">Pay Less Travel More</h1>
-        <h3 class="header-text">
-            <em class="header-text">Your only source for Cheap Carpools</em>
-        </h3><br />
-        <a href="#about" class="btn header-btn">Find Out More</a>
+        <div class="field" id="searchform">
+
+            <!--
+            <div angucomplete-alt
+                          placeholder="Search for other developers"
+                          pause="500"
+                          selected-object="selectedUser"
+                          remote-url="/api/developer/search/"
+                          title-field="username"
+                          minlength="2"
+                          input-class="form-control form-control-small"
+                          match-class="highlight">
+            </div>
+            -->
+
+                <input ng-model="model.city" type="text" id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
+
+            <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
+        </div>
+        <a href="#services" class="btn btn-default header-btn">Find Out More</a>
         <br/>
-        <a href="#about"><img ng-src="img/direction.png" class="space" alt="Direction"></a>
+        <a href=""><img ng-src="img/direction.png" class="space" alt="Direction"></a>
     </div>
 </div>
-
-<!-- /Full Page Image Header Area -->
-
-
-<!-- Intro Section -->
-<div id="about">
-    <div class="light-wrapper">
-        <div class="container inner">
-            <div class="row">
-                <div class="field" id="searchform">
-                    <input ng-model="model.city" type="text" id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
-                    <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="well">
-                    <h3 class="ext-center">Results</h3>
-                    <table class="table list-group">
-                        <tbody>
-                        <tr ng-repeat="pool in model.carPools">
-                            <td>
-                            <a href="#" class="list-group-item">
-                                <div class="media col-md-2">
-                                    <figure class="pull-left">
-                                        <span class="glyphicon glyphicon-zoom-in blogicon"></span>
-                                    </figure>
-                                </div>
-                                <div class="col-md-7">
-                                    <ul class="list-inline">
-                                        <li>
-                                            <label class="control-label">Source: </label>
-                                            {{pool.source}}
-                                        </li>
-                                        <li>
-                                            <label class="control-label">Destination: </label>
-                                            {{pool.destination}}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 text-center">
-                                    <ul class="list-inline">
-                                    <li>
-                                        <label class="control-label">Time: </label>
-                                        {{pool.time}}
-                                    </li>
-                                    <li>
-                                        <label class="control-label">Date:</label>
-                                        {{pool.date}}
-                                    </li>
-                                    </ul>
-                                </div>
-                            </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="container inner">
-            <div class="row">
-                <div class="table-responsive" ng-show="model.carPools">
-                    <h3>You have to Log-In for Details Come back to home and Search Again</h3>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Source</th>
-                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Destination</th>
-                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Time</th>
-                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Date</th>
-                            <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Details</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr ng-repeat="pool in model.carPools">
-                            <td>{{pool.source}}</td>
-                            <td>{{pool.destination}}</td>
-                            <td>{{pool.time}}</td>
-                            <td>{{pool.date}}</td>
-                            <td>
-                                <a ng-click="model.details($index)" class="btn btn-success btn-block" aria-label="Left Align">
-                                    Details
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-header">
-                        <h3>CRUD & API USAGES</h3>
-                        <ul class="nav nav-pills nav-justified">
-                            <li role="presentation"><a href="#/carpoolcrud">CarPool/API CRUD</a></li>
-                            <li role="presentation"><a href="#/admin">Admin CRUD</a></li>
-                            <li role="presentation"><a href="#/message">Message CRUD</a></li>
-                            <li role="presentation"><a href="#/ratingcrud">Rating CRUD</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Intro -->
-<div id="about-2">
-    <div class="light-wrapper">
-        <div class="container inner">
-            <div class="row">
-                <div class="text-center">
-                    <h2 class="main-title">About our company</h2>
-                    <hr>
-                </div>
-                <div class="col-sm-12">
-                    <h4 class="centered">Our Motto</h4>
-                    <p>
-                        We propose to design a system that provides a user with rideshare/carpool facilities available around him. A user is provided with a feature to find local passengers with similar travel plans, common routes or even common destinations, thus providing cost-effective transportation, reduce pollution due to traffic emission and also make easy cash on the way. I have observed that students at my university post on social media platforms like Facebook i.e. in university groups about various rideshare/carpools opportunities in order to save some cash, not only this sometimes they also use class discussion forums like Piazza to find some people to share their ride. The proposed system aims to provide such users an easy, fast and convenient way to find people around them looking for a carpool. The users using the system shall have to be registered and verified with the application. Users are provided with login ids and passwords. User can post about a carpool or look for one. System will use Google API for calculating routes, distance and time to provide end user with various details. The system will also provide carpool reviews and rating system to develop trust amongst various users. A user setting up a carpool will decide a base price for it, users interested for it will be provided with various facilities to negotiate the price for a carpool. System will maintain profile of various users which will include his public information like name, email Id etc and also customer ratings. All this data would be saved as a part of database. A user who has added a carpool opportunity may also take it down.
-
-                    </p>
-
-                </div>
-            </div>
-            <div class="divide50"></div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <h4>Our Journeys</h4><hr>
-                    <p>Duis non lectus sit amet est imperdiet cursus elementum vitae eros. Etiam adipiscingmorbi vitae magna tellus.</p>
-                    <div class="divide5"></div>
-                    <ul class="progress-list">
-                        <li>
-                            <p>Asia <em>90%</em></p>
-                            <div class="progress plain">
-                                <div class="bar" style="width: 90%;"></div>
-                            </div>
-                        </li>
-                        <li>
-                            <p>Australia <em>80%</em></p>
-                            <div class="progress plain">
-                                <div class="bar" style="width: 80%;"></div>
-                            </div>
-                        </li>
-                        <li>
-                            <p>America <em>85%</em></p>
-                            <div class="progress plain">
-                                <div class="bar" style="width: 85%;"></div>
-                            </div>
-                        </li>
-                        <li>
-                            <p>Europe <em>50%</em></p>
-                            <div class="progress plain">
-                                <div class="bar" style="width: 50%;"></div>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- /.progress-list -->
-                </div>
-                <!-- /.col -->
-
-                <div class="col-sm-4">
-                    <h4>Why Choose Us?</h4><hr>
-                    <p>Vestibulum id ligula porta felis euismod semper. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. </p>
-                    <div class="divide10"></div>
-                    <ol class="color">
-                        <li>Donec ullamcorper nulla non metus auctor.</li>
-                        <li>Cras justo odio, dapibus ac facilisis in egestas.</li>
-                        <li>Praesent commodo cursus magna.</li>
-                        <li>Curabitur blandit tempus porttitor.</li>
-                        <li>Sed posuere consectetur est at lobortis.</li>
-                        <li>Aenean lacinia bibendum nulla sed consectetur.</li>
-                    </ol>
-                </div>
-                <!-- /.col -->
-
-                <div class="col-sm-4">
-                    <h4>Our Transports</h4><hr>
-                    <div class="divide10"></div>
-                    <div class="services-2">
-                        <div class="icon"> <img src="" data-src="style/images/icons/icon-web.png" data-ret="style/images/icons/icon-web@2x.png" class="retina" alt="" /> </div>
-                        <!-- /.icon -->
-                        <div class="text">
-                            <h5>Responsive Layout</h5>
-                            <p>Etiam porta malesuada magna.</p>
-                        </div>
-                        <!-- /.text -->
-                        <div class="divide20"></div>
-                        <div class="icon"> <img src="" data-src="style/images/icons/icon-heart.png" data-ret="style/images/icons/icon-heart@2x.png" class="retina" alt="" /> </div>
-                        <!-- /.icon -->
-                        <div class="text">
-                            <h5>Flat & Clean design</h5>
-                            <p>Etiam porta malesuada.</p>
-                        </div>
-                        <!-- /.text -->
-                        <div class="divide20"></div>
-                        <div class="icon"> <img src="" data-src="style/images/icons/icon-print.png" data-ret="style/images/icons/icon-print@2x.png" class="retina" alt="" /> </div>
-                        <!-- /.icon -->
-                        <div class="text">
-                            <h5>Print Design</h5>
-                            <p>Etiam porta malesuada magna.</p>
-                        </div>
-                        <!-- /.text -->
-
-                    </div>
-                    <!-- /.services-2 -->
-
-                </div>
-                <!-- /.col -->
-
-            </div>
-            <!-- /.row -->
-
-        </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.light-wrapper -->
-</div>
-<!-- /Intro -->
 
 
 <!-- Services -->

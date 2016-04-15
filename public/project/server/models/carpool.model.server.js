@@ -118,7 +118,6 @@ module.exports = function (db){
     // functions finds all CarPool's by city
     function findCarPoolByCity(city){
         var deferred = q.defer();
-        console.log("HI");
         CarPoolModel
             .find(
                 {
@@ -130,7 +129,6 @@ module.exports = function (db){
                 },
                 function (err, results) {
                     if (!err) {
-                        console.log(results);
                         deferred.resolve (results);
                     } else {
                         deferred.reject (err);

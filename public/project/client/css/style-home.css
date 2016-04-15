@@ -65,7 +65,7 @@ border-radius: 4px;
 }
 .main-title{
   font-family: 'Lobster', cursive;
-  font-size: 45px;
+  font-size: 40px;
 }
 #about{
   font-family: "Lato";
@@ -125,6 +125,7 @@ h3.header-text{
 .btn-primary {
   background-color: #228C87;
   border-color: #228989;
+  height: inherit;
 }
 .btn-primary:hover{
   background-color: #6DD1C9;
@@ -756,81 +757,6 @@ figure.effect-zoe:hover p.icon-links a:first-child {
   :-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #727272;
   }
-
-/* Footer */
-
-footer {
-  padding: 100px 0;
-  background:url(../img/sky.jpg);
-  height: 330px;
-  margin-top: -20px;
-}
-
-.list-inline{
-  margin-bottom: 50px;
-}
-
-.list-inline li i {
-  margin-right: 15px;
-  width: 44px;
-  padding-top: 8px;
-  height: 44px;
-  font-size: 30px;
-  border: 1px solid rgb(47, 106, 142);
-  color: rgb(47, 106, 142);
-  -webkit-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-  transform: scaleX;
-  transform: rotate(25deg);
-}
-
-.list-inline li i:hover {
-  color: #fff;
-  background-color: rgb(47,106,142);
-  transform: rotate(0deg);
-  cursor: pointer;
-}
-
-.top-scroll {
-  margin-top: 25px;
-}
-
-.top-scroll a {
-  text-decoration: none;
-  color: inherit;
-}
-
-i.scroll {
-  color: #2F6A8E;
-  font-size: 3em;
-}
-
-i.scroll:hover {
-  color: #0a5175;
-}
-/* Responsive */
-
-@media (max-width: 768px) {
-  
-  .header {
-  background: url(img/bg.jpg) no-repeat center center scroll;
-  }
-
-  .callout {
-  background: url(img/callout.jpg) no-repeat center center scroll;
-  }
-
-  .map {
-  height: 75%;
-  }
-
-}
-@media only screen and (min-width: 970px){
- .services{
-  padding: 140px 0px;
- }
-}
 
 /* --------------------------- modal -------------------------------------------- */
 

@@ -1,105 +1,80 @@
-<div class="container-fluid container page">
 
-    <div class="row ">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <h1 class="page-header">CARPOOL DETAILS</h1>
-    </div>
-    </div>
+<div class="container container-contact bootstrap snippets carpoolbody">
+    <div class="row decor-default">
+        <div class="col-md-12">
+            <div class="contact">
+                <div class="controls">
+                    <<div class="icon icon-close">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar" class="avatar z-depth-3">
+                    </div>
+
+                    <div id="map" class="cover" alt="cover"></div>
 
 
-    <div class="row">
-       <div class="col-md-6 col-sm-12">
-        <form class="form-horizontal" >
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">Source</label>
-                <div class="col-md-9 col-sm-6 ">
-                    {{model.selectedPool.destination}}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-md-5 col-xs-12">
+                        <div id="right-panel"></div>
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-xs-12">
+                        <p class="contact-description">
+                        <form class="form-horizontal" >
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-lg-2">Source</label>
+                                <div class="col-md-4 col-lg-5 ">
+                                    {{model.selectedPool.destination}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-lg-2">Destination</label>
+                                <div  class="col-md-4 col-lg-5 ">
+                                    {{model.selectedPool.destination}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-lg-2">Date</label>
+                                <div class="col-md-4 col-lg-5 ">
+                                    {{model.selectedPool.date}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-lg-2">Time</label>
+                                <div class="col-md-4 col-lg-5 ">
+                                    {{model.selectedPool.time}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-lg-2">Car Info</label>
+                                <div class="col-md-4 col-lg-5 ">
+                                    {{model.selectedPool.carInfo}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-lg-2">Base Price</label>
+                                <div class="col-md-4 col-lg-5 ">
+                                    {{model.selectedPool.basePrice}}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 col-sm-6">No. Of Seats</label>
+                                <div class="col-md-4 col-sm-6 ">
+                                    {{model.selectedPool.noOfSeats}}
+                                </div>
+                            </div>
+                        </form>
+
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">Destination</label>
-                <div  class="col-md-9 col-sm-6 ">
-                    {{model.selectedPool.destination}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">Date</label>
-                <div class="col-md-9 col-sm-6 ">
-                    {{model.selectedPool.date}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">Time</label>
-                <div class="col-md-9 col-sm-6 ">
-                    {{model.selectedPool.time}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">Car Info</label>
-                <div class="col-md-9 col-sm-6 ">
-                    {{model.selectedPool.carInfo}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">Base Price</label>
-                <div class="col-md-9 col-sm-6 ">
-                  {{model.selectedPool.basePrice}}
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-3 col-sm-6">No. Of Seats</label>
-                <div class="col-md-9 col-sm-6 ">
-                    {{model.selectedPool.noOfSeats}}
-                </div>
-            </div>
-        </form>
-    </div>
-
-       <div class="col-md-6 col-sm-12 col-xs-12">
-           <div class="table table-responsive overflow-class">
-               <div id="right-panel"></div>
-           </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="table-responsive" >
-            <br>
-            <table class="table table-stripped table-bordered">
-                <thead>
-                <th>Details:</th>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Origin :</td>
-                    <td>{{model.legs.start_address}} ({{model.legs.start_location.lat}},{{model.legs.start_location.lng}})</td>
-                </tr>
-                <tr>
-                    <td>Destination :</td>
-                    <td>{{model.legs.end_address}} ({{model.legs.end_location.lat}},{{model.legs.end_location.lng}})</td>
-                </tr>
-                <tr>
-                    <td>Distance :</td>
-                    <td>{{model.legs.distance.text}}</td>
-                </tr>
-                <tr>
-                    <td>Time :</td>
-                    <td>{{model.legs.duration.text}}</td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
-
-    <div class="row " >
-        <div id="map" class="col-md-8"></div>
-    </div>
-
 </div>

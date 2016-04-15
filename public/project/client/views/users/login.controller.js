@@ -22,17 +22,12 @@
         // function for checking login of a controller
         function login(user){
 
-            if(!user)
-            {
-                return;
-            }
-
             //console.log(username,password);
             UserService.findUserByCredentials(user.email,user.password)
                 .then(function (response){
                         if(response.data !=null) {
-                            UserService.setCurrentUser(response.data);
-                            $location.url("/showprofile");
+                            console.log(response.data);
+                            $location.url("/showprofile/"+response.data._id);
                         }
                 });
 

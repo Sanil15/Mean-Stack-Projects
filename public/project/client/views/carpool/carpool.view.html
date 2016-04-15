@@ -1,70 +1,70 @@
-
 <div class="container-fluid page">
-    <div class="row">
 
-        <div class="page-header">
-        <ul class="nav nav-pills nav-justified">
-            <li role="presentation"><a href="#/showprofile">Profile</a></li>
-            <li role="presentation" class="active"><a href="#/carpool">Create a Carpool</a></li>
-            <li role="presentation"><a href="#/editprofile">Edit Profile</a></li>
-            <li role="presentation"><a href="#/usercarpool">My CarPools</a></li>
-        </ul>
-       </div>
+    <div class="row ">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h2 class="main-title">Create A CarPool</h2>
+            <hr>
+            <div class="divide50"></div>
+        </div>
+    </div>
+
+
+    <div class="row">
 
         <div class="col-md-7">
         <form class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2 control-label">Source</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.source" id="origin-input" type="text" class="form-control" placeholder="Source"/>
+                    <input ng-model="model.pool.source" id="origin-input" type="text" class="form" placeholder="Source"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Destination</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.destination" id="destination-input" type="text" class="form-control" placeholder="Destination"/>
+                    <input ng-model="model.pool.destination" id="destination-input" type="text" class="form" placeholder="Destination"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Date</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.date" class="form-control" type="date">
+                    <input ng-model="model.pool.date" class="form" type="date">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Time</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.time" class="form-control" placeholder="time">
+                    <input ng-model="model.pool.time" class="form" placeholder="time">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Car Info</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.carInfo" class="form-control" placeholder="carInfo">
+                    <input ng-model="model.pool.carInfo" class="form" placeholder="carInfo">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Base Price</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.basePrice" class="form-control" placeholder="$">
+                    <input ng-model="model.pool.basePrice" class="form" placeholder="$">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">No. Of Seats</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.pool.noOfSeats" class="form-control" placeholder="No of Seats Available">
+                    <input ng-model="model.pool.noOfSeats" class="form" placeholder="No of Seats Available">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.createCarPool(model.pool)" class="btn btn-success btn-block">Create Carpool</a>
+                    <a ng-click="model.createCarPool(model.pool)" class="btn btn-primary btn-block">Create Carpool</a>
                 </div>
             </div>
         </form>

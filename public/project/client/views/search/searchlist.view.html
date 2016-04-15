@@ -1,0 +1,54 @@
+
+
+<div class="container page">
+    <hgroup class="mb20">
+        <h1 class="main-title text-center">Search Results</h1>
+
+        <h2 class="lead"><strong class="text-danger">{{model.size}}</strong> results were found for your search</h2>
+    </hgroup>
+
+    <div class="row bootstrap snippets">
+        <div class="col-md-9 col-sm-7">
+            <hr>
+        </div>
+        <div class="col-md-3 col-sm-5">
+            <form method="get" role="form" class="search-form-full">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="s" id="search-input" placeholder="Search...">
+                    <i class="entypo-search"></i>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="member-entry" ng-repeat="pool in model.carPools">
+        <a ng-click="model.userProfile(pool.userId)" class="member-img">
+            <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-rounded">
+            <i class="fa fa-forward"></i>
+        </a>
+        <div class="member-details">
+            <h4>  <a ng-click="model.details(pool)"> <i class="fa fa-car"></i> Details</a> </h4>
+            <div class="row info-list">
+                <div class="col-sm-8">
+                    <i class="fa fa-map-marker"></i>
+                    <label>Source:</label> {{pool.source}}
+                </div>
+                <div class="col-sm-4">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                    {{pool.date | date}}
+                </div>
+                <div class="clear"></div>
+                <div class="col-sm-8">
+                    <i class="fa fa-map-marker"></i>
+                    <label>To:</label> {{pool.destination}}
+                </div>
+                <div class="col-sm-4">
+                    <i class="glyphicon glyphicon-time"></i>
+                    {{pool.time}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

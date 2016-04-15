@@ -49,11 +49,10 @@
         // function to logout current user
         function logout(){
 
-            UserService.setCurrentUser(null);
-            console.log()
-            vm.username=null;
+            UserService.logout()
+                .then(function(response){
+                    $location.path("/home")
+                });
         }
-
-
     }
 })();

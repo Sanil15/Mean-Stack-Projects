@@ -17,22 +17,24 @@
         vm.update = update;
 
         function init() {
-            var user=UserService.getCurrentUser();
+            var user;
+            UserService.getCurrentUser()
+                .then(function(response) {
+                    user=response.data;
+                    vm.selectedUserId=user._id;
+                    vm.user = {
+                        firstName : user.firstName,
+                        lastName : user.lastName,
+                        email : user.email,
+                        country : user.country,
+                        state : user.state,
+                        address : user.address,
+                        city : user.city,
+                        contact : user.contact,
+                        dob : new Date(user.dob),
+                        zipCode : user.zipCode
 
-            vm.selectedUserId=user._id;
-            vm.user = {
-                firstName : user.firstName,
-                lastName : user.lastName,
-                email : user.email,
-                country : user.country,
-                state : user.state,
-                address : user.address,
-                city : user.city,
-                contact : user.contact,
-                dob : new Date(user.dob),
-                zipCode : user.zipCode
-            }
-
+                }})
         }
 
         init();
@@ -45,8 +47,9 @@
                 })
                 .then(function(response){
                     if(response.data){
+                        console.log(response.data);
                         UserService.setCurrentUser(response.data);
-                        $location.path("/showprofile");
+                        $location.path("/showprofile/"+response.data._id);
                     }
                 });
         }
