@@ -9,15 +9,16 @@
         <div class="inner contact">
             <div class="contact-form">
                 <form id="contact-us">
+
                     <div class="col-md-6 col-xs-12 col-md-offset-3 " data-animation="fadeInLeft" data-animation-delay="300">
-                        <input type="text" ng-model="model.user.email" name="name" id="name" required="required" class="form" placeholder="Userame/Email" />
-                        <input type="password" ng-model="model.user.password" name="subject" id="subject" required="required" class="form" placeholder="Password" />
+                        <input type="text" name="name" id="name" required="required"  ng-model="model.user.email" class="form" placeholder="Userame/Email" />
+                        <input type="password" name="subject" id="subject" required="required"  ng-model="model.user.password" class="form" placeholder="Password" />
                     </div><!-- End Left Inputs -->
 
                     <!-- Bottom Submit -->
                     <div class="relative fullwidth col-xs-12">
                         <!-- Send Button -->
-                        <a ng-click="model.login(model.user)" type="submit" id="submit" name="submit" class="btn btn-block semibold form-btn">Sign-In</a>
+                        <button type="submit" id="submit" name="submit" ng-click="model.login(model.user)" class="btn form-btn">Sign-In</button>
                     </div><!-- End Bottom Submit -->
                     <!-- Clear -->
                     <div class="clear"></div>
