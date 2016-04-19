@@ -27,14 +27,15 @@
             var autocomplete1 = new google.maps.places.Autocomplete(document.getElementById("origin-input"));
             var autocomplete2 = new google.maps.places.Autocomplete(document.getElementById("destination-input"));
 
-            if(UserService.getCurrentUser()!=null)
-                CarPoolService.findAllCarPoolByUser(UserService.getCurrentUser()._id)
+                UserService.getCurrentUser()
                     .then(function(response){
-                        vm.carPools=response.data;
-                        pools=response.data;
-                        vm.selectedPool=null;
+                        CarPoolService.findAllCarPoolByUser(response.data._id)
+                            .then(function(respons){
+                                vm.carPools=respons.data;
+                                pools=respons.data;
+                                vm.selectedPool=null;
+                            });
                     });
-
         }
 
         init();

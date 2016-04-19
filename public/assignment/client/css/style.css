@@ -18,3 +18,6 @@ div.border
 {
  padding-left: 45px;
 }
+.b{
+    white-space: nowrap;
+}

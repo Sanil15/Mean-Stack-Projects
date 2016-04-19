@@ -117,6 +117,7 @@ module.exports = function(app, userModel) {
         userModel.createUser(user)
             .then(
                 function (doc) {
+                    req.session.user=doc;
                     res.json(doc);
                 },
                 function (err) {

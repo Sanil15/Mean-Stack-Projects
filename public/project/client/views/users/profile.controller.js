@@ -169,7 +169,12 @@
             //console.log($scope.msg);
 
             vm.review.toUser = vm.user.username;
-            vm.review.fromUser = UserService.getCurrentUser().username;
+            UserService.getCurrentUser()
+                .then(
+                    function(response){
+                        vm.review.fromUser= response.data.username;
+                    }
+                );
             console.log(vm.review);
 
 

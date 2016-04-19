@@ -716,7 +716,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
 /* Send Button Styles */
 
   .form-btn{
-    width:180px;
+    width:auto;
     display: block;
     height: auto;
     padding:15px;

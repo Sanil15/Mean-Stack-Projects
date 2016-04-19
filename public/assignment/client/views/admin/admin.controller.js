@@ -49,11 +49,14 @@
         }
 
         function update(user){
+            if(vm.selectedUserId)
             UserService
                 .adminUpdateUser(vm.selectedUserId,user)
                 .then(function(response){
                         if(response)
                             return UserService.adminFindAllUsers();
+                    else
+                        vm.error="Error in Updation";
                     })
                 .then(function(response){
                     if(response.data){
@@ -75,12 +78,14 @@
         }
 
         function add(user){
-            console.log(user);
+            if(user)
             UserService
                 .adminCreateUser(user)
                 .then(function(response){
-                        if(response)
+                        if(response!=null)
                             return UserService.adminFindAllUsers();
+                        else
+                        vm.error="USERNAME ALREADY EXISTS!!!!!";
                     }
                 )
                 .then(function(response){

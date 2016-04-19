@@ -16,6 +16,7 @@
         vm.checkRootScope=checkRootScope;
         vm.checkAdmin=checkAdmin;
         vm.logout=logout;
+        vm.userProfile =userProfile;
 
         function init(){
             vm.$location=$location;
@@ -46,9 +47,15 @@
             return false;
         }
 
+        function userProfile(){
+            UserService.getCurrentUser()
+                .then(function(response){
+                    $location.url("/showprofile/"+response.data._id);
+                });
+        }
+
         // function to logout current user
         function logout(){
-
             UserService.logout()
                 .then(function(response){
                     $location.path("/home")

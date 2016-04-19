@@ -21,11 +21,11 @@ module.exports = function(app, userModel){
 
     // Admin priveleges
     var admin =isAdmin;
-    app.post("/api/assignment/admin/user",admin ,createUser);
+    app.post("/api/assignment/admin/user",admin ,createUserByAdmin);
     app.get("/api/assignment/admin/user", admin ,getAllUsers);
     app.get("/api/assignment/admin/user/:userId", admin ,getUserById);
     app.delete("/api/assignment/admin/user/:userId", admin ,deleteUserById);
-    app.put("/api/assignment/admin/user/:userId", admin ,updateUserById);
+    app.put("/api/assignment/admin/user/:userId", admin ,updateUserByIdAdmin);
 
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
@@ -62,7 +62,7 @@ module.exports = function(app, userModel){
 
     function isAdmin(req,res,next){
 
-        if (req.isAuthenticated() && (req.user.roles.indexOf("admin") > 0)){
+        if (req.isAuthenticated() && (req.user.roles.indexOf("admin") >= 0)){
             next();
         } else {
             res.send(403);
@@ -89,7 +89,7 @@ module.exports = function(app, userModel){
     }
 
     function loggedIn(req, res) {
-        res.send(req.isAuthenticated() ? req.user : '0');
+        res.send(req.isAuthenticated() ? req.user : null);
     }
 
     function logout(req, res) {
@@ -103,7 +103,7 @@ module.exports = function(app, userModel){
         res.json(user);
     }
 
-    function createUser(req,res){
+    function createUserByAdmin(req,res){
         var user = req.body;
 
         if(user.roles && user.roles.substring) {
@@ -146,6 +146,49 @@ module.exports = function(app, userModel){
                     res.status(400).send(err);
                 });
     }
+
+    function register(req,res){
+        var user = req.body;
+
+
+        if (user.emails && user.emails.substring) {
+            user.emails=user.emails.split(",");
+        }
+
+        user.roles=['student'];
+
+
+        userModel
+            .findUserByUsername(user.username)
+            .then(
+                function(result){
+                    if(result){
+                        res.json(null);
+                    }else{
+                        user.password=bcrypt.hashSync(user.password);
+                        return userModel.createUser(user);
+                    }
+                }, function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (user) {
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
+    }
+
 
 
     function findUserByCredentials(req, res) {
@@ -236,45 +279,6 @@ module.exports = function(app, userModel){
             );
     }
 
-    function register(req,res){
-        var user = req.body;
-
-
-        if (user.emails && user.emails.substring) {
-            user.emails=user.emails.split(",");
-        }
-
-        user.roles=['student'];
-        userModel
-            .findUserByUsername(user.username)
-            .then(
-                function(result){
-                    if(result){
-                        res.json(null);
-                    }else{
-                        user.password=bcrypt.hashSync(user.password);
-                        return userModel.createUser(user);
-                    }
-                }, function(err){
-                    res.status(400).send(err);
-                }
-            )
-            .then(
-                function (user) {
-                    if(user){
-                        req.login(user, function(err) {
-                            if(err) {
-                                res.status(400).send(err);
-                            } else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                },
-                function(err){
-                    res.status(400).send(err);
-                });
-    }
 
 
     function updateUserById(req,res){
@@ -296,6 +300,35 @@ module.exports = function(app, userModel){
             user.roles = user.roles.split(",");
         }
 
+        userModel.updateUser(userId,user)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateUserByIdAdmin(req,res){
+
+        var userId;
+        var user=req.body;
+
+        if(req.params.userId)
+            userId=req.params.userId;
+        else
+            userId=req.params.id;
+
+
+        if (user.emails && user.emails.substring) {
+            user.emails=user.emails.split(",");
+        }
+
+        if(user.roles && user.roles.substring) {
+            user.roles = user.roles.split(",");
+        }
 
         userModel.updateUser(userId,user)
             .then(
@@ -307,6 +340,7 @@ module.exports = function(app, userModel){
                 }
             );
     }
+
 
     function deleteUserById(req,res){
         var userId;

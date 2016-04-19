@@ -31,9 +31,15 @@
                         </a>
                     </th>
 
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Last Name</th>
+                    <th>
+                        <a ng-click="model.sortType = 'lastname'; model.sortReverse = !model.sortReverse">
+                            <span ng-show="model.sortType === 'lastname' && !model.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+                            <span ng-show="model.sortType === 'lastname' && model.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                            Last Name
+                    </a>
+                    </th>
 
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Role</th>
+                    <th>Role</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -41,18 +47,18 @@
 
                 <tr>
                     <td><input type="text" ng-model="model.selectedUser.username" class="form-control" placeholder="username"/></td>
-                    <td><input type="password" ng-model="model.selectedUser.password" class="form-control" placeholder="password"></td>
+                    <td><input type="password" ng-if="!model.selectedUserId" ng-model="model.selectedUser.password" class="form-control" placeholder="password"></td>
                     <td><input type="text" class="form-control" ng-model="model.selectedUser.firstName" placeholder="first name"/></td>
                     <td><input type="text" class="form-control" ng-model="model.selectedUser.lastName" placeholder="last name"></td>
                     <td><input type="text" class="form-control" ng-model="model.selectedUser.roles" placeholder="role1,role2"/></td>
 
-                    <td>
-                        <a ng-click="model.add(model.selectedUser)" class="btn btn-default" aria-label="Left Align">
-                           Add</span>
+                    <td class="b">
+                        <a ng-click="model.add(model.selectedUser)" class="btn btn-success" aria-label="Left Align">
+                           <span class="glyphicon glyphicon-plus "></span>
                         </a>
 
-                        <a ng-click="model.update(model.selectedUser)" class="btn btn-default">
-                            Update</span>
+                        <a ng-click="model.update(model.selectedUser)" class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok "></span>
                         </a>
                     </td>
                 </tr>
@@ -60,17 +66,17 @@
                 <tr ng-repeat="user in model.users | orderBy: model.sortType:model.sortReverse">
 
                     <td>{{user.username}}</td>
-                    <td>{{user.password}}</td>
+                    <td>...</td>
                     <td>{{user.firstName}}</td>
                     <td>{{user.lastName}}</td>
                     <td>{{user.roles}}</td>
-                    <td>
-                        <a ng-click="model.deleteUser(user)" class="btn btn-default" aria-label="Left Align">
-                            Delete</span>
+                    <td class="b">
+                        <a ng-click="model.deleteUser(user)" class="btn btn-danger" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-remove"></span>
                         </a>
 
-                        <a ng-click="model.select(user)" class="btn btn-default">
-                            Edit</span>
+                        <a ng-click="model.select(user)" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-cog "></span>
                         </a>
                     </td>
 

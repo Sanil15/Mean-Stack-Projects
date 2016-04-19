@@ -13,8 +13,10 @@
     function Configure($routeProvider) {
         $routeProvider
             .when("/home", {
-                templateUrl: "views/home/home.view.html"
-                //controller: "views/home/home.controller.js"]
+                templateUrl: "views/home/home.view.html",
+                resolve:{
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",

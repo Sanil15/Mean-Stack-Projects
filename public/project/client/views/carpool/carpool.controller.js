@@ -28,16 +28,17 @@
 
             function createCarPool(newPool){
 
-                    var userId = UserService.getCurrentUser();
-                    newPool.source = document.getElementById("origin-input").value;
-                    newPool.destination = document.getElementById("destination-input").value;
-                    CarPoolService.createCarPoolByUser(userId._id, newPool)
+                   UserService.getCurrentUser()
                         .then(function(response){
-                            $location.path("/usercarpool");
+                            newPool.source = document.getElementById("origin-input").value;
+                            newPool.destination = document.getElementById("destination-input").value;
+                            CarPoolService.createCarPoolByUser(response.data._id, newPool)
+                                .then(function(response){
+                                    $location.path("/usercarpool");
+                                })
                         })
 
             }
-
 
             function initMap() {
 

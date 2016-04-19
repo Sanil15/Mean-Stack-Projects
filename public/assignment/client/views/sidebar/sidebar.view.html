@@ -3,4 +3,5 @@
         <li ng-show ="user" ng-class="{'active': model.$location.url() == '/profile'}"><a href="#/profile">Profile</a></li>
         <!--<li ng-show ="checkAdmin()" ng-class="{'active': model.$location.url() == '/admin'}"><a href="#/admin">Admin</a></li>-->
         <li ng-show ="user" ng-class="{'active': model.$location.url() == '/forms' || model.$location.url() == '/fields'}"><a href="#/forms">Forms</a></li>
+        <li ng-show ="user.roles.indexOf('admin')>=0" ng-class="{'active': model.$location.url() == '/admin'}"><a href="#/admin">Admin</a></li>
 </ul>

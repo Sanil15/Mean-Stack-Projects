@@ -136,6 +136,7 @@ module.exports = function(db){
             .update(
                 {_id: userId},
                 {$set: {
+                    "username": user.username,
                     "password": user.password,
                     "firstName": user.firstName,
                     "lastName": user.lastName,

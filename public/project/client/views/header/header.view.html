@@ -17,9 +17,9 @@
             <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                 <li ng-show="!user"><a href="#/login" data-target="#login">Login</a></li>
                 <li ng-show="!user"><a href="#/register" data-target="#register">Register</a></li>
-                <li ng-show="user"><a href="#/showprofile" data-target="#showprofile">Profile</a></li>
+                <li ng-show="user"><a href="#/usercarpool" data-target="#showprofile">My CarPool</a></li>
                 <li ng-show="user"><a href="#/carpool" data-target="#carpool">Create CarPools</a></li>
-                <li ng-show="user"><a href="#/usercarpool" data-target="#usercarpool">My CarPools</a></li>
+                <li ng-show="user"><a ng-click="model.userProfile()" data-target="#usercarpool">User Profile</a></li>
                 <li ng-show="user"><a ng-click="model.logout()" href="#/home" data-target="#home">Logout</a></li>
             </ul>
         </div>
