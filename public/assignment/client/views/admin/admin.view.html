@@ -1,6 +1,6 @@
 
 <div class="container-fluid">
-    <div class="row" ng-controller="AdminController">
+    <div class="row" ng-controller="AdminController as model">
 
             <h1 class="page-header">Admin</h1>
             <h3> Users </h3>
@@ -8,35 +8,34 @@
             <div ng-if="model.error" class="alert alert-success" role="alert">
                 {{model.error}}
             </div>
-
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>
-                        <a ng-click="model.sortType = 'username'; model.sortReverse = !model.sortReverse">
-                        <span ng-show="model.sortType == 'username' && !model.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-                        <span ng-show="model.sortType == 'username' && model.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
-                        User Name
+                        <a ng-click="model.Sort('username', userNameBottom)">
+                            <span type="button" class="glyphicon glyphicon-triangle-bottom" ng-show="userNameBottom == -1"></span>
+                            <span type="button" class="glyphicon glyphicon-triangle-top" ng-show="userNameBottom == 1"></span>
+                            Username
                         </a>
                     </th>
 
                     <th> Password</th>
 
                     <th>
-                        <a ng-click="model.sortType = 'firstname'; model.sortReverse = !model.sortReverse">
-                        <span ng-show="model.sortType == 'firstname' && !model.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-                        <span ng-show="model.sortType == 'firstname' && model.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
-                        First Name
+                        <a ng-click="model.Sort('firstName', firstNameBottom)">
+                            <span type="button" class="glyphicon glyphicon-triangle-bottom" ng-show="firstNameBottom == -1"></span>
+                            <span type="button" class="glyphicon glyphicon-triangle-top" ng-show="firstNameBottom == 1"></span>
+                            First Name
                         </a>
                     </th>
 
                     <th>
-                        <a ng-click="model.sortType = 'lastname'; model.sortReverse = !model.sortReverse">
-                            <span ng-show="model.sortType === 'lastname' && !model.sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
-                            <span ng-show="model.sortType === 'lastname' && model.sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+                        <a ng-click="model.Sort('lastName', lastNameBottom)">
+                            <span type="button" class="glyphicon glyphicon-triangle-bottom" ng-show="lastNameBottom == -1"></span>
+                            <span type="button" class="glyphicon glyphicon-triangle-top" ng-show="lastNameBottom == 1"></span>
                             Last Name
-                    </a>
+                        </a>
                     </th>
 
                     <th>Role</th>
@@ -44,7 +43,6 @@
                 </tr>
                 </thead>
                 <tbody>
-
                 <tr>
                     <td><input type="text" ng-model="model.selectedUser.username" class="form-control" placeholder="username"/></td>
                     <td><input type="password" ng-if="!model.selectedUserId" ng-model="model.selectedUser.password" class="form-control" placeholder="password"></td>
@@ -82,6 +80,7 @@
 
                 </tr>
                 </tbody>
+                    {{model.sortType}}
             </table>
             </div>
 

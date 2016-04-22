@@ -6,7 +6,7 @@
         .module("CarPoolApp")
         .controller("MessageController",MessageController);
 
-    function MessageController($location, UserService, MessageService){
+    function MessageController($location, UserService, MessageService, $scope){
 
         var vm = this;
 
@@ -59,6 +59,14 @@
                             return a;
                         },[]);
 
+                        for(var i =0; i< uniqUser.length ;i++)
+                        {
+
+                            if(uniqUser[i] == vm.currentUser.username){
+                                console.log(uniqUser[i]);
+                                uniqUser.splice(i,1);
+                            }
+                        }
                         vm.users=uniqUser;
                         vm.convs=response.data;
                 })
@@ -68,17 +76,15 @@
 
         function createNew(message){
 
-            UserService.getCurrentUser()
-                .then(function(response){
-                    message.fromUser=response.data.username;
-            })
-
+            message.fromUser=vm.currentUser.username;
             message.toUser=vm.selectedUser;
 
             console.log(message);
             MessageService.createMessage(message)
                 .then(function (response){
-                    return MessageService.findAllMessagesForUser(vm.currentUser);
+                   init();
+                   loadConversation(vm.selectedUser);
+
                 })
 
         }

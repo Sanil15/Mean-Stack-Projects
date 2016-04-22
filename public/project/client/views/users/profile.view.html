@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
-                <a type="button" ng-click="model.sendMessage()" class="btn btn-primary">Send message</a>
+                <a type="button" ng-click="model.sendMessage(model.message)" class="btn btn-primary">Send message</a>
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="fb-user-details">
-                    <h3><a href="#" class="#">{{review.fromUser}}</a></h3>
+                    <h3><a href="/client/{}" class="#">{{review.fromUser}}</a></h3>
                     <p>{{review.created | date}}</p>
                     <p>{{review.rating}} stars</p>
                 </div>

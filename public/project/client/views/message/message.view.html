@@ -45,7 +45,7 @@
                     <div class="lv-avatar pull-left">
 
                     </div>
-                    <span>David Parbell</span>
+                    <span>{{model.selectedUser.username}}</span>
                 </div>
 
                 <ul class="ah-actions actions">
@@ -98,7 +98,7 @@
             <div class="scrolling">
             <div ng-repeat="message in model.conversation">
 
-                <div class="message-feed media" ng-if="message.fromUser == model.currentUser._id">
+                <div class="message-feed media" ng-if="message.fromUser != model.currentUser.username">
                     <div class="pull-left">
                         <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar">
                     </div>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="message-feed right" ng-if="message.fromUser != model.selectedUser._id">
+                <div class="message-feed right" ng-if="message.fromUser == model.currentUser.username" >
                 <div class="pull-right">
                     <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="" class="img-avatar">
                 </div>

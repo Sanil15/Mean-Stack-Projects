@@ -153,35 +153,46 @@
 
         init();
 
-        function sendMessage(){
-            vm.message.toUser = vm.user.username;
-            vm.message.fromUser = UserService.getCurrentUser().username;
-            console.log(vm.message);
-            MessageService.createMessage(vm.message)
+        function sendMessage(message){
+            UserService.getCurrentUser()
+                .then(function(response){
+                    console.log(response.data);
+
+                    var msg = {
+                        "fromUser": response.data.username,
+                        "toUser": vm.user.username,
+                        "message": message.message
+                    }
+
+                    console.log(msg);
+                    return  MessageService.createMessage(msg);
+                })
                 .then(function (response){
                     if(response.data){
-
+                        init();
                     }
-                })
+                });
+
+
+
         }
 
         function createReview(){
             //console.log($scope.msg);
 
-            vm.review.toUser = vm.user.username;
+            var rev = {};
+            rev.toUser = vm.user.username;
+            rev.review = vm.review.review;
             UserService.getCurrentUser()
                 .then(
                     function(response){
-                        vm.review.fromUser= response.data.username;
-                    }
-                );
-            console.log(vm.review);
-
-
-            ReviewService.createReview(vm.review)
+                        var u = response.data;
+                        rev.fromUser= u.username;
+                        return ReviewService.createReview(rev)
+                    })
                 .then(function(response){
-                if(response.data)
-                    init();
+                    if(response.data)
+                        init();
                 })
         }
 
@@ -189,7 +200,7 @@
             ReviewService.updateReviewById(vm.selectedReviewId,review)
                 .then(function(response){
                     if(response.data)
-                        return  ReviewService.findAllReviews();
+                        return ReviewService.findAllReviews();
                 })
                 .then(function(response){
                     //console.log(response.data);

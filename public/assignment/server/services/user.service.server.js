@@ -131,20 +131,14 @@ module.exports = function(app, userModel){
                 }
             )
             .then(
-                function (user) {
-                    if(user){
-                        req.login(user, function(err) {
-                            if(err) {
-                                res.status(400).send(err);
-                            } else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                },
-                function(err){
-                    res.status(400).send(err);
-                });
+            function (user) {
+                if(user){
+                    res.json(user);
+                }
+            },
+            function(err){
+                res.status(400).send(err);
+            });
     }
 
     function register(req,res){

@@ -4,7 +4,7 @@
 <div id="top" class="header">
     <div class="vert-text parallax">
         <h1 class="header-text">Pay Less Travel More</h1>
-        <div class="field" id="searchform">
+        <div class="field" id="searchfor">
 
             <!--
             <div angucomplete-alt
@@ -24,6 +24,7 @@
             <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
         </div>
         <a href="#places" class="btn btn-default header-btn">Find Out More</a>
+
         <br/>
         <a href=""><img ng-src="img/direction.png" class="space" alt="Direction"></a>
     </div>
@@ -78,7 +79,29 @@
 <!-- Callout -->
 <div class="callout">
     <div class="vert-text">
-        <h1 class="main-title parallax2">Your Travellers Guide</h1>
+        <h1 class="main-title parallax2">Your Travellers Guide
+        </h1>
+        <div class="field" id="searchform">
+
+            <!--
+            <div angucomplete-alt
+                          placeholder="Search for other developers"
+                          pause="500"
+                          selected-object="selectedUser"
+                          remote-url="/api/developer/search/"
+                          title-field="username"
+                          minlength="2"
+                          input-class="form-control form-control-small"
+                          match-class="highlight">
+            </div>
+            -->
+
+            <input ng-model="model.city" type="text" id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
+
+            <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
+        </div>
+        <a href="#places" class="btn btn-default header-btn">Find Out More</a>
+
     </div>
 </div>
 <!-- /Callout -->
