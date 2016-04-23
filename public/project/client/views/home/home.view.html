@@ -19,17 +19,41 @@
             </div>
             -->
 
-                <input ng-model="model.city" type="text" id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
+                <input ng-model="model.city" type="text"  id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
 
             <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
         </div>
-        <a href="#places" class="btn btn-default header-btn">Find Out More</a>
+        <a href="#about" class="btn btn-default header-btn">Find Out More</a>
 
         <br/>
         <a href=""><img ng-src="img/direction.png" class="space" alt="Direction"></a>
     </div>
 </div>
 
+<!-- Intro -->
+<div id="about">
+    <div class="light-wrapper">
+        <div class="container inner">
+            <div class="row">
+                <div class="text-center">
+                    <h2 class="main-title">About our company</h2>
+                    <hr>
+                </div>
+                <div class="divide50"></div>
+                <div class="col-sm-4">
+                    <figure><img src="" alt="" style="width: 100%;"></figure>
+                </div>
+                <div class="col-sm-8">
+                    <h4>Our Working Place</h4>
+                    <p>Vestibulum ligut praesent commodo cursus magna, consectetur et. Cum socis natoque penatibus et magnis dis tellus parturient pharetra montes. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas sed diam eget risus varius blandit sit amet non magna. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.light-wrapper -->
+</div>
+<!-- /Intro -->
 
 <!-- Services -->
 <div id="services" class="services">
@@ -81,27 +105,7 @@
     <div class="vert-text">
         <h1 class="main-title parallax2">Your Travellers Guide
         </h1>
-        <div class="field" id="searchform">
-
-            <!--
-            <div angucomplete-alt
-                          placeholder="Search for other developers"
-                          pause="500"
-                          selected-object="selectedUser"
-                          remote-url="/api/developer/search/"
-                          title-field="username"
-                          minlength="2"
-                          input-class="form-control form-control-small"
-                          match-class="highlight">
-            </div>
-            -->
-
-            <input ng-model="model.city" type="text" id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
-
-            <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
         </div>
-        <a href="#places" class="btn btn-default header-btn">Find Out More</a>
-
     </div>
 </div>
 <!-- /Callout -->

@@ -1,3 +1,5 @@
+
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -22,7 +24,9 @@
 </div>
 
 
-<div class="profile_continer bootstrap snippet profile_page">
+
+<div class=" profile_continer bootstrap snippet profile_page">
+
     <div class="profile_row">
         <div class="profile_panel">
             <div class="cover-photo">
@@ -34,31 +38,28 @@
                 </div>
             </div>
 
-            <div class="panel-body">
+
+
+        <div class="panel-body">
+
+
                 <div class="profile-thumb">
                     <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                 </div>
-                <div class="fb-user-mail">
-                    <i class="fa fa-user"> {{model.user.username}}</i>
-                </div>
-                <div class="fb-user-mail">
-                    <i class="fa fa-map-marker"> {{model.user.state}},{{model.user.country}}</i>
-                </div>
 
-                <div class="fb-user-mail">
-                    <i class="fa fa-envelope-o"> {{model.user.email}}</i>
-                </div>
 
-                <div class="fb-user-mail">
-                    <i class="fa fa-phone"> {{model.user.contact}}</i>
-                </div>
+                    <div class="fb-user-mail info">
+                        <p><span class="fa fa-map-marker"></span> <span class="title">Address:</span>  {{model.user.state}},{{model.user.country}}</p>
+                        <p><span class="fa fa-envelope-o"></span> <span class="title">E-Mail:</span> {{model.user.email}}</p>
 
-                <div class="pull-right">
-                <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-comments-o"></i>
-                    Message User
-                </a>
-                </div>
+                        <div class="actions">
+                            <div class="btn-group">
+                                <button class="btn btn-sm tip btn-responsive" title="" data-toggle="modal" data-target="#exampleModal" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
+                                <button class="btn btn-sm tip btn-responsive" title="" data-original-title="Recommend"><span class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></span> Recommend</button>
+                            </div>
+                        </div>
+
+                    </div>
 
             </div>
         </div>
@@ -99,23 +100,6 @@
                 <p class="fb-user-status">
                     {{review.review}}
                 </p>
-
-                <div class="fb-status-container fb-border">
-                    <div class="fb-time-action">
-                        <a href="#" title="Find This Userful"> <i class="fa fa-thumbs-up"></i> Useful</a>
-                        <span>-</span>
-                        <a href="#" title="Not Userful"><i class="fa fa-thumbs-down"></i> Not Useful</a>
-                        <span>-</span>
-                        <a href="#" title="Send this to friend or post it on your time line"> <i class="fa fa-hand-stop-o"></i> Report</a>
-                    </div>
-                </div>
-
-                <div class="fb-status-container fb-border fb-gray-bg">
-                    <div class="fb-time-action like-info">
-                        <a>40 Users</a>
-                        <span>find this useful!</span>
-                    </div>
-                </div>
 
             </div>
         </div>

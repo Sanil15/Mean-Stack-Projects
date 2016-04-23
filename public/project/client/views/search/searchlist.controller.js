@@ -19,6 +19,9 @@
         vm.userProfile=userProfile;
 
         function init() {
+            vm.currentPage = 1;
+            vm.pageSize = 1;
+
             var city=$routeParams.queryString;
 
             CarPoolService.findCarPoolByCity(city)

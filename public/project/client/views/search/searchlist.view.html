@@ -21,33 +21,41 @@
         </div>
     </div>
 
-    <div class="member-entry" ng-repeat="pool in model.carPools">
-        <a ng-click="model.userProfile(pool.userId)" class="member-img">
-            <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-rounded">
-            <i class="fa fa-forward"></i>
-        </a>
-        <div class="member-details">
-            <h4>  <a ng-click="model.details(pool)"> <i class="fa fa-car"></i> Details</a> </h4>
-            <div class="row info-list">
-                <div class="col-sm-8">
-                    <i class="fa fa-map-marker"></i>
-                    <label>Source:</label> {{pool.source}}
-                </div>
-                <div class="col-sm-4">
-                    <i class="glyphicon glyphicon-calendar"></i>
-                    {{pool.date | date}}
-                </div>
-                <div class="clear"></div>
-                <div class="col-sm-8">
-                    <i class="fa fa-map-marker"></i>
-                    <label>To:</label> {{pool.destination}}
-                </div>
-                <div class="col-sm-4">
-                    <i class="glyphicon glyphicon-time"></i>
-                    {{pool.time}}
+    <ul>
+        <div dir-paginate="pool in model.carPools | filter:q | itemsPerPage: model.pageSize" current-page="model.currentPage">
+            <div class="member-entry">
+                <a ng-click="model.userProfile(pool.userId)" class="member-img">
+                    <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-rounded">
+                    <i class="fa fa-forward"></i>
+                </a>
+                <div class="member-details">
+                    <h4>  <a ng-click="model.details(pool)"> <i class="fa fa-car"></i> Details</a> </h4>
+                    <div class="row info-list">
+                        <div class="col-sm-8">
+                            <i class="fa fa-map-marker"></i>
+                            <label>Source:</label> {{pool.source}}
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                            {{pool.date | date}}
+                        </div>
+                        <div class="clear"></div>
+                        <div class="col-sm-8">
+                            <i class="fa fa-map-marker"></i>
+                            <label>To:</label> {{pool.destination}}
+                        </div>
+                        <div class="col-sm-4">
+                            <i class="glyphicon glyphicon-time"></i>
+                            {{pool.time}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </ul>
+
+    <div class="text-center">
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>
     </div>
 
 

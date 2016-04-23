@@ -1,41 +1,67 @@
-
-<div class="container-fluid page">
-
-    <div class="page-header">
-        <h1>Admin CRUD</h1>
+<div class="container page">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box clearfix">
+                <div class="table-responsive">
+                    <table class="table user-list">
+                        <thead>
+                        <tr>
+                            <th><span>User</span></th>
+                            <th><span>Username</span></th>
+                            <th class="text-center"><span>Status</span></th>
+                            <th><span>Email</span></th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="user in model.users">
+                            <td>
+                                <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <a href="#" class="user-link">{{user.firstName}} {{user.lastName}}</a>
+                                <span class="user-subhead">{{user.roles}}</span>
+                            </td>
+                            <td>
+                                {{user.username}}
+                            </td>
+                            <td class="text-center">
+                                <span class="label label-success">Active</span>
+                            </td>
+                            <td>
+                                <a href="#">{{user.email}}</a>
+                            </td>
+                            <td style="width: 20%;">
+                                <a ng-click="model.findDetail($index)" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+                                </a>
+                                <a ng-click="model.deleteUser($index)" class="table-link danger">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="pagination pull-right">
+                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="table-responsive" >
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> User Name</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> First Name</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Last Name</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Email</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Details</th>
-                <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="user in model.users">
-                <td>{{user.userName}}</td>
-                <td>{{user.firstName}}</td>
-                <td>{{user.lastName}}</td>
-                <td>{{user.email}}</td>
-                <td>
-                    <a ng-click="model.findDetail($index)" class="btn btn-info btn-block" aria-label="Left Align">
-                        DETAILS</a>
-                </td>
-                <td>
-                    <a ng-click="model.deleteUser($index)" class="btn btn-danger btn-block" aria-label="Left Align">
-                        DELETE</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
+<div class="container-fluid">
     <div ng-show="model.user!=null">
         <div class="col-md-6">
         <table class="table table-resposive table-hover">
@@ -55,12 +81,16 @@
                     <td>{{model.user.lastName}}</td>
                 </tr>
                 <tr>
+                    <td><label class="control-label">Username:</label></td>
+                    <td>{{model.user.username}}</td>
+                </tr>
+                <tr>
                     <td><label class="control-label">Email:</label></td>
                     <td>{{model.user.email}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">DOB</label></td>
-                    <td>{{model.user.dob}}</td>
+                    <td>{{model.user.dob | date}}</td>
                 </tr>
                 <tr>
                     <td><label class="control-label">Country</label></td>
