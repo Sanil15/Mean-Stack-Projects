@@ -3,6 +3,10 @@
  */
 module.exports = function(app, userModel) {
 
+    var multer  = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
     app.post("/api/project/user", createUser);
     app.get("/api/project/user", getAllUsers);
     app.get("/api/project/user/:id", getUserById);
@@ -10,6 +14,33 @@ module.exports = function(app, userModel) {
     app.delete("/api/project/user/:id", deleteUserById);
     app.post("/api/project/logout", logout);
     app.get("/api/project/loggedin", loggedin);
+
+    function uploadImage(req, res) {
+
+        var userId=req.session.user._id;
+
+        var myFile        = req.file;
+
+        var destination   = myFile.destination;
+        var path          = myFile.path;
+        var originalname  = myFile.originalname;
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+        var filename      = myFile.filename;
+
+        var imgUrl= "../public/uploads/"+filename;
+
+        userModel
+            .uploadImageById(userId, imgUrl)
+            .then(
+                function(response) {
+                    res.redirect("/project/client/#/showprofile/"+userId);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function logout(req, res) {
         req.session.destroy();

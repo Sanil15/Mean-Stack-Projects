@@ -12,6 +12,7 @@
     function ChatController($location,UserService,$scope){
 
         var vm=this;
+
         var socket=null;
         vm.send = send;
         vm.disconnect=disconnect;
@@ -29,6 +30,7 @@
                 .then(function (response){
                     vm.userList=response.data;
                 });
+
             UserService.getCurrentUser()
                 .then(function(response){
                     socket.emit('create',response.data.username);

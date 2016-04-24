@@ -16,10 +16,17 @@
         vm.selectMessage=selectMessage;
         vm.loadConversation=loadConversation;
         vm.createNew = createNew;
+        vm.send = send;
+        vm.disconnect=disconnect;
+        vm.del = del;
+
+        var socket=null;
 
         function init() {
             vm.selectedMessageId=-1;
+            vm.delSelect = -1;
 
+            $('.scrolling').css('max-height',$(window).height());
 
             $(function(){
                 if ($('#ms-menu-trigger')[0]) {
@@ -63,29 +70,69 @@
                         {
 
                             if(uniqUser[i] == vm.currentUser.username){
-                                console.log(uniqUser[i]);
                                 uniqUser.splice(i,1);
                             }
                         }
                         vm.users=uniqUser;
                         vm.convs=response.data;
+
                 })
+
+            if ($location.absUrl().indexOf("localhost") > -1) {
+                socket = io();
+            }
+            else{
+                socket=io("http://webdev2016-jainsanil.rhcloud.com:8000");
+            }
+
+            UserService.getCurrentUser()
+                .then(function(response){
+                    socket.emit('create',response.data.username);
+                    socket.on('chat',function(message){
+                        console.log("RECEIVE");
+                        console.log(message);
+                        vm.mymsg = message;
+                        $scope.$apply();
+                    });
+                })
+
         }
 
         init();
+
+
+        function del(){
+
+            if(vm.delSelect == -1)
+            vm.delSelect = 1;
+
+            else
+            vm.delSelect = -1;
+
+            loadConversation(vm.selectedUser);
+        }
+
+        function send(message){
+            socket.emit("chat", message);
+        }
+
+        function disconnect(){
+            socket.emit('disconnect');
+        }
 
         function createNew(message){
 
             message.fromUser=vm.currentUser.username;
             message.toUser=vm.selectedUser;
 
-            console.log(message);
             MessageService.createMessage(message)
                 .then(function (response){
-                   init();
-                   loadConversation(vm.selectedUser);
-
-                })
+                    return MessageService.findAllMessagesForUser(vm.currentUser.username);
+                }).then(function(resposne){
+                    vm.convs=resposne.data;
+                    loadConversation(vm.selectedUser);
+                });
+            send(message);
 
         }
 
@@ -102,18 +149,15 @@
                 });
         }
 
-        function deleteMessage(index){
-
-            MessageService.deleteMessageById(vm.messages[index]._id)
+        function deleteMessage(id){
+            console.log(id);
+            MessageService.deleteMessageById(id)
                 .then(function (response){
-                    return MessageService.findAllMessages();
-                })
-                .then(function (response){
-                    vm.messages=response.data;
-                    vm.msg=null;
-                    vm.selectedMessage=null;
-                    vm.selectedMessageId=-1;
-                });
+                    return MessageService.findAllMessagesForUser(vm.currentUser.username);
+                }).then(function(resposne){
+                vm.convs=resposne.data;
+                loadConversation(vm.selectedUser);
+            });
 
         }
 

@@ -208,7 +208,7 @@
     .field>button {
         position: relative;
         display:block;
-        font:0.8em 'sans-serif';
+        font:0.8em 'sanSs-serif';
         box-shadow:
                 1px 1px 0 rgb(22, 160, 133),
                 2px 2px 0 rgb(22, 160, 133),
@@ -1058,6 +1058,15 @@ a:hover{
     padding-top: 60px;
 }
 
+
+.scrolling{
+    height:100%;
+    overflow: auto;
+    overflow-y: scroll;
+    max-height:100%;
+
+}
+
 #messages-main {
     position: relative;
     margin: 0 auto;
@@ -1069,11 +1078,11 @@ a:hover{
 }
 #messages-main .ms-menu {
     position: absolute;
+    height: calc(100% - 58px);
     left: 0;
     top: 0;
     border-right: 1px solid #eee;
     padding-bottom: 50px;
-    height: 100%;
     width: 240px;
     background: #fff;
 }
@@ -1092,7 +1101,6 @@ a:hover{
         display: block;
     }
     #messages-main .ms-body {
-        overflow-y: scroll;
     }
 }
 #messages-main .ms-user {
@@ -1248,9 +1256,6 @@ a:hover{
 .ms-body{
     background:#fff;
 
-}
-.scrolling{
-    overflow-y: scroll;
 }
 
 #ms-menu-trigger {
@@ -1445,4 +1450,72 @@ a:hover{
 }
 .table-stats .table-line-plus .status-social-icon {
     color: #a75d54;
+}
+
+.stepwizard-step p {
+    margin-top: 10px;
+}
+
+.stepwizard-row {
+    display: table-row;
+}
+
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+
+}
+
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+/* nice check boxes */
+.input-group-addon.beautiful input[type="checkbox"],
+.input-group-addon.beautiful input[type="radio"] {
+    display: none;
+}
+.beautiful {
+    color: white !important;
+    font-size: 14px;
+}
+.beautiful .fa {
+    font-size: 20px !important;
+}
+.bg-success {
+    background-color: #5cb85c;
+}
+.text-white {
+    color:white;
+}
+.add-top {
+    margin-top:20px;
 }

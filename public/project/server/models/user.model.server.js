@@ -19,10 +19,32 @@ module.exports = function (){
         deleteUserById : deleteUserById,
         updateUser : updateUser,
         findUserByUsername: findUserByUsername,
-        findUserById: findUserById
+        findUserById: findUserById,
+        uploadImageById: uploadImageById
     };
 
     return api;
+
+    function uploadImageById(userId, imgUrl){
+        var deferred = q.defer();
+        UserModel
+            .update(
+                {_id: userId},
+                {$set: {
+                    "image": imgUrl
+                }},
+                function (err, results){
+                    if(!err) {
+                        deferred.resolve(results);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
 
     function findUserById(userId){
         var deferred = q.defer();

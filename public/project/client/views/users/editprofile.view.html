@@ -1,17 +1,17 @@
 
 <div class="container-fluid page">
     <div class="row">
-        <div class="page-header">
-            <ul class="nav nav-pills nav-justified">
-                <li role="presentation"><a href="#/showprofile">Profile</a></li>
-                <li role="presentation"><a href="#/carpool">Create a Carpool</a></li>
-                <li role="presentation" class="active"><a href="#/editprofile">Edit Profile</a></li>
-                <li role="presentation"><a href="#/usercarpool">My CarPools</a></li>
-            </ul>
-        </div>
 
+        <form action="/api/upload"
+              method="post"
+              enctype="multipart/form-data">
+            <input type="file" name="myFile" class="form-control"/>
+            <button type="submit" class="btn btn-block btn-primary">
+                Upload Image
+            </button>
+        </form>
 
-        <form class="form-horizontal">
+        <div class="form-horizontal">
             <div class="form-group">
                 <label class="col-sm-2 control-label">First Name</label>
                 <div class="col-sm-10">
@@ -95,6 +95,6 @@
                     <a ng-click="model.update(model.user)" class="btn btn-success btn-block">Update Profile</a>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>

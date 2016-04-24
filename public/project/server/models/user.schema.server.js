@@ -19,6 +19,7 @@ module.exports = function () {
         address: String,
         zipCode: Number,
         contact: [String],
+        image: String
     },{collection : 'user'});
     return UserSchema;
 };

@@ -6,20 +6,32 @@
         <h1 class="header-text">Pay Less Travel More</h1>
         <div class="field" id="searchfor">
 
-            <!--
-            <div angucomplete-alt
-                          placeholder="Search for other developers"
-                          pause="500"
-                          selected-object="selectedUser"
-                          remote-url="/api/developer/search/"
-                          title-field="username"
-                          minlength="2"
-                          input-class="form-control form-control-small"
-                          match-class="highlight">
-            </div>
-            -->
 
-                <input ng-model="model.city" type="text"  id="searchterm" placeholder="Type Here to Search Carpool ex. Boston" />
+            <!--<div angucomplete-alt-->
+                          <!--placeholder="Search for other developers"-->
+                          <!--pause="500"-->
+                          <!--selected-object="selectedUser"-->
+                          <!--remote-url="/api/carpool/search/"-->
+                          <!--title-field="location"-->
+                          <!--minlength="2"-->
+                          <!--input-class="form-control form-control-small"-->
+                          <!--match-class="highlight">-->
+            <!--</div>-->
+
+
+                <input angucomplete-alt
+                       pause="500"
+                       selected-object="selectedUser"
+                       remote-url="/api/carpool/search/"
+                       title-field="location"
+                       minlength="2"
+                       input-class="form-control form-control-small"
+                       match-class="highlight"
+
+                       ng-model="model.city"
+                       type="text"
+                       id="searchterm"
+                       placeholder="Type Here to Search Carpool ex. Boston" />
 
             <button ng-click="model.findCarPool(model.city)" type="button" id="search">Find!</button>
         </div>
