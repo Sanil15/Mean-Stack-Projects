@@ -124,15 +124,17 @@
 
             message.fromUser=vm.currentUser.username;
             message.toUser=vm.selectedUser;
+            send(message);
 
             MessageService.createMessage(message)
                 .then(function (response){
                     return MessageService.findAllMessagesForUser(vm.currentUser.username);
                 }).then(function(resposne){
                     vm.convs=resposne.data;
+                    send(message);
+                    vm.newMessage = null;
                     loadConversation(vm.selectedUser);
                 });
-            send(message);
 
         }
 
@@ -149,9 +151,15 @@
                 });
         }
 
-        function deleteMessage(id){
-            console.log(id);
-            MessageService.deleteMessageById(id)
+        function deleteMessage(message){
+            var which;
+            if(message.fromUser == vm.currentUser.username)
+            which = "from";
+
+            else
+            which = "to";
+
+            MessageService.deleteMessageById(message._id,which)
                 .then(function (response){
                     return MessageService.findAllMessagesForUser(vm.currentUser.username);
                 }).then(function(resposne){
@@ -200,6 +208,8 @@
         }
 
         function loadConversation(user){
+
+
             vm.selectedUser=user;
             var conversation = [];
             for(var i=0;i<vm.convs.length;i++){

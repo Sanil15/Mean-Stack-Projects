@@ -1,24 +1,28 @@
 <div class="container-fluid page">
-    <div class="row">
-        <div class="page-header">
-            <ul class="nav nav-pills nav-justified">
-                <li role="presentation"><a href="#/showprofile">Profile</a></li>
-                <li role="presentation"><a href="#/carpool">Create a Carpool</a></li>
-                <li role="presentation"><a href="#/editprofile">Edit Profile</a></li>
-                <li role="presentation" class="active"><a href="#/usercarpool">My CarPools</a></li>
-            </ul>
+
+
+    <div class="row ">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h2 class="main-title">My CarPool's</h2>
+            <hr>
+            <div class="divide50"></div>
         </div>
+    </div>
+
+
+
+    <div class="row">
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
+            <table class="table table-resposive table-hover">
                 <thead>
                 <tr>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Source</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Destination</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Time</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Date</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Update</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Deactivate</th>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Update</th>
+                    <th>Deactivate</th>
                 </tr>
                 </thead>
 
@@ -27,7 +31,7 @@
                     <td>{{pool.source}}</td>
                     <td>{{pool.destination}}</td>
                     <td>{{pool.time}}</td>
-                    <td>{{pool.date}}</td>
+                    <td>{{pool.date | date}}</td>
                     <td>
                         <a ng-click="model.selectCarPool($index)" class="btn btn-success btn-block" aria-label="Left Align">
                         Update
@@ -47,55 +51,55 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Source</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.source" id="origin-input" type="text" class="form-control" placeholder="Source"/>
+                    <input ng-model="model.selectedPool.source" id="origin-input" type="text" class="form" placeholder="Source"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Destination</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.destination" id="destination-input" type="text" class="form-control" placeholder="Destination"/>
+                    <input ng-model="model.selectedPool.destination" id="destination-input" type="text" class="form" placeholder="Destination"/>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Date</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.date" class="form-control" type="date">
+                    <input ng-model="model.selectedPool.date" class="form" type="date">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Time</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.time" class="form-control" placeholder="time">
+                    <input ng-model="model.selectedPool.time" class="form" placeholder="time">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Car Info</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.carInfo" class="form-control" placeholder="carInfo">
+                    <input ng-model="model.selectedPool.carInfo" class="form" placeholder="carInfo">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Base Price</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.basePrice" class="form-control" placeholder="$">
+                    <input ng-model="model.selectedPool.basePrice" class="form" placeholder="$">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">No. Of Seats</label>
                 <div class="col-sm-10">
-                    <input ng-model="model.selectedPool.noOfSeats" class="form-control" placeholder="No of Seats Available">
+                    <input ng-model="model.selectedPool.noOfSeats" class="form" placeholder="No of Seats Available">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.updateCarPool(model.selectedPool)" class="btn btn-success btn-block">Update Carpool</a>
+                    <a ng-click="model.updateCarPool(model.selectedPool)" class="btn form-btn btn-block">Update Carpool</a>
                 </div>
             </div>
         </form>

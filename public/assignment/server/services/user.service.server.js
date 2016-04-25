@@ -9,7 +9,8 @@ var bcrypt = require("bcrypt-nodejs");
 module.exports = function(app, userModel){
 
     var auth = authorized;
-    app.post("/api/assignment/login",passport.authenticate('local'),login)
+    //app.post("/api/assignment/login",passport.authenticate('local'),login)
+
     app.post("/api/assignment/register", register);
     app.get("/api/assignment/loggedin", loggedIn);
     app.post("/api/assignment/logout",logout)

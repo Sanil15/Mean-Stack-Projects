@@ -8,21 +8,11 @@
     </hgroup>
 
     <div class="row bootstrap snippets">
-        <div class="col-md-9 col-sm-7">
             <hr>
-        </div>
-        <div class="col-md-3 col-sm-5">
-            <form method="get" role="form" class="search-form-full">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="s" id="search-input" placeholder="Search...">
-                    <i class="entypo-search"></i>
-                </div>
-            </form>
-        </div>
     </div>
 
     <ul>
-        <div dir-paginate="pool in model.carPools | filter:q | itemsPerPage: model.pageSize" current-page="model.currentPage">
+        <div dir-paginate="pool in model.carPools | filter:q | itemsPerPage: 3" current-page="model.currentPage">
             <div class="member-entry">
                 <a ng-click="model.userProfile(pool.userId)" class="member-img">
                     <img src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-rounded">

@@ -33,8 +33,8 @@
             return $http.get("/api/project/message?userName="+username);
         }
 
-        function deleteMessgaeById(messageId){
-            return $http.delete("/api/project/message/"+messageId);
+        function deleteMessgaeById(messageId, which){
+            return $http.delete("/api/project/message/"+messageId+"?which="+which);
         }
 
         function updateMessageById(messageId,mes){

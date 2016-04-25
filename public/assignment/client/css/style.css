@@ -27,3 +27,7 @@ div.border
 .sortorder.reverse:after {
     content: '\25bc';
 }
+
+.glyphicon-remove{
+    color: red;
+}

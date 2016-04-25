@@ -16,6 +16,7 @@
         vm.createReview=createReview;
         vm.updateReview= updateReview;
         vm.sendMessage = sendMessage;
+        vm.goProfile = goProfile;
 
         function init() {
 
@@ -77,7 +78,7 @@
 
                         _results = [];
                         for (_i = 1, _ref = this.options.numStars; 1 <= _ref ? _i <= _ref : _i >= _ref; 1 <= _ref ? _i++ : _i--) {
-                            _results.push(this.$el.append("<span class='btn btn-danger glyphicon .glyphicon-star-empty-2x'></span>"));
+                            _results.push(this.$el.append("<span class='glyphicon sizea .glyphicon-star-empty-5x'></span>"));
                         }
                         return _results;
                     };
@@ -183,9 +184,12 @@
             var rev = {};
             rev.toUser = vm.user.username;
             rev.review = vm.review.review;
+            rev.rating=vm.review.rating;
+            if(rev.review!=null && rev.rating!=null )
             UserService.getCurrentUser()
                 .then(
                     function(response){
+                        console.log(rev);
                         var u = response.data;
                         rev.fromUser= u.username;
                         return ReviewService.createReview(rev)
@@ -209,6 +213,16 @@
                     vm.selectedReview=null;
                     vm.selectedReviewId=-1
                 });
+        }
+
+        function goProfile(username){
+            UserService.findUserByUsername(username)
+                .then(function(response){
+                    if(response.data){
+                        var user=response.data;
+                        $location.path("/showprofile/"+user._id);
+                    }
+                })
         }
 
     }

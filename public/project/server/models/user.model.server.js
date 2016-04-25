@@ -20,7 +20,8 @@ module.exports = function (){
         updateUser : updateUser,
         findUserByUsername: findUserByUsername,
         findUserById: findUserById,
-        uploadImageById: uploadImageById
+        uploadImageById: uploadImageById,
+        updateUserByAdmin:updateUserByAdmin
     };
 
     return api;
@@ -102,7 +103,6 @@ module.exports = function (){
     function createUser(user){
 
         var deferred = q.defer();
-        user.roles=["general"];
         UserModel
             .create(user, function (err, stats){
                 if(!err) {
@@ -148,6 +148,25 @@ module.exports = function (){
         return deferred.promise;
     }
 
+    function updateUserByAdmin(userId, user){
+        var deferred = q.defer();
+        UserModel
+            .update(
+                {_id: userId},
+                {$set: {
+                    "roles": user.roles,
+                }},
+                function (err, results){
+                    if(!err) {
+                        deferred.resolve(results);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
 
     // function to update a user and its various attributes
     function updateUser(userId, user){

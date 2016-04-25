@@ -17,8 +17,12 @@
             vm.createCarPool = createCarPool;
             vm.initMap = initMap;
 
+
+
+
             function init() {
                 initMap();
+
                 if(vm.selectedPool!=null) {
                     vm.pool=vm.selectedPool;
                 }

@@ -66,16 +66,30 @@ module.exports = function(app, messageModel, userModel) {
     function deleteMessageById(req,res){
 
         var messageId=req.params.messageId;
+        var which=req.query.which;
 
-        messageModel.deleteMessageById(messageId)
-            .then(
-                function (doc) {
-                    res.json(doc);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            );
+        if(which == "from") {
+            messageModel.deleteMessageById(messageId)
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
+        else if(which == "to"){
+            messageModel.deleteMessgaeByIdForOtherUser(messageId)
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
     }
 
     function createMessageByUser(req,res){

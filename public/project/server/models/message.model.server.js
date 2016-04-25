@@ -18,7 +18,8 @@ module.exports = function() {
         findAllMessagesForUser: findAllMessagesForUser,
         deleteMessageById: deleteMessgaeById,
         updateMessageById: updateMessageById,
-        findMessageById: findMessageById
+        findMessageById: findMessageById,
+        deleteMessgaeByIdForOtherUser: deleteMessgaeByIdForOtherUser
     };
 
     return api;
@@ -100,6 +101,26 @@ module.exports = function() {
                 {_id: messageId},
                 {$set: {
                     "visibleFromUser": false
+                }},
+                function (err, stats){
+                    if(!err) {
+                        deferred.resolve(stats);
+                    }
+                    else{
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
+
+    function deleteMessgaeByIdForOtherUser(messageId){
+        var deferred = q.defer();
+        MessageModel
+            .update(
+                {_id: messageId},
+                {$set: {
+                    "visibleToUser": false
                 }},
                 function (err, stats){
                     if(!err) {

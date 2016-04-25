@@ -16,7 +16,7 @@
 
         vm.deleteUser = deleteUser;
         vm.findDetail = findDetail;
-
+        vm.makeAdmin = makeAdmin;
 
         function init() {
 
@@ -29,9 +29,16 @@
 
         init();
 
+        function makeAdmin(id){
+            UserService.makeAdmin(id)
+                .then(function(response){
+                    if(response.data)
+                    init()
+                });
+        }
+
 
         function deleteUser(index){
-
             UserService.deleteUserById(vm.users[index]._id)
                 .then(function (response){
                     init();

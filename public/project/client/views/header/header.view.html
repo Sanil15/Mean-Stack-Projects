@@ -20,8 +20,11 @@
                 <li ng-show="user"><a href="#/usercarpool" data-target="#showprofile">My CarPool</a></li>
                 <li ng-show="user"><a href="#/carpool" data-target="#carpool">Create CarPools</a></li>
                 <li ng-show="user"><a href="#/message" data-target="#message">Message Box</a></li>
-                <li ng-show="user"><a ng-click="model.userProfile()" data-target="#usercarpool">User Profile</a></li>
+                <li ng-show="user"><a href="#/editprofile" data-target="#message">Edit Profile</a></li>
+                <li ng-show="user"><a ng-click="model.userProfile()" data-target="#usercarpool">My Public Profile</a></li>
                 <li ng-show="user"><a ng-click="model.logout()" href="#/home" data-target="#home">Logout</a></li>
+                <li ng-show="user.roles.indexOf('admin')>=0"><a href="#/admin" data-target="#home"></a></li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->

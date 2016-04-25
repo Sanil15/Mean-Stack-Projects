@@ -10,13 +10,15 @@
                             <th><span>Username</span></th>
                             <th class="text-center"><span>Status</span></th>
                             <th><span>Email</span></th>
+                            <th>Make Admin</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="user in model.users">
                             <td>
-                                <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <img ng-if="user.image" ng-src="user.image">
+                                <img ng-if="user.image" src="http://bootdey.com/img/Content/avatar/avatar1.png">
                                 <a href="#" class="user-link">{{user.firstName}} {{user.lastName}}</a>
                                 <span class="user-subhead">{{user.roles}}</span>
                             </td>
@@ -27,7 +29,10 @@
                                 <span class="label label-success">Active</span>
                             </td>
                             <td>
-                                <a href="#">{{user.email}}</a>
+                                <a href>{{user.email}}</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-info" ng-click="model.makeAdmin(user._id)">Make Admin</a>
                             </td>
                             <td style="width: 20%;">
                                 <a ng-click="model.findDetail($index)" class="table-link">
@@ -44,18 +49,17 @@
                                 </a>
                             </td>
                         </tr>
+
+                        <div class="text-center">
+                            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>
+                        </div>
+
                         </tbody>
                     </table>
+
+
                 </div>
-                <ul class="pagination pull-right">
-                    <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                </ul>
+
             </div>
         </div>
     </div>
@@ -63,7 +67,7 @@
 
 <div class="container-fluid">
     <div ng-show="model.user!=null">
-        <div class="col-md-6">
+        <div class="col-md-6 col-md-offset-3">
         <table class="table table-resposive table-hover">
 
                 <thread>
@@ -118,28 +122,6 @@
                 </tr>
                 </tbody>
         </table>
-    </div>
-         <div class="col-md-6">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> From</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> For</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Review</th>
-                    <th><span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> Rating</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="rve in model.reviews">
-                    <td>{{rve.fromUser}}</td>
-                    <td>{{rve.toUser}}</td>
-                    <td>{{rve.review}}</td>
-                    <td>{{rve.rating}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
     </div>
 </div>

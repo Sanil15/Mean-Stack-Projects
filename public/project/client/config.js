@@ -16,15 +16,16 @@
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
                 controller: "HomeController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn : getLoggedIn
-                }
+                controllerAs: "model"
             })
             .when("/admin",{
                 templateUrl: "views/admin/admin.view.html",
                 controller: "AdminController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
+
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
@@ -115,34 +116,12 @@
             });
     }
 
-    function checkLoggedIn(UserService, $q, $location) {
-        var deferred = $q.defer();
-
-        UserService
-            .getCurrentUser()
-            .then(function(response) {
-                var currentUser = response.data;
-                // console.log(currentUser);
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    console.log("session not found");
-                    $location.url("/home");
-                }
-            });
-
-        return deferred.promise;
-    }
-
-
     function getLoggedIn(UserService, $q) {
         var deferred = $q.defer();
 
         UserService
             .getCurrentUser()
-            .then(function (response) {
+            .then(function(response){
                 var currentUser = response.data;
                 UserService.setCurrentUser(currentUser);
                 deferred.resolve();
@@ -150,5 +129,32 @@
 
         return deferred.promise;
     }
+
+
+    var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/project/loggedin')
+            .success(function(user)
+            {
+                $rootScope.errorMessage = null;
+                // User is Authenticated
+                if (user !== '0')
+                {
+                    $rootScope.user = user;
+                    deferred.resolve();
+                }
+                // User is Not Authenticated
+                else
+                {
+                    $rootScope.error = 'You need to log in.';
+                    deferred.reject();
+                    $location.url('/home');
+                }
+            });
+
+        return deferred.promise;
+    };
 
 })();

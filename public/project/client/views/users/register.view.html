@@ -11,15 +11,15 @@
     <div class="stepwizard">
         <div class="stepwizard-row setup-panel">
             <div class="stepwizard-step">
-                <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                <a href="#step-1" type="button" class="btn form-btn" id="btn-circle">1</a>
                 <p>Step 1</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                <a href="#step-2" type="button" class="btn form-btn" id="btn-circle2" disabled="disabled">2</a>
                 <p>Step 2</p>
             </div>
             <div class="stepwizard-step">
-                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <a href="#step-3" type="button" class="btn form-btn" id="btn-circle1" disabled="disabled">3</a>
                 <p>Step 3</p>
             </div>
         </div>
@@ -85,7 +85,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary nextBtn col-xs-3 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
+                    <button class="btn form-btn col-md-5 nextBtn col-xs-3 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
                 </div>
             </div>
             <!-- Wizard STEP 1 END -->
@@ -102,7 +102,7 @@
                             <label class="col-sm-2 control-label" for="textinput">Country</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
-                                    <input type="text" placeholder="Your Country" class="form-control" required>
+                                    <input ng-model="model.user.country" type="text" placeholder="Your Country" class="form-control" required>
                                     <span class="input-group-addon label-danger"><i class="fa fa-flag"></i></span>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
 
 
                         <p style="display:inline;" class="small col-xs-9 col-sm-offset-2 col-sm-7">this is a block of copy for you to write some blurb.</p>
-                        <button class="btn btn-primary nextBtn col-xs-3 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
+                        <button  class="btn form-btn nextBtn col-xs-3 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
                     </div>
                 </div>
             </div>
@@ -174,8 +174,8 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
                             <p class="text-center">Almost Done! Use the form below to set your password. Your password cannot be the same as your username.</p>
-                            <form method="post" id="passwordForm">
-                                <input type="password" model.user.password class="input-lg form form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
+                            <form method="post" id="passwordForm" novalidate>
+                                <input type="password" ng-model="model.user.password"  class="form " name="password1" id="password1" placeholder="New Password" autocomplete="off">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 8 Characters Long<br>
@@ -186,13 +186,13 @@
                                         <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> One Number
                                     </div>
                                 </div>
-                                <input ng-model="model.confirmPassword" type="password" class="form input-lg form-control" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
+                                <input ng-model="model.confirmPassword" type="password" class="form" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
                                     </div>
                                 </div>
-                                <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Changing Password..." value="Change Password">
+                                <input type="submit" class="btn form-btn btn-block" ng-click="model.register(model.user,model.confirmPassword)" data-loading-text="Checking Password..." value="Register">
                             </form>
                         </div><!--/col-sm-6-->
                     </div><!--/row-->
@@ -204,135 +204,4 @@
 </div>
 
 
-<div class="container-fluid page">
-    <div class="row ">
-
-        <div class="col-md-4 col-md-offset-4 text-center">
-            <h2 class="main-title">Register</h2>
-            <hr>
-            <div class="divide50"></div>
-        </div>
-    </div>
-
-    <div class="row">
-
-    <div class="col-md-2">
-                <div class="thumbnail">
-                    <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" >
-                </div>
-                <div class="centered">
-                    <p><a href="" class="btn btn-success btn-block" role="button">Browse</a> </p>
-                </div>
-        </div>
-
-        <div class="col-md-10">
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">First Name</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.firstName" type="text" class="form" placeholder="First Name"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Last Name</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.lastName" type="text" class="form" placeholder="Last Name"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">User Name</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.username" type="text" class="form" placeholder="User Name"/>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Email</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.email" type="text" class="form" placeholder="Email"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.password" type="password" class=" form"  placeholder="Password">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Confirm Password</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.confirmPassword" type="password" class="form" placeholder="Confirm Password">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">DOB</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.dob" class="form" type="date">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Country</label>
-                <div class="col-sm-10">
-                <select ng-model="model.user.country" class="form">
-                    <option><a href="#">America</a></option>
-                    <option><a href="#">India</a></option>
-                    <option><a href="#">Mexico</a></option>
-                    <option><a href="#">Russia</a></option>
-                    <option><a href="#">China</a></option>
-                    <option><a href="#">Japan</a></option>
-                </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">State</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.state" class="form" placeholder="State">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">City</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.city" class="form" placeholder="City">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Address</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.address" class="form" placeholder="Address">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Zip Code</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.zipCode" class="form" placeholder="Zip Code">
-                </div>
-            </div>
-
-            <div class="form-group">
-                    <label class="col-sm-2 control-label">Contact No.</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.user.contact" class="form" placeholder="contact">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.register(model.user,model.confirmPassword)" class="btn form-btn btn-block">Register</a>
-                </div>
-            </div>
-        </form>
-        </div>
-    </div>
-</div>
 

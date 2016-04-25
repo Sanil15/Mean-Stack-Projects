@@ -4,16 +4,12 @@
 
         <div class="ms-menu">
             <div class="ms-user clearfix">
-                <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar pull-left">
+                <img ng-if="model.currentUser.image" ng-src="model.currentUser.image" src="" alt="" class="img-avatar pull-left">
+                <img ng-if="!model.currentUser.image" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar pull-left">
                 <div>Signed in as <br> {{model.currentUser.username}}</div>
             </div>
 
             <div class="p-15">
-                <div class="dropdown">
-                    <a class="btn btn-primary btn-block" href="" data-toggle="dropdown">Messages <i class="caret m-l-5"></i></a>
-                    <ul class="dropdown-menu dm-icon w-100">
-                    </ul>
-                </div>
             </div>
 
             <div class="list-group lg-alt">
@@ -54,11 +50,17 @@
 
             <div class="scrolling">
 
+            <div class="chat-head" ng-if="!model.conversation">
+                <br>
+                <i class="fa fa-hand-o-left fa-5x" aria-hidden="true">
+                </i>
+                <h1 class="main-title"> Click On User to Load Conversation</h1>
+            </div>
             <div ng-repeat="message in model.conversation">
 
                 <div class="message-feed media" ng-if="message.fromUser != model.currentUser.username">
                     <div class="pull-left" ng-if="model.delSelect == 1">
-                    <span ng-click="model.deleteMessage(message._id)" id="red2" class="glyphicon glyphicon-remove dir" aria-hidden="true"></span>
+                    <span ng-click="model.deleteMessage(message)" id="red2" class="glyphicon glyphicon-remove dir"  aria-hidden="true"></span>
                     </div>
                     <div class="pull-left">
                         <img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar">
@@ -74,7 +76,7 @@
                 <div class="message-feed right" ng-if="message.fromUser == model.currentUser.username" >
 
                     <div class="pull-right" ng-if="model.delSelect == 1">
-                        <span ng-click="model.deleteMessage(message._id)" class="glyphicon glyphicon-remove dir" aria-hidden="true"></span>
+                        <span ng-click="model.deleteMessage(message)" class="glyphicon glyphicon-remove dir"aria-hidden="true"></span>
                  </div>
 
                     <div class="pull-right">
@@ -87,13 +89,12 @@
                     <small class="mf-date"><i class="fa fa-clock-o"></i>{{message.created | date:'MM/dd/yyyy @ h:mma'}}</small>
                 </div>
                   </div>
-
             </div>
             </div>
 
             <div class="msb-reply">
-                <textarea ng-model="newMessage.message" placeholder="What's on your mind..."></textarea>
-                <button ng-click="model.createNew(newMessage)"><i class="fa fa-paper-plane-o"></i></button>
+                <textarea ng-model="model.newMessage.message" placeholder="What's on your mind..."></textarea>
+                <button ng-click="model.createNew(model.newMessage)"><i class="fa fa-paper-plane-o"></i></button>
             </div>
 
         </div>

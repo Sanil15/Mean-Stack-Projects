@@ -17,6 +17,7 @@
 
         function init() {
             vm.carPools=null;
+
         }
 
         init();
@@ -38,11 +39,11 @@
 
         var cities = [
             {
-                city: 'India',
+                city: 'London',
                 desc: 'This is the best country in the world!',
-                lat: 23.200000,
-                long: 79.225487
-            },
+                lat: 51.5074,
+                long: 0.1278
+    },
             {
                 city: 'New Delhi',
                 desc: 'The Heart of India!',
@@ -71,7 +72,7 @@
 
         var mapOptions = {
             zoom: 4,
-            center: new google.maps.LatLng(25, 80),
+            center: new google.maps.LatLng(51, 0.1),
             mapTypeId: google.maps.MapTypeId.TERRAIN
         }
 

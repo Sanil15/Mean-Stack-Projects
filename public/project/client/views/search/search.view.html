@@ -17,63 +17,94 @@
                     <div class="col-md-4 col-md-5 col-xs-12">
                         <div id="right-panel"></div>
                     </div>
-                    <div class="col-lg-8 col-md-7 col-xs-12">
-                        <p class="contact-description">
-                        <form class="form-horizontal" >
 
-                            <div class="form-group">
-                                <label class="col-md-3 col-lg-2">Source</label>
-                                <div class="col-md-4 col-lg-5 ">
+                    <div class="container">
+
+                        <div class="col-lg-8 col-md-7 col-xs-12">
+
+                        <div class="jumbotron">
+
+
+
+                            <form class="form-horizontal" >
+
+                                <div class="row">
+                                <div class="chat-head">
+                                    <h1 class="main-title"> Details</h1>
+                                    <hr style="color: black">
+                                </div>
+                                </div>
+
+                                <div class="row">
+                                <div class="col-md-2 col-lg-2">
+                                    <label >Source</label>
+                                </div>
+                                <div class="col-md-10 col-lg-10 ">
+                                    {{model.selectedPool.source}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2">
+                                <label>Destination</label>
+                                </div>
+                                <div class="col-md-10 col-lg-10 ">
                                     {{model.selectedPool.destination}}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-3 col-lg-2">Destination</label>
-                                <div  class="col-md-4 col-lg-5 ">
-                                    {{model.selectedPool.destination}}
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2">
+                                <label>Date</label>
+                                </div>
+                                <div class="col-md-10 col-lg-10 ">
+                                    {{model.selectedPool.date | date}}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-3 col-lg-2">Date</label>
-                                <div class="col-md-4 col-lg-5 ">
-                                    {{model.selectedPool.date}}
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2 ">
+                                <label>Time</label>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-3 col-lg-2">Time</label>
-                                <div class="col-md-4 col-lg-5 ">
+                                <div class="col-md-10 col-lg-10 ">
                                     {{model.selectedPool.time}}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-3 col-lg-2">Car Info</label>
-                                <div class="col-md-4 col-lg-5 ">
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2 ">
+                                <label>Car Info</label>
+                                </div>
+                                <div class="col-md-10 col-lg-10 ">
                                     {{model.selectedPool.carInfo}}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-3 col-lg-2">Base Price</label>
-                                <div class="col-md-4 col-lg-5 ">
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2 ">
+                                <label>Base Price</label>
+                                </div>
+                                <div class="col-md-10 col-lg-10 ">
                                     {{model.selectedPool.basePrice}}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-3 col-sm-6">No. Of Seats</label>
-                                <div class="col-md-4 col-sm-6 ">
+                            <div class="row">
+                                <div class="col-md-2 col-lg-2 ">
+                                <label>No. Of Seats</label>
+                                </div>
+                                <div class="col-md-10 col-sm-10 ">
                                     {{model.selectedPool.noOfSeats}}
                                 </div>
                             </div>
                         </form>
 
-                        </p>
+
+                    </div>
+                    </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

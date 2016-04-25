@@ -28,34 +28,33 @@
 <div class=" profile_continer bootstrap snippet profile_page">
 
     <div class="profile_row">
-        <div class="profile_panel">
+        <div class="profile_panel ">
             <div class="cover-photo">
                 <div class="fb-timeline-img">
-                    <img src="http://lorempixel.com/930/287/nature/8/" alt="">
+                    <img ng-src="http://pre02.deviantart.net/ae8b/th/pre/f/2012/139/2/d/street_wallpaper_by_microkey-d50ap4m.jpg" class="port" alt="">
                 </div>
                 <div class="fb-name">
-                    <h2><a href="#">{{model.user.firstName}} {{model.user.lastName}}</a></h2>
+                    <h2><a href="#">{{model.user.firstName}} {{model.user.lastName}}</a>
+
+                    </h2>
                 </div>
             </div>
 
 
-
         <div class="panel-body">
-
-
                 <div class="profile-thumb">
-                    <img ng-src="{{model.user.image}}" alt="">
+                    <img ng-if="model.user.image" ng-src="{{model.user.image}}" alt="">
+                    <img ng-if="!model.user.image" ng-src="http://gurucul.com/wp-content/uploads/2015/01/default-user-icon-profile.png" alt="">
                 </div>
 
 
                     <div class="fb-user-mail info">
+                        <button class="btn btn-sm tip btn-responsive pull-right" title="" data-toggle="modal" data-target="#exampleModal" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
                         <p><span class="fa fa-map-marker"></span> <span class="title">Address:</span>  {{model.user.state}},{{model.user.country}}</p>
                         <p><span class="fa fa-envelope-o"></span> <span class="title">E-Mail:</span> {{model.user.email}}</p>
 
                         <div class="actions">
                             <div class="btn-group">
-                                <button class="btn btn-sm tip btn-responsive" title="" data-toggle="modal" data-target="#exampleModal" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
-                                <button class="btn btn-sm tip btn-responsive" title="" data-original-title="Recommend"><span class="glyphicon glyphicon-share-alt glyphicon glyphicon-white"></span> Recommend</button>
                             </div>
                         </div>
 
@@ -66,33 +65,36 @@
 
         <div class="profile_panel profile-info">
                 <form>
-                    <textarea ng-model="model.review.review" class="form-control input-lg p-text-area" rows="2" placeholder="Your Opinion Matters"></textarea>
+                    <textarea ng-model="model.review.review" class="form-control input-lg p-text-area" rows="4" placeholder="Your Opinion Matters"></textarea>
                 </form>
-                <footer class="panel-footer">
-                    <a ng-click="model.createReview()" class="btn btn-primary pull-right">
+                <footer class="panel-footer col-md-12">
+                    <div class="nav col-md-6 pull-left">
+                        <div id="stars" class="starrr"></div><div id="count"></div>
+                    </div>
+                    <div class="col-md-6 pull-right">
+                    <a ng-click="model.createReview()" class="btn form-btn pull-right">
                         <i class="fa fa-check-square-o"></i>
                         Post Review
                     </a>
-                    <div class="nav">
-                        <div id="stars" class="starrr"></div>
-                        <div id="count"></div> stars
                     </div>
-                </footer>
+                 </footer>
         </div>
 
-        <div class="profile_panel" ng-repeat="review in model.reviews">
-            <div class="panel-body">
 
+        <div style="padding-top: 100px"></div>
+
+
+        <div class="panel profile_panel" ng-repeat="review in model.reviews">
+            <div class="panel-body">
                 <div class="fb-user-thumb">
-                    <img src="http://bootdey.com/img/Content/avatar/avatar2.png" alt="">
+                    <img src="http://gurucul.com/wp-content/uploads/2015/01/default-user-icon-profile.png" alt="">
                 </div>
 
                 <div class="fb-user-details">
-                    <h3><a href="/client/{}" class="#">{{review.fromUser}}</a></h3>
+                    <h3><a ng-click="model.goProfile(review.fromUser)" class="#">{{review.fromUser}}</a></h3>
                     <p>{{review.created | date}}</p>
                     <p>{{review.rating}} stars</p>
                 </div>
-
 
 
                 <div class="clearfix"></div>

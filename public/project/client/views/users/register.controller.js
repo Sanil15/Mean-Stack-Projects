@@ -125,8 +125,11 @@
 
             // function to register a current user
             function register(user,confirmPassword){
-
+                console.log("HI");
+                console.log(user);
+                console.log(confirmPassword)
                 if(user.password==confirmPassword){
+                    console.log("HI");
                     UserService.createUser(user)
                         .then(function (response){
                                 UserService.setCurrentUser(response.data);

@@ -20,7 +20,10 @@
             setCurrentUser : setCurrentUser,
             getCurrentUser : getCurrentUser,
             findUserById: findUserById,
-            logout: logout
+            logout: logout,
+            findUserByUsername:findUserByUsername,
+            makeAdmin: makeAdmin
+
          };
 
         return api;
@@ -39,15 +42,22 @@
             return $http.get("/api/project/loggedin");
         }
 
+        function login(user) {
+            return $http.post("/api/assignment/login", user);
+        }
 
         // function to find Email and Password
         function findUserByCredentials(username, password){
-           return $http.get("/api/project/user?"+"username=" + username + "&password=" + password);
+           return $http.post("/api/project/login?"+"username=" + username + "&password=" + password);
         }
 
-       function findUserById(userId){
+        function findUserByUsername(username){
+            return $http.get("/api/project/user?"+"username=" + username);
+        }
+
+        function findUserById(userId){
            return $http.get("/api/project/user/"+userId);
-       }
+        }
 
         // function returns all set of users
         function findAllUsers(){
@@ -68,6 +78,10 @@
         // function to update a user and its various attributes
         function updateUser(userId, user){
             return $http.put("/api/project/user/"+userId,user);
+        }
+
+        function makeAdmin(userId, user){
+            return $http.post("/api/project/admin/"+userId);
         }
     }
 })();
