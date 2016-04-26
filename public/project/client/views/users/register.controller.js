@@ -154,7 +154,7 @@
                                 $location.url("/showprofile");
                                }}
                         , function(err){
-                               vm.error= "Username Already Exists";
+                               vm.error= err;
                                $location.url("/register");
                             });
                 }
