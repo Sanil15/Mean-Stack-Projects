@@ -61,7 +61,7 @@ app.use(passport.session());
 
 
 
-require("./public/assignment/server/app.js")(app,db);
+//require("./public/assignment/server/app.js")(app,db);
 require("./public/project/server/app.js")(app,db);
 
 app.get('/hello', function(req, res){

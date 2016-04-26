@@ -151,7 +151,9 @@
                         .then(function (response){
                                if(response){
                                 UserService.setCurrentUser(response.data);
-                                $location.url("/showprofile");
+                                var a=response.data;
+
+                                $location.url("/showprofile"+ a._id);
                                }}
                         , function(err){
                                vm.error= err;
