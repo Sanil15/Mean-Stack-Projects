@@ -66,6 +66,10 @@ border-radius: 4px;
 .main-title{
   font-family: 'Lobster', cursive;
   font-size: 40px;
+  color: #f14444;
+}
+.main-title:hover{
+    color: #111;
 }
 #about{
   font-family: "Lato";
@@ -119,17 +123,15 @@ h3.header-text{
   }
 
 .btn-default {
-    color: #6C472C;
+    color: #f14444;
   }
 
 .btn-primary {
-  background-color: #228C87;
-  border-color: #228989;
+  background-color: #f14444;
   height: inherit;
 }
 .btn-primary:hover{
-  background-color: #6DD1C9;
-  border-color: #6DD1C9;
+  background-color: #111;
 }  
 .space{
   margin-top: 70px;
@@ -721,7 +723,7 @@ figure.effect-zoe:hover p.icon-links a:first-child {
     height: auto;
     padding:15px;
     color:#fff;
-    background:#8BC3A3;
+    background:#f14444;
     border:none;
     outline: none;
     -webkit-transition: all 0.3s;

@@ -8,22 +8,52 @@
     </div>
 
     <!-- Step Wizard -->
-    <div class="stepwizard">
+    <div class="stepwizard" >
+
         <div class="stepwizard-row setup-panel">
-            <div class="stepwizard-step">
-                <a href="#step-1" type="button" class="btn form-btn" id="btn-circle">1</a>
+
+            <div class="row">
+                <div class="col-md-12" ng-show="model.x == 3">
+                    <div class="progress">
+                        <div class="one primary-color"></div><div class="two primary-color"></div><div class="three primary-color"></div>
+                        <div class="progress-bar primary-color" style="width: 100%;"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="progress" ng-show="model.x == 1">
+                        <div class="one primary-color"></div><div class="two no-color"></div><div class="three no-color"></div>
+                        <div class="progress-bar primary-color" style="width: 25%;"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="progress" ng-show="model.x == 2">
+                        <div class="one primary-color"></div><div class="two primary-color"></div><div class="three no-color"></div>
+                        <div class="progress-bar primary-color" style="width: 50%;"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div ng-show="model.show2" class="stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-primary btn-circle" id="btn-circle">1</a>
                 <p>Step 1</p>
             </div>
-            <div class="stepwizard-step">
-                <a href="#step-2" type="button" class="btn form-btn" id="btn-circle2" disabled="disabled">2</a>
+            <div ng-show="model.show2" class="stepwizard-step">
+                <a  href="#step-2" type="button" class="btn btn-default btn-circle" id="btn-circle2" disabled="disabled">2</a>
                 <p>Step 2</p>
             </div>
-            <div class="stepwizard-step">
-                <a href="#step-3" type="button" class="btn form-btn" id="btn-circle1" disabled="disabled">3</a>
+            <div ng-show="model.show2" class="stepwizard-step">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" id="btn-circle1" disabled="disabled">3</a>
                 <p>Step 3</p>
             </div>
         </div>
     </div>
+    <br>
     <br>
     <!-- Step Wizard END -->
     <!-- quote form -->
@@ -69,7 +99,7 @@
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <input autocomplete="on" type="date" ng-model="model.user.dob" placeholder="unique user name" class="form-control" required>
-                                <span class="input-group-addon label-danger"><i class="fa fa-calender fa-lg text-white"></i></span>
+                                <span class="input-group-addon label-danger"><i class="fa fa-calendar-check-o fa-lg text-white"></i></span>
                             </div>
                         </div>
                     </div>
@@ -85,7 +115,7 @@
                         </div>
                     </div>
 
-                    <button class="btn form-btn col-md-5 nextBtn col-xs-3 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
+                    <button ng-click="model.x=2" class="btn btn-primary nextBtn col-xs-12 col-md-6  pull-right extend" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
                 </div>
             </div>
             <!-- Wizard STEP 1 END -->
@@ -95,7 +125,6 @@
                 <div class="col-sm-12">
 
                     <div class="form-group">
-
 
                         <!-- Text input-->
                         <div class="form-group">
@@ -159,10 +188,7 @@
                             </div>
                         </div>
 
-
-
-                        <p style="display:inline;" class="small col-xs-9 col-sm-offset-2 col-sm-7">this is a block of copy for you to write some blurb.</p>
-                        <button  class="btn form-btn nextBtn col-xs-3 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
+                        <button ng-click="model.x=3" class="btn btn-primary nextBtn col-md-6 col-xs-12 pull-right" type="button" >Next Step <i class="fa fa-angle-double-right"></i> </button>
                     </div>
                 </div>
             </div>
@@ -202,6 +228,4 @@
 </fieldset><!-- form contents END -->
 </form>
 </div>
-
-
 
