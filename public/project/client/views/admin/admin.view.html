@@ -15,11 +15,12 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         <tr ng-repeat="user in model.users">
                             <td>
-                                <img ng-if="user.image" ng-src="user.image">
-                                <img ng-if="user.image" src="http://bootdey.com/img/Content/avatar/avatar1.png">
-                                <a href="#" class="user-link">{{user.firstName}} {{user.lastName}}</a>
+                                <img src="https://image.freepik.com/free-icon/male-user-shadow_318-34042.png
+                                ">
+                                <a ng-click="model.userProfile(user._id)" class="user-link">{{user.firstName}} {{user.lastName}}</a>
                                 <span class="user-subhead">{{user.roles}}</span>
                             </td>
                             <td>
@@ -49,12 +50,14 @@
                                 </a>
                             </td>
                         </tr>
+                        </div>
+
+                        </tbody>
 
                         <div class="text-center">
                             <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="dirPagination.tpl.html"></dir-pagination-controls>
                         </div>
 
-                        </tbody>
                     </table>
 
 

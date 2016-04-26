@@ -17,6 +17,7 @@
         vm.deleteUser = deleteUser;
         vm.findDetail = findDetail;
         vm.makeAdmin = makeAdmin;
+        vm.userProfile=userProfile;
 
         function init() {
 
@@ -57,5 +58,11 @@
                     vm.reviews=response.data;
                 });
         }
+
+        function userProfile(userId){
+            console.log(userId);
+            $location.path("/showprofile/"+ userId);
+        }
+
     }
 })();

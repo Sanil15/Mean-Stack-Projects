@@ -38,12 +38,25 @@
 
 
         var cities = [
+
+            {
+                city: 'Paris',
+                desc: 'Wow',
+                lat: 48.8566,
+                long:2.3522
+            },
+            {
+                city: 'Washington',
+                desc: 'DC!',
+                lat: 77.0369    ,
+                long: 38.9072
+            },
             {
                 city: 'London',
-                desc: 'This is the best country in the world!',
+                desc: 'This is the best city in the world!',
                 lat: 51.5074,
                 long: 0.1278
-    },
+            },
             {
                 city: 'New Delhi',
                 desc: 'The Heart of India!',
@@ -83,6 +96,7 @@
         var infoWindow = new google.maps.InfoWindow();
 
         var createMarker = function (info) {
+
 
             var marker = new google.maps.Marker({
                 map: $scope.map,

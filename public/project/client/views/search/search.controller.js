@@ -12,6 +12,9 @@
     function SearchController($http, CarPoolService, UserService, $location, $routeParams) {
 
         var vm = this;
+
+        vm.userProfile=userProfile;
+
         var URL="http://maps.googleapis.com/maps/api/directions/json?&origin=ORIGIN&destination=DESTINATION&key=AIzaSyD_70F4Mj8HaLj4AS8IYt4ZXyJGm2v-KD0";
 
         function init() {
@@ -85,6 +88,11 @@
                 console.log(response);
                 vm.legs = response.routes[0].legs[0];
             }
+        }
+
+        function userProfile(userId){
+            console.log(userId);
+            $location.path("/showprofile/"+ userId);
         }
 
     }}())
