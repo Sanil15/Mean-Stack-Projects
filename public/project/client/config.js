@@ -112,7 +112,10 @@
                 }
             })
             .otherwise({
-                redirectTo: "/home"
+                redirectTo: "/home",
+                resolve:{
+                    getLoggedIn: getLoggedIn
+                }
             });
     }
 

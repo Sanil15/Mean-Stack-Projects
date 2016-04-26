@@ -68,6 +68,12 @@ border-radius: 4px;
   font-size: 40px;
   color: #f14444;
 }
+
+.main-title-home{
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+}
+
 .main-title:hover{
     color: #111;
 }
@@ -361,7 +367,7 @@ a#menu-close:hover {
 /* Services */
 
 .services {
-  background: #7fbbda;
+  background: #f14444;
   padding: 50px 0;
   color: #ffffff;
 }
@@ -369,7 +375,7 @@ a#menu-close:hover {
 
 @media (min-width: 320px) and (max-width: 1024px) { 
       .services {
-      background: #7fbbda;
+      background: #f14444;
       padding: 50px 0;
       color: #ffffff;
     }
@@ -676,13 +682,13 @@ figure.effect-zoe:hover p.icon-links a:first-child {
   }
 
   .form:hover{
-    border:1px solid #8BC3A3;
+    border:1px solid #f14444;
   }
 
   .form:focus{
     color: white;
     outline: none;
-    border:1px solid #8BC3A3;
+    border:1px solid #f14444;
   }
 
   .textarea{

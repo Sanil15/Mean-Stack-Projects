@@ -77,7 +77,8 @@ io.sockets.on('connection', function(socket){
     socket.on('chat',function(message){
         console.log("chat");
         console.log(message);
-        io.in(message.toUser).emit('chat',message.msg);
+        var alertMsg= "New Message : " + message.message + "from "+"@"+message.fromUser;
+        io.in(message.toUser).emit('chat',alertMsg);
     });
 
     socket.on('create', function(user){

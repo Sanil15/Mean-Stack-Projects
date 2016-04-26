@@ -1,6 +1,6 @@
 <!-- Navigation -->
 
-<nav class="navbar navbar-findcond navbar-fixed-top">
+<nav class="navbar navbar-findcond navbar-fixed-top" ng-controller="HeaderController as model">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -22,7 +22,7 @@
                 </li>
 
                 <li ng-show="user" class="dropdown">
-                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User: {{user}}<span class="caret"></span></a>
+                    <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User: {{user.username}}<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li ng-show="user"><a href="#/usercarpool" data-target="#showprofile">My CarPool</a></li>
                         <li ng-show="user"><a href="#/carpool" data-target="#carpool">Create CarPools</a></li>
@@ -31,7 +31,7 @@
                     </ul>
                 </li>
                 <li ng-show="user.roles.indexOf('admin')>=0"><a href="#/admin" data-target="#home">Admin</a></li>
-                <li ng-show="user"><a ng-click="model.logout()" href="#/home" data-target="#home">Logout</a></li>
+                <li ng-show="user"><a ng-click="model.logout()" data-target="#home">Logout</a></li>
 
             </ul>
         </div>

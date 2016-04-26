@@ -34,9 +34,9 @@
                     <img ng-src="http://pre02.deviantart.net/ae8b/th/pre/f/2012/139/2/d/street_wallpaper_by_microkey-d50ap4m.jpg" class="port" alt="">
                 </div>
                 <div class="fb-name">
-                    <h2><a href="#">{{model.user.firstName}} {{model.user.lastName}}</a>
-
+                    <h2><a href="#" class="colora">{{model.user.firstName}} {{model.user.lastName}}</a>
                     </h2>
+
                 </div>
             </div>
 
@@ -48,31 +48,32 @@
                 </div>
 
 
-                    <div class="fb-user-mail info">
-                        <button class="btn btn-sm tip btn-responsive pull-right" title="" data-toggle="modal" data-target="#exampleModal" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
-                        <p><span class="fa fa-map-marker"></span> <span class="title">Address:</span>  {{model.user.state}},{{model.user.country}}</p>
-                        <p><span class="fa fa-envelope-o"></span> <span class="title">E-Mail:</span> {{model.user.email}}</p>
+                <div class="fb-user-mail info row">
+                        <p><span class="fa fa-map-marker colora"></span> <span class="title">Address:</span>  {{model.user.state}},{{model.user.country}}</p>
+                        <p><span class="fa fa-envelope-o colora"></span> <span class="title">E-Mail:</span> {{model.user.email}}</p>
+                        <p><span class="fa fa-user colora"></span> <span class="title">Username:</span> {{model.user.username}}</p>
 
-                        <div class="actions">
-                            <div class="btn-group">
-                            </div>
-                        </div>
 
                     </div>
 
-            </div>
+                <div class="actions pull-right">
+                <div class="btn-group">
+                    <button class="btn tip btn-responsive col-xs-12 form-btn pull-right" title="" data-toggle="modal" data-target="#exampleModal" data-original-title="Send message"><span class="glyphicon glyphicon-envelope glyphicon glyphicon-white"></span> Message</button>
+                </div>
+                </div>
+        </div>
         </div>
 
         <div class="profile_panel profile-info">
                 <form>
-                    <textarea ng-model="model.review.review" class="form-control input-lg p-text-area" rows="4" placeholder="Your Opinion Matters"></textarea>
+                    <textarea  ng-model="model.review.review" class="form-control input-lg p-text-area" rows="4" placeholder="Your Opinion Matters"></textarea>
                 </form>
                 <footer class="panel-footer col-md-12">
                     <div class="nav col-md-6 pull-left">
                         <div id="stars" class="starrr"></div><div id="count"></div>
                     </div>
                     <div class="col-md-6 pull-right">
-                    <a ng-click="model.createReview()" class="btn form-btn pull-right">
+                    <a ng-click="model.createReview()" class="btn form-btn col-xs-12 pull-right">
                         <i class="fa fa-check-square-o"></i>
                         Post Review
                     </a>
@@ -81,7 +82,9 @@
         </div>
 
 
-        <div style="padding-top: 100px"></div>
+        <div style="padding-top: 100px">
+
+        </div>
 
 
         <div class="panel profile_panel" ng-repeat="review in model.reviews">

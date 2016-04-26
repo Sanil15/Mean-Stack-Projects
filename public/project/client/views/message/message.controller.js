@@ -10,21 +10,28 @@
 
         var vm = this;
 
-        vm.createMessage=createMessage;
         vm.deleteMessage=deleteMessage;
         vm.updateMessage=updateMessage;
         vm.selectMessage=selectMessage;
         vm.loadConversation=loadConversation;
         vm.createNew = createNew;
-        vm.send = send;
         vm.disconnect=disconnect;
         vm.del = del;
 
         var socket=null;
 
+
+
         function init() {
             vm.selectedMessageId=-1;
             vm.delSelect = -1;
+
+            if ($location.absUrl().indexOf("localhost") > -1) {
+                socket = io();
+            }
+            else{
+                socket=io("http://webdev2016-jainsanil.rhcloud.com:8000");
+            }
 
             $('.scrolling').css('max-height',$(window).height());
 
@@ -78,12 +85,13 @@
 
                 })
 
-            if ($location.absUrl().indexOf("localhost") > -1) {
-                socket = io();
-            }
-            else{
-                socket=io("http://webdev2016-jainsanil.rhcloud.com:8000");
-            }
+            function createNoty(message, type) {
+                var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-6">';
+                html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
+                html += message;
+                html += '</div>';
+                $(html).hide().prependTo('#noty-holder').slideDown();
+            };
 
             UserService.getCurrentUser()
                 .then(function(response){
@@ -91,14 +99,22 @@
                     socket.on('chat',function(message){
                         console.log("RECEIVE");
                         console.log(message);
-                        vm.mymsg = message;
+                        $(function(){
+                            createNoty(message, 'info');
+                            $('.page-alert .close').click(function(e) {
+                                e.preventDefault();
+                                $(this).closest('.page-alert').slideUp();
+                            });
+                        });
                         $scope.$apply();
                     });
                 })
 
+
         }
 
         init();
+
 
 
         function del(){
@@ -112,44 +128,31 @@
             loadConversation(vm.selectedUser);
         }
 
-        function send(message){
-            socket.emit("chat", message);
-        }
-
         function disconnect(){
             socket.emit('disconnect');
         }
 
         function createNew(message){
 
-            message.fromUser=vm.currentUser.username;
-            message.toUser=vm.selectedUser;
-            send(message);
+            if(vm.selectedUser && message.message) {
+                message.fromUser = vm.currentUser.username;
+                message.toUser = vm.selectedUser;
 
-            MessageService.createMessage(message)
-                .then(function (response){
-                    return MessageService.findAllMessagesForUser(vm.currentUser.username);
-                }).then(function(resposne){
-                    vm.convs=resposne.data;
-                    send(message);
+
+                MessageService.createMessage(message)
+                    .then(function (response) {
+                        return MessageService.findAllMessagesForUser(vm.currentUser.username);
+                    }).then(function (resposne) {
+                    vm.convs = resposne.data;
+                    console.log(message);
+                    socket.emit('chat', message);
+                    init();
                     vm.newMessage = null;
                     loadConversation(vm.selectedUser);
                 });
-
+            }
         }
 
-        function createMessage(message){
-            MessageService.createMessage(message)
-                .then(function (response){
-                    return MessageService.findAllMessages();
-                })
-                .then(function (response){
-                    vm.messages=response.data;
-                    vm.msg=null;
-                    vm.selectedMessage=null;
-                    vm.selectedMessageId=-1;
-                });
-        }
 
         function deleteMessage(message){
             var which;

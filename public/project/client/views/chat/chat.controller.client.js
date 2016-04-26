@@ -46,6 +46,7 @@
         init();
 
         function send(message){
+            console.log(message);
             socket.emit("chat", message);
             init();
         }

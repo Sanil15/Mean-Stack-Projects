@@ -44,8 +44,10 @@
                             console.log(response.data);
                             UserService.setCurrentUser(response.data);
                             $location.url("/showprofile/"+response.data._id);
-                        }
-                });
+                        }},
+                    function(err){
+                        vm.error = "Invalid Login Credentials!!!";
+                    });
 
         }
 

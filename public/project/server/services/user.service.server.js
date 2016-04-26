@@ -148,7 +148,7 @@ module.exports = function(app, userModel) {
         userModel.findUserByCredentials(credentials)
             .then(
                 function (doc) {
-                    console.log("USER");
+                    //console.log("USER");
                     req.session.user=doc;
                     res.json(doc);
                 },
@@ -221,6 +221,7 @@ module.exports = function(app, userModel) {
         console.log("hi")
         var user = req.body;
         user.roles=["general"];
+        console.log(user.username);
         userModel
             .findUserByUsername(user.username)
             .then(
@@ -279,8 +280,8 @@ module.exports = function(app, userModel) {
     function updateUserById(req, res) {
         var user = req.body;
         var userId = req.params.id;
-        console.log(user);
-        console.log(userId);
+        //console.log(user);
+        //console.log(userId);
         userModel.updateUser(userId, user)
             .then(
                 function (doc) {

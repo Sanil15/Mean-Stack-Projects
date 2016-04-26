@@ -7,12 +7,15 @@
         <div class="divide50"></div>
     </div>
 
+    <div ng-if="model.error" class="alert alert-success" role="alert">
+        {{model.error}}
+    </div>
     <!-- Step Wizard -->
     <div class="stepwizard" >
 
         <div class="stepwizard-row setup-panel">
 
-            <div class="row">
+            <div class="row" ng-show="!model.show2">
                 <div class="col-md-12" ng-show="model.x == 3">
                     <div class="progress">
                         <div class="one primary-color"></div><div class="two primary-color"></div><div class="three primary-color"></div>
@@ -32,7 +35,7 @@
                 <div class="col-md-12">
                     <div class="progress" ng-show="model.x == 2">
                         <div class="one primary-color"></div><div class="two primary-color"></div><div class="three no-color"></div>
-                        <div class="progress-bar primary-color" style="width: 50%;"></div>
+                        <div class="progress-bar primary-color" style="width: 55%;"></div>
                     </div>
 
                 </div>

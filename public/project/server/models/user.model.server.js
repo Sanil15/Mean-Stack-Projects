@@ -154,7 +154,7 @@ module.exports = function (){
             .update(
                 {_id: userId},
                 {$set: {
-                    "roles": user.roles,
+                    "roles": user.roles
                 }},
                 function (err, results){
                     if(!err) {

@@ -149,9 +149,14 @@
                     console.log("HI");
                     UserService.createUser(user)
                         .then(function (response){
+                               if(response){
                                 UserService.setCurrentUser(response.data);
                                 $location.url("/showprofile");
-                        });
+                               }}
+                        , function(err){
+                               vm.error= "Username Already Exists";
+                               $location.url("/register");
+                            });
                 }
             }
 

@@ -13,6 +13,7 @@
 }
 
 .box{
+
     background-image: url(img/bg.jpg);
 }
 
@@ -723,7 +724,7 @@ a:hover{
     border: none;
     font-weight: 300;
     box-shadow: none;
-    color: #c3c3c3;
+    color: #f14444;
     font-size: 16px;
 }
 
@@ -1635,8 +1636,15 @@ a:hover{
 
 .sizea{
     font-size: 40px;
-    color: #8BC3A3;
+    color: #f14444;
 }
+.fav_color{
+    color: #f14444;
+}
+#fav_color{
+    color: #f14444;
+}
+
 .port{
     height: 300px;
 }
@@ -1645,7 +1653,11 @@ a:hover{
     color: red!important;
 }
 
-nav.navbar-findcond { background: #fff; border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
+.colora{
+    color: #f14444;
+}
+
+nav.navbar-findcond { background: rgba(255,255,255,0.9); border-color: #ccc; box-shadow: 0 0 2px 0 #ccc; }
 nav.navbar-findcond a { color: #f14444; }
 nav.navbar-findcond ul.navbar-nav a { color: #f14444; border-style: solid; border-width: 0 0 2px 0; border-color: #fff; }
 nav.navbar-findcond ul.navbar-nav a:hover,
@@ -1698,4 +1710,44 @@ nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #f
 }
 .no-color{
     background-color:inherit;
+}
+.panel-footer {
+height: 80px;
+}
+@media (max-width: 540px) {
+    .panel-footer {
+        height: 100px;
+        width: 100%;
+    }
+    .sizea{
+        font-size: 30px;
+    }
+}
+
+#noty-holder{
+    width: 100%;
+    top: 0;
+    font-weight: bold;
+    z-index: 1031; /* Max Z-Index in Fixed Nav Menu is 1030*/
+    text-align: center;
+    position: fixed;
+}
+
+.alert{
+    margin-bottom: 2px;
+    border-radius: 0px;
+}
+
+#main{
+    min-height:900px;
+}
+
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: #eee;
+    border-color: #f14444;
 }

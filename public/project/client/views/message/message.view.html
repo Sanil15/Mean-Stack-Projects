@@ -1,4 +1,4 @@
-
+<div id="noty-holder"></div>
 <div class="container bootstrap snippet  page">
     <div class="tile tile-alt" id="messages-main">
 
@@ -54,7 +54,7 @@
                 <br>
                 <i class="fa fa-hand-o-left fa-5x" aria-hidden="true">
                 </i>
-                <h1 class="main-title"> Click On User to Load Conversation</h1>
+                <h1 class="main-title-home"> Click On User to Load Conversation</h1>
             </div>
             <div ng-repeat="message in model.conversation">
 
@@ -94,7 +94,7 @@
 
             <div class="msb-reply">
                 <textarea ng-model="model.newMessage.message" placeholder="What's on your mind..."></textarea>
-                <button ng-click="model.createNew(model.newMessage)"><i class="fa fa-paper-plane-o"></i></button>
+                <button ng-click="model.createNew(model.newMessage)"><i class="fa sizea fa-paper-plane-o"></i></button>
             </div>
 
         </div>
