@@ -23,7 +23,7 @@
                 controller: "AdminController",
                 controllerAs: "model",
                 resolve:{
-                    checkLoggedIn: checkLoggedIn
+                    checkLoggedInAdmin: checkLoggedInAdmin
                 }
 
             })
@@ -159,5 +159,32 @@
 
         return deferred.promise;
     };
+
+    var checkLoggedInAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/project/loggedin')
+            .success(function(user)
+            {
+                $rootScope.errorMessage = null;
+                // User is Authenticated
+                if (user !== '0' && user.roles.indexOf('admin')>=0)
+                {
+                    $rootScope.user = user;
+                    deferred.resolve();
+                }
+                // User is Not Authenticated
+                else
+                {
+                    $rootScope.error = 'You Do Not Have Admin Previleges.';
+                    deferred.reject();
+                    $location.url('/home');
+                }
+            });
+
+        return deferred.promise;
+    };
+
 
 })();

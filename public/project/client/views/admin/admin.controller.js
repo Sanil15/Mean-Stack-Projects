@@ -25,8 +25,10 @@
                 .then(function (response){
                     //console.log("Hi");
                     vm.users=response.data;
-                });
-        }
+                },
+                function (err) {
+                    vm.error = "You Do Not Have Admin Priveleges";
+                })};
 
         init();
 
