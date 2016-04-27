@@ -9,20 +9,70 @@
         .module("CarPoolApp")
         .controller("RegisterController",RegisterController)
 
-        function RegisterController( UserService, $location){
+        function RegisterController( UserService, $location, $scope){
 
             var vm = this;
 
             vm.register = register;
-
+            vm.findUserName = findUserName;
 
             function init() {
 
 // nice form step wizard
                 vm.x =1;
-
+                vm.user={};
                 vm.show2=false;
                 vm.show3=false;
+                vm.available = 0;
+
+                // nice form step wizard
+                $(document).ready(function () {
+
+                    var navListItems = $('div.setup-panel div a'),
+                        allWells = $('.setup-content'),
+                        allNextBtn = $('.nextBtn');
+
+                    allWells.hide();
+
+                    navListItems.click(function (e) {
+                        e.preventDefault();
+                        var $target = $($(this).attr('href')),
+                            $item = $(this);
+
+                        if (!$item.hasClass('disabled')) {
+                            navListItems.removeClass('btn-primary').addClass('btn-default');
+                            $item.addClass('btn-primary');
+                            allWells.hide();
+                            $target.show();
+                            $target.find('input:eq(0)').focus();
+                        }
+                    });
+
+                    allNextBtn.click(function(){
+                        var curStep = $(this).closest(".setup-content"),
+                            curStepBtn = curStep.attr("id"),
+                            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                            curInputs = curStep.find("input[type='text'],input[type='email'],select[id='industry']"),
+                            isValid = true;
+
+                        $(".form-group").removeClass("has-error");
+                        for(var i=0; i<curInputs.length; i++){
+                            if (!curInputs[i].validity.valid){
+                                isValid = false;
+                                $(curInputs[i]).closest(".form-group").addClass("has-error");
+                            }
+                        }
+
+                        if (isValid)
+                            nextStepWizard.removeAttr('disabled').trigger('click');
+                    });
+
+                    $('div.setup-panel div a.btn-primary').trigger('click');
+                });
+
+
+
+
 
                 $("input[type=password]").keyup(function(){
                     var ucase = new RegExp("[A-Z]+");
@@ -81,64 +131,23 @@
                 });
 
 
-                // nice form step wizard
-                $(document).ready(function () {
-
-                    var navListItems = $('div.setup-panel div a'),
-                        allWells = $('.setup-content'),
-                        allNextBtn = $('.nextBtn'),
-                        allPrevBtn = $('.prevBtn');
-
-                    allWells.hide();
-
-                    navListItems.click(function (e) {
-                        e.preventDefault();
-                        var $target = $($(this).attr('href')),
-                            $item = $(this);
-
-                        if (!$item.hasClass('disabled')) {
-                            navListItems.removeClass('btn-primary').addClass('btn-default');
-                            $item.addClass('btn-primary');
-                            allWells.hide();
-                            $target.show();
-                            $target.find('input:eq(0)').focus();
-                        }
-                    });
-
-                    allNextBtn.click(function(){
-                        var curStep = $(this).closest(".setup-content"),
-                            curStepBtn = curStep.attr("id"),
-                            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-                            curInputs = curStep.find("input[type='text'],input[type='url']"),
-                            isValid = true;
-
-                        $(".form-group").removeClass("has-error");
-                        for(var i=0; i<curInputs.length; i++){
-                            if (!curInputs[i].validity.valid){
-                                isValid = false;
-                                $(curInputs[i]).closest(".form-group").addClass("has-error");
-                            }
-                        }
-
-                        if (isValid) {
-                            nextStepWizard.removeAttr('disabled').trigger('click');
-                        }
-                    });
-
-                    allPrevBtn.click(function(){
-                        var curStep = $(this).closest(".setup-content"),
-                            curStepBtn = curStep.attr("id"),
-                            prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
-
-                        $(".form-group").removeClass("has-error");
-                        prevStepWizard.removeAttr('disabled').trigger('click');
-                    });
-
-                    $('div.setup-panel div a.btn-primary').trigger('click');
-                });
             }
 
             init();
+
+            function findUserName(username){
+                UserService.findAllUsers()
+                    .then(function(response){
+                        if(response != null){
+                            vm.available = 2;
+                            vm.checkUserName = null;
+                        }
+                        else {
+                            vm.available = 1;
+                            vm.user.username = username;
+                        }
+                    })
+            }
 
             // function to register a current user
             function register(user,confirmPassword){
@@ -152,7 +161,6 @@
                                if(response){
                                 UserService.setCurrentUser(response.data);
                                 var a=response.data;
-
                                 $location.url("/showprofile"+ a._id);
                                }}
                         , function(err){

@@ -86,7 +86,7 @@
                 })
 
             function createNoty(message, type) {
-                var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert col-md-6">';
+                var html = '<div class="alert alert-' + type + ' alert-dismissable page-alert">';
                 html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
                 html += message;
                 html += '</div>';

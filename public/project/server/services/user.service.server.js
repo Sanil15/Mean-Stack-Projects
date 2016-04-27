@@ -17,7 +17,7 @@ module.exports = function(app, userModel) {
     app.post("/api/project/logout", logout);
     app.get("/api/project/loggedin", loggedIn);
 
-    app.get("/api/project/user", auth, getAllUsers);
+    app.get("/api/project/user", getAllUsers);
     app.get("/api/project/user/:id", auth , getUserById);
     app.put("/api/project/user/:id", auth, updateUserById);
 
@@ -107,7 +107,7 @@ module.exports = function(app, userModel) {
 
     function uploadImage(req, res) {
 
-        var userId=req.session.user._id;
+        var userId=req.user._id;
 
         var myFile        = req.file;
 
@@ -124,7 +124,7 @@ module.exports = function(app, userModel) {
             .uploadImageById(userId, imgUrl)
             .then(
                 function(response) {
-                    res.redirect("/project/client/#/showprofile/"+userId);
+                    res.redirect("/project/client/#/editprofile");
                 },
                 function(err) {
                     res.status(400).send(err);

@@ -12,59 +12,69 @@
     <div class="row">
 
         <div class="col-md-7">
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="post">
+
+
             <div class="form-group">
-                <label class="col-sm-2 control-label">Source</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.source" id="origin-input" type="text" class="form" placeholder="Source"/>
+                <label for="validate-text" class="col-sm-2 control-label">Source</label>
+                <div class="input-group col-sm-10">
+                    <input id="origin-input" name="validate-text" type="text" class="form" ng-model="model.pool.source" placeholder="Source" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Destination</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.destination" id="destination-input" type="text" class="form" placeholder="Destination"/>
+                <div class="input-group col-sm-10">
+                    <input name="validate-text" id="destination-input" ng-model="model.pool.destination"  type="text" class="form" placeholder="Destination" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
                 </div>
             </div>
 
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">Date</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.date" class="form" type="date">
+                <div class="input-group col-sm-10">
+                    <input name="validate-text" ng-model="model.pool.date" class="form" type="date" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Time</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.time" class="form" placeholder="time">
+                <div class=" col-sm-10">
+                    <ng-timepicker ng-model="model.pool.time" theme="red" show-meridian="true" required></ng-timepicker>
                 </div>
             </div>
 
-            <div class="form-group">
+
+            <div class="form-group adjust">
                 <label class="col-sm-2 control-label">Car Info</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.carInfo" class="form" placeholder="carInfo">
+                <div class="input-group col-sm-10">
+                    <input name="validate-text" ng-model="model.pool.carInfo" class="form" placeholder="carInfo" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">Base Price</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.basePrice" class="form" placeholder="$">
+                <div class="input-group col-sm-10" data-validate="number">
+                    <input name="validate-number" ng-model="model.pool.basePrice" class="form" placeholder="$" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">No. Of Seats</label>
-                <div class="col-sm-10">
-                    <input ng-model="model.pool.noOfSeats" class="form" placeholder="No of Seats Available">
+                <label class="col-sm-2 control-label">#Seats</label>
+                <div class="input-group col-sm-10" data-validate="number">
+                    <input name="validate-number" ng-model="model.pool.noOfSeats" class="form" placeholder="No of Seats Available" required>
+                    <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a ng-click="model.createCarPool(model.pool)" class="btn form-btn btn-block">Create Carpool</a>
+                    <a type="submit" ng-click="model.createCarPool(model.pool)" class="btn form-btn btn-block" ng-disabled="model.x == 1">Create Carpool</a>
                 </div>
             </div>
         </form>
