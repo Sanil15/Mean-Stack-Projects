@@ -227,6 +227,7 @@ module.exports = function(app, userModel) {
             .then(
                 function(result){
                     if(result){
+                        console.log("Same ID");
                         res.json(null);
                     }else{
                         user.password=bcrypt.hashSync(user.password);

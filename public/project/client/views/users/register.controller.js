@@ -48,6 +48,7 @@
                         }
                     });
 
+
                     allNextBtn.click(function(){
                         var curStep = $(this).closest(".setup-content"),
                             curStepBtn = curStep.attr("id"),
@@ -68,6 +69,29 @@
                     });
 
                     $('div.setup-panel div a.btn-primary').trigger('click');
+
+                    $('#txtPhone').blur(function(e) {
+                        if (validatePhone('txtPhone')) {
+                            $('#spnPhoneStatus').html('Valid');
+                            $('#spnPhoneStatus').css('color', 'green');
+                        }
+                        else {
+                            $('#spnPhoneStatus').html('Invalid');
+                            $('#spnPhoneStatus').css('color', 'red');
+                        }
+                    });
+
+                    function validatePhone(txtPhone) {
+                        var a = document.getElementById(txtPhone).value;
+                        var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
+                        if (filter.test(a)) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+
                 });
 
 
@@ -158,14 +182,15 @@
                     console.log("HI");
                     UserService.createUser(user)
                         .then(function (response){
-                               if(response){
-                                UserService.setCurrentUser(response.data);
-                                var a=response.data;
-                                $location.url("/showprofile"+ a._id);
+                               if(response.data==null){
+                                   vm.error="Username Already Exists!";
+                               }else{
+                                   UserService.setCurrentUser(response.data);
+                                   var a=response.data;
+                                   $location.path("/home");
                                }}
                         , function(err){
                                vm.error= err;
-                               $location.url("/register");
                             });
                 }
             }

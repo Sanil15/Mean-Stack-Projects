@@ -179,8 +179,9 @@
                             <label class="col-sm-2 control-label" for="textinput">Tel</label>
                             <div class="col-sm-4">
                                 <div class="input-group" data-validate="phone">
-                                    <input  name="validate-phone"  ng-model="model.user.contact" type="tel" placeholder="(---)(---)(----)" class="form-control">
+                                    <input id='txtPhone' ng-model="model.user.contact" type="tel" placeholder="(---)(---)(----)" class="form-control" required>
                                     <span class="input-group-addon danger"><i class="fa fa-phone fa-lg text-white"></i></span>
+                                    <span id="spnPhoneStatus"></span>
                                 </div>
                             </div>
 

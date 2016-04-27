@@ -4,7 +4,7 @@
 
         <div class="ms-menu">
             <div class="ms-user clearfix">
-                <img ng-if="model.currentUser.image" ng-src="model.currentUser.image" src="" alt="" class="img-avatar pull-left">
+                <img ng-if="model.currentUser.image" ng-src="{{model.currentUser.image}}" src="" alt="" class="img-avatar pull-left">
                 <img ng-if="!model.currentUser.image" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="img-avatar pull-left">
                 <div>Signed in as <br> {{model.currentUser.username}}</div>
             </div>
