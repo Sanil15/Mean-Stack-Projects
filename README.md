@@ -27,6 +27,5 @@ NOTE:
 Tehnologies Used
  - AngularJS, NodeJS, Express, MongoDb, Mongoose, CSS, Bootstrap, HTML5, jQuery, jQueryUI, Google Maps APIs, Sockets.io, 
 
-Thanks 
-
+Thanks  
 Sanil Jain
